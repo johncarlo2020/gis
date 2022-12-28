@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class LoginController extends Controller
 {
@@ -27,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
 
     
     
@@ -41,34 +43,37 @@ class LoginController extends Controller
 
         $this->middleware('guest')->except('logout');
     }
+    
+ 
 
-
-    public function login(Request $request)
+    // public function login(Request $request)
+    public function redirectTo()
     {   
-        $input = $request->all();
-   
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-   
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+
+        if (Auth::check())
         {
             // 1 admin
             // 2 encoder
             // 3 registrar
             if (auth()->user()->role == 1) {
-                return redirect()->route('admin.home');
+                return ('userAdmin/index');
             }else if (auth()->user()->role == 2) {
-                return redirect()->route('registrar.home');
+                return ('userRegistrar/index');
             }else if (auth()->user()->role == 3) {
-                return redirect()->route('encoder.home');
+                return ('userEncoder/index');
             }else{
-                return redirect()->route('login')->with('error','User Not Found.');
+                return ('login')->with('error','User Not Found.');
             }
         }else{
             return redirect()->route('login')->with('error','Email-Address And Password Are Wrong.');
         }
-          
     }
+
+    protected function authenticated(Request $request)
+    {
+        Auth::logoutOtherDevices($request->password);
+    }
+    
+
+    
 }

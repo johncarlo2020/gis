@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Providers\RouteServiceProvider;
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
@@ -22,7 +23,15 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                if (auth()->user()->role == 1) {
+                    return redirect()->route('admin.home');
+                }else if (auth()->user()->role == 2) {
+                    return redirect()->route('registrar.home');
+                }else if (auth()->user()->role == 3) {
+                    return redirect()->route('encoder.home');
+                }else{
+                    return redirect()->route('login')->with('error','User Not Found.');
+                }
             }
         }
 
