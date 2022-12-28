@@ -25,4 +25,19 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    // User Admin
+    public function AdminHome()
+    {
+        return view('useradmin.index');
+    }
+    // User Encoder
+    public function EncoderHome()
+    {
+        return view('userencoder.index');
+    }
+    // User Registrar
+    public function RegistrarHome()
+    {
+        return view('userregistrar.index');
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -28,9 +29,7 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-
-
-
+    
     
     /**
      * Create a new controller instance.
@@ -39,6 +38,37 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+
         $this->middleware('guest')->except('logout');
+    }
+
+
+    public function login(Request $request)
+    {   
+        $input = $request->all();
+   
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+   
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        {
+            // 1 admin
+            // 2 encoder
+            // 3 registrar
+            if (auth()->user()->role == 1) {
+                return redirect()->route('admin.home');
+            }else if (auth()->user()->role == 2) {
+                return redirect()->route('registrar.home');
+            }else if (auth()->user()->role == 3) {
+                return redirect()->route('encoder.home');
+            }else{
+                return redirect()->route('login')->with('error','User Not Found.');
+            }
+        }else{
+            return redirect()->route('login')->with('error','Email-Address And Password Are Wrong.');
+        }
+          
     }
 }
