@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class userRegistrar
 {
@@ -19,7 +20,7 @@ class userRegistrar
             // 1 admin
             // 2 encoder
             // 3 registrar
-            
+
         if (auth()->user()->role == 1) {
             return redirect()->route('admin.home');
         }else if (auth()->user()->role == 2) {
