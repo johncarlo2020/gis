@@ -61,6 +61,19 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
+                        
+                            <div class="col-md-6">
+                                <select id="role" required name="role" class="form-select col-form-label mb-3" aria-label=".form-select-lg example">
+                                    <option selected disabled>Open this select menu</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Registrar</option>
+                                    <option value="3">Encoder</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
