@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <table class="table table-striped">
+        <table class="table table-striped" id="table_id">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -34,3 +34,7 @@
 </table>
     </div>
 @endsection
+
+
+<script>
+</script>

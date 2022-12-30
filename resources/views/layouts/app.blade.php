@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link href="{{ asset('css/adminlte.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
 
 </head>
 <!--
@@ -211,15 +212,18 @@
 
     <!-- REQUIRED SCRIPTS -->
 
-    <!-- jQuery -->
-    <script src="{{ asset('jquery/jquery.min.js') }}" defer></script>
-    <!-- Bootstrap -->
-    <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}" defer></script>
 
     <!-- AdminLTE -->
     <script src="{{ asset('js/adminlte.js') }}" defer></script>
+    <script
+  src="https://code.jquery.com/jquery-3.6.3.js"
+  integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+  crossorigin="anonymous"></script>
     <!-- OPTIONAL SCRIPTS -->
     <script src="{{ asset('chart.js/Chart.min.js') }}" defer></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script src="{{ asset('js/index.js') }}"></script>
+
 
 </body>
 
