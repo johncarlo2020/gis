@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 // users 
@@ -25,35 +27,52 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Route::get('userEncoder/index', [HomeController::class, 'EncoderHome'])->name('encoder.home')->middleware('userRegistrar');
+// Route::post('/survey/addquestion', [App\Http\Controllers\QuestionsController::class, 'add_question'])->name('add_question');
+// Route::post('ajax/user/store', [UserController::class, 'store']);
+// Route::get('ajax/save', [UserController::class, 'store']);
+Route::post('/ajax/save', [App\Http\Controllers\UserController::class, 'store'])->name('ajax_store');
+// Route::post('/survey/addquestion', [App\Http\Controllers\QuestionsController::class, 'add_question'])->name('add_question');
+
+
+
 
 Route::group(['middleware' => 'auth'], function (){
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// =================================================================================================================================
-//admin routes
-Route::get('userAdmin/index', [HomeController::class, 'AdminHome'])->name('admin.home')->middleware('userAdmin');
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        // =================================================================================================================================
+        //admin routes
+        Route::get('userAdmin/index', [HomeController::class, 'AdminHome'])->name('admin.home')->middleware('userAdmin');
 
-Route::group(['middleware' => ['userAdmin']], function() {
-        Route::get('userAdmin/user', [UserController::class, 'index'])->name('admin.user');
+        Route::group(['middleware' => ['userAdmin']], function() {
+                Route::get('userAdmin/user', [UserController::class, 'index'])->name('admin.user');
+        });
+
+        // =================================================================================================================================
+        //encoder routes
+        Route::get('userRegistrar/index', [HomeController::class, 'RegistrarHome'])->name('registrar.home')->middleware('userEncoder');
+
+        Route::group(['middleware' => ['userAdmin']], function() {
+                Route::get('userAdmin/user', [UserController::class, 'index'])->name('admin.user');
+        });
+
+        // =================================================================================================================================
+        //registrar routes
+        Route::get('userEncoder/index', [HomeController::class, 'EncoderHome'])->name('encoder.home')->middleware('userRegistrar');
+
+        Route::group(['middleware' => ['userAdmin']], function() {
+                Route::get('userAdmin/user', [UserController::class, 'index'])->name('admin.user');
+        });
+        // =================================================================================================================================
+
 });
 
-// =================================================================================================================================
-//encoder routes
-Route::get('userRegistrar/index', [HomeController::class, 'RegistrarHome'])->name('registrar.home')->middleware('userEncoder');
 
-Route::group(['middleware' => ['userAdmin']], function() {
-        Route::get('userAdmin/user', [UserController::class, 'index'])->name('admin.user');
-});
 
-// =================================================================================================================================
-//registrar routes
-Route::get('userEncoder/index', [HomeController::class, 'EncoderHome'])->name('encoder.home')->middleware('userRegistrar');
 
-Route::group(['middleware' => ['userAdmin']], function() {
-        Route::get('userAdmin/user', [UserController::class, 'index'])->name('admin.user');
-});
-// =================================================================================================================================
 
-});
+
+
+
 
 

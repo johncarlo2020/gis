@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class UserController extends Controller
 {
@@ -13,8 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('useradmin/user');
-        
+        $users = DB::table('users')->get();
+        return view('useradmin/user' , compact('users'));
     }
 
     /**
@@ -35,7 +37,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       return('asdasd');
     }
 
     /**

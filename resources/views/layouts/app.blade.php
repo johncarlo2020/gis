@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <title>AdminLTE 3 | Dashboard 3</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -14,9 +16,9 @@
     <!-- IonIcons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">	
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">	
     <link href="{{ asset('css/adminlte.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-
 </head>
 <!--
 `body` tag options:
@@ -201,7 +203,7 @@
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+            <strong>Copyright &copy; 2014-2021 <</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.2.0
@@ -215,14 +217,19 @@
 
     <!-- AdminLTE -->
     <script src="{{ asset('js/adminlte.js') }}" defer></script>
-    <script
-  src="https://code.jquery.com/jquery-3.6.3.js"
-  integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-  crossorigin="anonymous"></script>
+
     <!-- OPTIONAL SCRIPTS -->
     <script src="{{ asset('chart.js/Chart.min.js') }}" defer></script>
+
+
+    <!-- Additional Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-    <script src="{{ asset('js/index.js') }}"></script>
+    <script src="{{ asset('js/users.js') }}"></script>
+    <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+</script>
 
 
 </body>
