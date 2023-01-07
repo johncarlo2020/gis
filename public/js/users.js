@@ -16,23 +16,19 @@
         }
         return url;
     }
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 
 
     $(document).on("click" , '.usermodalsave' , function () {
 
         var url = base_url();
-        var ajaxurl=url+"public/ajax/save"
+        var ajaxurl = url + "public/ajax/save"
+        var csrf = document.querySelector('meta[name="csrf-token"]').content;
 
     
         $.ajax({
             url: ajaxurl,
             data: {
-                "_token": "{{ csrf_token() }}"
+                "_token": csrf
             },
             dataType: "json",
             type: "post",
