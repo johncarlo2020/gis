@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -37,7 +38,35 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       return('asdasd');
+        // validation
+        $validate_name = DB::table('users')
+                ->where('username', '=', $request['data']['fname'].$request['data']['lname'])
+                ->count();
+        $validate_email = DB::table('users')
+                ->where('email', '=', $request['data']['email'])
+                ->count();
+
+        if ($validate_name == 0 AND $validate_email == 0) {
+        //    dd('no duplicate');
+           DB::table('users')->insert(
+            [
+                'username'  => $request['data']['username'],
+                'fname'     => $request['data']['fname'],
+                'lname'     => $request['data']['lname'],
+                'mname'     => $request['data']['mname'],
+                'address'   => $request['data']['address'],
+                'mobile_no' => $request['data']['contact'],
+                'email'     => $request['data']['email'],
+                'role'      => $request['data']['role'],
+                'email'     => $request['data']['email'], 
+                'status'    => 1, 
+                'created_at'=> date("Y-m-d H:i:s")  , 
+                'password'  => Hash::make('password'),
+            ]);
+            return response()->json('success');
+        }else{
+            return response()->json('failed');
+        }
     }
 
     /**
@@ -48,7 +77,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -80,8 +109,23 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        DB::table('users')
+            ->where('id', $request['id'])
+            ->update(['status' => $request['status']]);
+
+        return response()->json($request['id']);
     }
+
+    public function view(Request $request){
+
+        $data = DB::table('users')
+                ->where('id', '=', $request['id'])
+                ->get();
+
+        return response()->json($data);
+    }
+
+
 }

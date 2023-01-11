@@ -27,13 +27,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('userEncoder/index', [HomeController::class, 'EncoderHome'])->name('encoder.home')->middleware('userRegistrar');
-// Route::post('/survey/addquestion', [App\Http\Controllers\QuestionsController::class, 'add_question'])->name('add_question');
-// Route::post('ajax/user/store', [UserController::class, 'store']);
-// Route::get('ajax/save', [UserController::class, 'store']);
-Route::post('/ajax/save', [App\Http\Controllers\UserController::class, 'store'])->name('ajax_store');
-// Route::post('/survey/addquestion', [App\Http\Controllers\QuestionsController::class, 'add_question'])->name('add_question');
-
+// ajax
+Route::post('/ajax/user-create', [UserController::class, 'store']);
+Route::post('/ajax/user-view', [UserController::class, 'view']);
+Route::post('/ajax/user-delete', [UserController::class, 'destroy']);
 
 
 
