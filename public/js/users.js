@@ -19,7 +19,7 @@ function base_url() {
     });
 
     $(document).on("click" , '#user_add' , function () {
-        
+
       $('.modal-dialog').addClass('modal-lg');
         var tmp_body = ` 
         <h4>Personal Information</h4>
@@ -51,7 +51,7 @@ function base_url() {
           <hr>
           <div class="form-row mt-2">
             <div class="col">
-                  <input type="text" name="username" value="`+data['0'].username+`" class="form-control addvalidator " placeholder="Username*" required>
+                  <input type="text" name="username" class="form-control addvalidator " placeholder="Username*" required>
                   <small id="required-username" class="d-none" style="color:red">Username required</small>
                   <small id="unique-username" class="d-none" style="color:red">Username already exist</small>
                 </div>
