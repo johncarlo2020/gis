@@ -102,3 +102,103 @@ input ::placeholder {
     line-height: 13px;
     color: #bb1111;
 }
+.title-head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title-head h1 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+
+    color: #676767;
+}
+.title-head .add-btn {
+    background: #3c63d1;
+    border-radius: 50px;
+    width: 98px;
+    height: 28px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 13px;
+
+    color: #ffffff;
+    margin-bottom: 50px;
+    margin-top: 2px;
+}
+.main-section {
+    padding: 24px 34px;
+}
+
+/* data table style */
+
+.dataTables_length label,
+.dataTables_filter label {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.01em;
+
+    color: #000000;
+}
+
+.dataTables_filter label input {
+    border: 1px solid #736b6b;
+    border-radius: 3px;
+    width: 175.41px;
+    height: 28px;
+}
+
+table thead th {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.01em;
+
+    color: #000000;
+}
+table tbody td {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.01em;
+
+    color: #000000;
+}
+table {
+    border: 1px solid #cec2c2;
+    border-radius: 4px;
+}
+.dataTables_info {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.01em;
+
+    color: #000000;
+}
+.dataTables_paginate a {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 13px;
+    letter-spacing: 0.01em;
+
+    color: #000000;
+}
+.paginate_button {
+    background-color: #ffff;
+}
+.dataTables_paginate {
+    background-color: #ffff;
+    border-radius: 4px;
+}
+.dataTables_paginate .current {
+    background: #3c63d1;
+    color: #ffff;
+}
