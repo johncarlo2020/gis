@@ -1,0 +1,40 @@
+.user-Name {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: #756464;
+    margin-top: 5px;
+    border-left: 2px solid #ecdfdf;
+    padding-left: 10px;
+}
+.sidebar-Container {
+    background: #3c63d1;
+    color: #e4e0e0;
+}
+.brand-text {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    text-transform: uppercase;
+
+    color: #ffffff;
+}
+.brand-image {
+    width: 38px;
+    height: 38px;
+}
+.brand-link {
+    border-bottom: 1px solid #e4e0e0;
+}
+.sidebar .nav-link p,
+.sidebar .nav-link i {
+    color: #ffffff;
+}
+.dashboard-link {
+    border-bottom: 1px solid #e4e0e0;
+    margin-bottom: 20px;
+}
+.sidebar ul li:last-child {
+    border-bottom: 1px solid #e4e0e0;
+}
