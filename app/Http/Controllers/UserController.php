@@ -16,7 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->get();
+        $users = DB::table('users')
+        // ->where('status', '=', 1)
+                ->get();
         return view('useradmin/user' , compact('users'));
     }
 
@@ -25,9 +27,53 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function reload(Request $request)
     {
-        //
+        
+        $count = DB::table('users')->count();
+        $users = DB::table('users')->get();
+
+        $users = json_decode($users, true);
+        // $count = json_decode($count, true);
+
+        $results = array_map(function($users){
+
+            if ($users['role'] == 1) {
+                $role = "Admin";
+            }else if ($users['role'] == 2) {
+                $role = "Registrar";
+            }else if ($users['role'] == 3) {
+                $role = "Encoder";
+            }
+
+            if ($users['status'] == 1) {
+               $status = '<span span data-user_id="' . $users['id'] . '" data-name="' . $users['fname'] . ' " "'  . $users['mname'] . ' " "'  . $users['lname'] . '" class="btn btn-sm btn-danger" id="user_delete"> <i class="fa-solid fa-trash-can"></i></span>';
+            }else{
+               $status = '<span span data-user_id="' . $users['id'] . '" data-name="' . $users['fname'] . ' " "'  . $users['mname'] . ' " "'  . $users['lname'] . '" class="btn btn-sm btn-success" id="user_recover"> <i class="fa-solid fa-hammer"></i></span>';
+            }
+
+                return  [
+                         $users['id'],
+                         $users['fname'] . " " . $users['mname'] . " " . $users['lname'],
+                         $users['email'],
+                         '<center>' . $role . '</center>',
+                         '<center>' . $users['created_at'] . '</center>',
+                         '<center>' . $users['updated_at'] . '</center>',
+                        //  $users['status'],
+                        '<center><span data-user_id="'. $users['id'] .'" class="btn btn-sm btn-primary" id="user_view"><i class="fa-solid fa-eye"></i></span>&nbsp;<span data-user_id="' . $users['id'] . '" class="btn btn-sm btn-info" id="user_edit"> <i class="fa-solid fa-pen"></i></span>&nbsp;' . $status . '</center>',
+                ];
+            },$users);
+            // $results = $results->toArray();
+            $data = [
+                "data"            => $results,
+                "draw"            => $request['draw'],
+                "recordsTotal"    => $count,
+                "recordsFiltered" => $count,
+            ];
+
+        // dd($users);
+        return response()->json($data);
+
     }
 
     /**
@@ -86,10 +132,39 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        // validation
+        $validate_name = DB::table('users')
+                ->where('username', '=', $request['data']['fname'].$request['data']['lname'])
+                ->count();
+        $validate_email = DB::table('users')
+                ->where('email', '=', $request['data']['email'])
+                ->count();
+
+        if ($validate_name == 0 AND $validate_email == 0) {
+        //    dd('no duplicate');
+           DB::table('users')->insert(
+            [
+                'username'  => $request['data']['username'],
+                'fname'     => $request['data']['fname'],
+                'lname'     => $request['data']['lname'],
+                'mname'     => $request['data']['mname'],
+                'address'   => $request['data']['address'],
+                'mobile_no' => $request['data']['contact'],
+                'email'     => $request['data']['email'],
+                'role'      => $request['data']['role'],
+                'email'     => $request['data']['email'], 
+                'status'    => 1, 
+                'created_at'=> date("Y-m-d H:i:s")  , 
+                'password'  => Hash::make('password'),
+            ]);
+            return response()->json('success');
+        }else{
+            return response()->json('failed');
+        }
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -123,6 +198,15 @@ class UserController extends Controller
         $data = DB::table('users')
                 ->where('id', '=', $request['id'])
                 ->get();
+
+        return response()->json($data);
+    }
+    // username checker
+    public function username_validate(Request $request){
+
+        $data = DB::table('users')
+                ->where('username', '=', $request['data'])
+                ->count();
 
         return response()->json($data);
     }

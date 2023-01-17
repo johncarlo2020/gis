@@ -7,7 +7,7 @@
             <button class="btn add-btn" id="user_add">Add <span><i class="fa-solid fa-circle-plus"></i></span></button>
         </div>
         <div class="container-fluid">
-            <table class="table " id="table_id">
+            <table class="table" id="table_id">
                 <thead>
                     <tr>
                         <th class="text-center">ID</th>
@@ -16,7 +16,7 @@
                         <th class="text-center">Role</th>
                         <th class="text-center">Created At</th>
                         <th class="text-center">Updated At</th>
-                        <th class="text-center">Status</th>
+                        <!-- <th class="text-center">Status</th> -->
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -37,13 +37,13 @@
                                 </b></td>
                             <td class="text-center">{{ $user->created_at }}</td>
                             <td class="text-center">{{ $user->updated_at }}</td>
-                            <td class="text-center">
+                            <!-- <td class="text-center">
                                 @if ($user->status == 1)
                                     <b style="color:green">Active</b>
                                 @else
                                     <b style="color:red">Inactive</b>
                                 @endif
-                            </td>
+                            </td> -->
                             <td class="text-center">
                                 <span data-user_id="{{ $user->id }}" class="btn btn-sm btn-primary" id="user_view"><i
                                         class="fa-solid fa-eye"></i></span>
@@ -76,7 +76,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btnclose" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="" method="POST">
@@ -87,7 +87,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-success usermodalsave">Save</button>
+                        <button type="button" class="btnclose btn btn-success usermodalsave">Save</button>
                     </div>
                 </div>
             </div>
