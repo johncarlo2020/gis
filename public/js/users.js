@@ -10,7 +10,9 @@ function base_url() {
         var url = location.origin + "/" + pathparts[1].trim("/") + "/";
     } else {
         var url = location.origin;
-    }
+  }
+console.log(url);
+  
     return url;
 }
 // ==============================================================================
