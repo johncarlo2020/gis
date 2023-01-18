@@ -25,11 +25,6 @@ Route::get('/', function () {
         return view('auth/login');
 });
 
-// Route::get('/', function () {
-//         return Redirect::action('Auth\AuthController@showLoginForm');
-//     });
-
-
 Auth::routes();
 
 
