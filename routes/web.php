@@ -21,16 +21,16 @@ use App\Http\Controllers\userRegistrar;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function () { 
+        return view('welcome');
 });
 
-Auth::routes();
+// Route::get('/', function () {
+//         return Redirect::action('Auth\AuthController@showLoginForm');
+//     });
 
-// ajax
-Route::post('/ajax/user-create', [UserController::class, 'store']);
-Route::post('/ajax/user-view', [UserController::class, 'view']);
-Route::post('/ajax/user-delete', [UserController::class, 'destroy']);
+
+Auth::routes();
 
 
 
@@ -67,6 +67,14 @@ Route::group(['middleware' => 'auth'], function (){
 
 
 
+
+// ajax
+Route::post('/ajax/user-reload', [UserController::class, 'reload']);
+Route::post('/ajax/user-create', [UserController::class, 'store']);
+Route::post('/ajax/user-edit', [UserController::class, 'edit']);
+Route::post('/ajax/user-view', [UserController::class, 'view']);
+Route::post('/ajax/user-delete', [UserController::class, 'destroy']);
+Route::post('/ajax/user-validate_username', [UserController::class, 'username_validate']);
 
 
 

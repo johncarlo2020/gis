@@ -14,9 +14,44 @@ function base_url() {
     return url;
 }
 // ==============================================================================
+
 $(document).ready(function () {
     $("#table_id").DataTable();
 });
+
+function reload_users(){
+  $('#table_id').DataTable().clear().destroy();
+
+  $(".usermodalsave").removeClass("user-recover");
+  $(".usermodalsave").removeClass("btn-delete");
+  $(".usermodalsave").removeClass("btn-warning");
+  $(".usermodalsave").addClass("btn-success");
+  $(".usermodalsave").text("Save");
+  $(".usermodalsave").removeClass("disabled");
+
+
+  $('#table_id').DataTable({
+      "processing": true,
+      "serverSide": true,
+      "ajax": {
+        url: base_url() + "public/ajax/user-reload",
+        type: 'POST',
+      },
+  });
+}
+
+
+
+
+// $('#example').DataTable({
+//   processing: true,
+//   serverSide: true,
+//   ajax: '../server_side/scripts/server_processing.php',
+// });
+
+
+
+
 
 $(document).on("click", "#user_add", function () {
     $(".modal-dialog").addClass("modal-lg");
@@ -50,9 +85,9 @@ $(document).on("click", "#user_add", function () {
           <hr>
           <div class="form-row mt-2">
             <div class="col">
-                  <input type="text" name="username" class="form-control addvalidator " placeholder="Username*" required>
+                  <input type="text" name="username" class="form-control addvalidator usernamevalidator" placeholder="Username*" required>
                   <small id="required-username" class="d-none" style="color:red">Username required</small>
-                  <small id="unique-username" class="d-none" style="color:red">Username already exist</small>
+                  <small id="unique-username" class="d-none" style="color:red" status="0">Username already exist</small>
                 </div>
             <div class="col">
               <input type="email" name="email" class="form-control addvalidator" placeholder="Email address*" required>
@@ -67,7 +102,6 @@ $(document).on("click", "#user_add", function () {
                   <option value="3">Encoder</option>
               </select>
               <small id="required-role" class="d-none" style="color:red">Role Required!</small>
-
             </div>
           </div>`;
     $("#modal-form").empty();
@@ -80,6 +114,68 @@ $(document).on("click", "#user_add", function () {
 });
 
 // add user validation
+
+$(document).on("keyup", ".usernamevalidator", function () {
+  
+  $.ajax({
+      url: base_url() + "public/ajax/user-validate_username",
+      data: {
+          data: $(this).val(),
+      },
+      dataType: "json",
+      type: "post",
+      success: function (data) {
+          if (data > 0) {
+            $('#unique-username').removeClass('d-none')
+            $('#unique-username').attr('status','1')
+          }else{
+            $('#unique-username').addClass('d-none')
+            $('#unique-username').attr('status','0')
+          }
+      },
+  });
+});
+
+
+// $(document).on("click", ".user_insert", function () {
+//   var data = {};
+//   $.each($("form").serializeArray(), function (i, field) {
+//       data[field.name] = field.value;
+//   });
+
+//   $.ajax({
+//       url: base_url() + "public/ajax/user-create",
+//       data: {
+//           data: data,
+//       },
+//       dataType: "json",
+//       type: "post",
+//       beforeSend: function(){
+//         Swal.fire({
+//           title: 'Uploading...',
+//           html: 'Please wait...',
+//           allowEscapeKey: false,
+//           allowOutsideClick: false,
+//           didOpen: () => {
+//             Swal.showLoading()
+//           }
+//         });
+//        },success: function (data) {
+//         $("#user_modal").modal("hide");
+//         setTimeout(function() { 
+//           reload_users(); 
+//           Swal.fire(
+//             'User Create!',
+//             'Created Successfully!',
+//             'success'
+//           )
+//         }, 1000);
+//       },
+//   });
+// });
+
+
+
 $(document).on("keyup", ".addvalidator", function () {
     validator();
 });
@@ -136,39 +232,60 @@ function validator() {
     } else {
         $("#required-role").removeClass("d-none");
     }
+    
 
-    $.each($(".addvalidator"), function () {
-        if ($(".addselectvalidator").val() != null) {
-            if ($(this).val() == "") {
-                $(".usermodalsave").addClass("disabled");
-                return false;
-            } else {
-                console.log("else " + $(".addselectvalidator").val());
-                $(".usermodalsave").removeClass("disabled");
-            }
-        } else {
-            $(".usermodalsave").addClass("disabled");
-        }
-    });
-}
+    if ($('#unique-username').attr('status') == 0) {
+      $.each($(".addvalidator"), function () {
+          if ($(".addselectvalidator").val() != null) {
+              if ($(this).val() == "") {
+                  $(".usermodalsave").addClass("disabled");
+                  return false;
+              } else {
+                  console.log("else " + $(".addselectvalidator").val());
+                  $(".usermodalsave").removeClass("disabled");
+              }
+          } else {
+              $(".usermodalsave").addClass("disabled");
+          }
+      });
+    }
+  }
 
 $(document).on("click", ".user_insert", function () {
-    var data = {};
-    $.each($("form").serializeArray(), function (i, field) {
-        data[field.name] = field.value;
-    });
+  var data = {};
+  $.each($("form").serializeArray(), function (i, field) {
+      data[field.name] = field.value;
+  });
 
-    $.ajax({
-        url: base_url() + "public/ajax/user-create",
-        data: {
-            data: data,
-        },
-        dataType: "json",
-        type: "post",
-        success: function (data) {
-            console.log(data);
-        },
-    });
+  $.ajax({
+      url: base_url() + "public/ajax/user-create",
+      data: {
+          data: data,
+      },
+      dataType: "json",
+      type: "post",
+      beforeSend: function(){
+        Swal.fire({
+          title: 'Uploading...',
+          html: 'Please wait...',
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading()
+          }
+        });
+       },success: function (data) {
+        $("#user_modal").modal("hide");
+        setTimeout(function() { 
+          reload_users(); 
+          Swal.fire(
+            'User Create!',
+            'Created Successfully!',
+            'success'
+          )
+        }, 1000);
+      },
+  });
 });
 
 // ==========================================================================
@@ -250,9 +367,21 @@ $(document).on("click", "#user_view", function () {
 });
 
 // ======================= EDIT ======================================================
+
+$(document).on("click", "#user_edit", function () {
+  $("#modal-form").empty();
+
+
+  $(".usermodalsave").removeClass("disabled");
+
+
+});
+
 $(document).on("click", "#user_edit", function () {
     var id = $(this).data("user_id");
     $(".modal-dialog").addClass("modal-lg");
+    $(".usermodalsave").text("Save");
+
 
     $.ajax({
         url: base_url() + "public/ajax/user-view",
@@ -262,6 +391,12 @@ $(document).on("click", "#user_edit", function () {
         dataType: "json",
         type: "post",
         success: function (data) {
+
+
+          if (data["0"].role == 1) {var active = "selected"}
+          else if (data["0"].role == 2) {var active = "selected"}
+          else if (data["0"].role == 3) {var active = "selected"}
+
             var tmp_body =
                 `
             <h4>Personal Information</h4>
@@ -318,7 +453,6 @@ $(document).on("click", "#user_edit", function () {
                 </div>
                 <div class="col">
                   <select name="role" class="form-select addselectvalidator" required>
-                      <option value="null" selected disabled>Open this select menu</option>
                       <option value="1">Admin</option>
                       <option value="2">Registrar</option>
                       <option value="3">Encoder</option>
@@ -332,11 +466,54 @@ $(document).on("click", "#user_edit", function () {
             $(".modal-title").append("Edit User");
             $("#modal-form").append(tmp_body);
             $(".usermodalsave").addClass("user_update");
-            $(".usermodalsave").addClass("disabled");
             $("#user_modal").modal("show");
+
+            if (data['0'].role == 1) {$("select[name=role]").val('1');}
+            if (data['0'].role == 2) {$("select[name=role]").val('2');}
+            if (data['0'].role == 3) {$("select[name=role]").val('3');}
         },
     });
 });
+
+
+$(document).on("click", ".user_update", function () {
+  var data = {};
+  $.each($("form").serializeArray(), function (i, field) {
+      data[field.name] = field.value;
+  });
+
+  $.ajax({
+      url: base_url() + "public/ajax/user-edit",
+      data: {
+          data: data,
+      },
+      dataType: "json",
+      type: "post",
+      beforeSend: function(){
+        Swal.fire({
+          title: 'Uploading...',
+          html: 'Please wait...',
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading()
+          }
+        });
+       },success: function (data) {
+        $("#user_modal").modal("hide");
+        setTimeout(function() { 
+          reload_users(); 
+          Swal.fire(
+            'User Update!',
+            'updated Successfully!',
+            'success'
+          )
+        }, 1000);
+      },
+  });
+});
+
+
 
 // ========================= DELETE ======================================================
 
@@ -376,7 +553,27 @@ $(document).on("click", ".user-delete", function () {
         },
         dataType: "json",
         type: "post",
-        success: function (data) {},
+        beforeSend: function(){
+          Swal.fire({
+            title: 'Uploading...',
+            html: 'Please wait...',
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+              Swal.showLoading()
+            }
+          });
+         },success: function (data) {
+          $("#user_modal").modal("hide");
+          setTimeout(function() { 
+            reload_users(); 
+            Swal.fire(
+              'User Delete!',
+              'Deleted Successfully!',
+              'success'
+            )
+          }, 1000);
+        },
     });
 });
 
@@ -402,13 +599,13 @@ $(document).on("click", "#user_recover", function () {
     $("#user_modal").modal("show");
     $(".usermodalsave").addClass("user-recover");
     $(".usermodalsave").removeClass("btn-success");
+    $(".usermodalsave").addClass("btn-warning");
     $(".usermodalsave").text("Recover");
-    $(".user-delete").attr("id", $(this).data("user_id"));
+    $(".user-recover").attr("id", $(this).data("user_id"));
 });
 
 $(document).on("click", ".user-recover", function () {
     var id = $(this).attr("id");
-    console.log(id);
     $.ajax({
         url: base_url() + "public/ajax/user-delete",
         data: {
@@ -417,8 +614,27 @@ $(document).on("click", ".user-recover", function () {
         },
         dataType: "json",
         type: "post",
+        beforeSend: function(){
+          Swal.fire({
+            title: 'Uploading...',
+            html: 'Please wait...',
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+              Swal.showLoading()
+            }
+          });
+         },
         success: function (data) {
-            console.log(data);
+          $("#user_modal").modal("hide");
+          setTimeout(function() { 
+            reload_users(); 
+            Swal.fire(
+              'User Recover!',
+              'Recover Successfully!',
+              'success'
+            )
+          }, 1000);
         },
     });
 });
