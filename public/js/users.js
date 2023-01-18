@@ -9,7 +9,7 @@ function base_url() {
     if (location.host == "localhost") {
         var url = location.origin + "/" + pathparts[1].trim("/") + "/";
     } else {
-        var url = location.origin;
+        var url = location.origin + "/";
   }
 console.log(url);
   
