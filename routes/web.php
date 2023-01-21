@@ -5,6 +5,16 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ScholarshipController;
+use App\Http\Controllers\QualificationController;
+use App\Http\Controllers\DisabilityController;
+use App\Http\Controllers\ClassificationController;
+use App\Http\Controllers\StudentController;
+
+
+
+
+
 // users 
 use App\Http\Controllers\userAdmin;
 use App\Http\Controllers\userEncoder;
@@ -38,6 +48,16 @@ Route::group(['middleware' => 'auth'], function (){
 
         Route::group(['middleware' => ['userAdmin']], function() {
                 Route::get('userAdmin/user', [UserController::class, 'index'])->name('admin.user');
+                Route::get('scholarship/show', [ScholarshipController::class, 'index'])->name('admin.scholarship.show');
+                Route::get('Qualification/show', [QualificationController::class, 'index'])->name('admin.qualification.show');
+                Route::get('Disability/show', [DisabilityController::class, 'index'])->name('admin.disability.show');
+                Route::get('Classification/show', [ClassificationController::class, 'index'])->name('admin.classification.show');
+                Route::get('Student/show', [StudentController::class, 'index'])->name('admin.student.show');
+
+
+
+
+
         });
 
         // =================================================================================================================================

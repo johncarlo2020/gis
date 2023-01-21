@@ -112,6 +112,51 @@
                             </a>
                         </li>
                         <li class="nav-item ">
+                            <a href="{{ route('admin.scholarship.show') }}"
+                                class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Scholarship
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('admin.qualification.show') }}"
+                                class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Qualification/Courses
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('admin.disability.show') }}"
+                                class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Disability
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('admin.classification.show') }}"
+                                class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Client Classification
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ route('admin.student.show') }}"
+                                class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Student
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
                             <a href="{{ route('admin.user') }}"
                                 class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
