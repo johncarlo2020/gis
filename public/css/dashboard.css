@@ -29,7 +29,12 @@
 }
 .sidebar .nav-link p,
 .sidebar .nav-link i {
-    color: #ffffff;
+    color: #E4E0E0;
+    font-size: 13px;
+}
+.sidebar a.nav-link.active p ,.sidebar a.nav-link.active i {
+    color: #ffff !important;
+    font-weight: 700;
 }
 .dashboard-link {
     border-bottom: 1px solid #e4e0e0;
