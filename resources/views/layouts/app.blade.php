@@ -113,7 +113,7 @@
                         </li>
                         <li class="nav-item ">
                             <a href="{{ route('admin.scholarship.show') }}"
-                                class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
+                                class="nav-link {{ request()->routeIs('admin.scholarship*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Scholarship
@@ -122,7 +122,7 @@
                         </li>
                         <li class="nav-item ">
                             <a href="{{ route('admin.qualification.show') }}"
-                                class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
+                                class="nav-link {{ request()->routeIs('admin.qualification*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Qualification/Courses
@@ -131,7 +131,7 @@
                         </li>
                         <li class="nav-item ">
                             <a href="{{ route('admin.disability.show') }}"
-                                class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
+                                class="nav-link {{ request()->routeIs('admin.disability*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Disability
@@ -140,7 +140,7 @@
                         </li>
                         <li class="nav-item ">
                             <a href="{{ route('admin.classification.show') }}"
-                                class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
+                                class="nav-link {{ request()->routeIs('admin.classification*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Client Classification
@@ -149,7 +149,7 @@
                         </li>
                         <li class="nav-item ">
                             <a href="{{ route('admin.student.show') }}"
-                                class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
+                                class="nav-link {{ request()->routeIs('admin.student*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Student
