@@ -90,7 +90,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-Container elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="{{ route('admin.home') }}" class="brand-link">
                 <img src="{{ asset('images/logo-white.png') }}" alt="Logo" class="brand-image img-circle "
                     style="opacity: .8">
                 <span class="brand-text ">Institute</span>
@@ -111,7 +111,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none':'' }}">
                             <a href="{{ route('admin.scholarship.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.scholarship*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
@@ -120,7 +120,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none':'' }}">
                             <a href="{{ route('admin.qualification.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.qualification*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
@@ -129,7 +129,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none':'' }} ">
                             <a href="{{ route('admin.disability.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.disability*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
@@ -138,7 +138,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none':'' }}">
                             <a href="{{ route('admin.classification.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.classification*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
@@ -156,7 +156,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item {{ auth()->user()->role != 1 ? 'd-none':'' }}">
                             <a href="{{ route('admin.user') }}"
                                 class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>

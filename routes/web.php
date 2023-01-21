@@ -42,22 +42,17 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function (){
 
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::get('scholarship/show', [ScholarshipController::class, 'index'])->name('admin.scholarship.show');
+        Route::get('Qualification/show', [QualificationController::class, 'index'])->name('admin.qualification.show');
+        Route::get('Disability/show', [DisabilityController::class, 'index'])->name('admin.disability.show');
+        Route::get('Classification/show', [ClassificationController::class, 'index'])->name('admin.classification.show');
+        Route::get('Student/show', [StudentController::class, 'index'])->name('admin.student.show');
         // =================================================================================================================================
         //admin routes
         Route::get('userAdmin/index', [HomeController::class, 'AdminHome'])->name('admin.home')->middleware('userAdmin');
 
         Route::group(['middleware' => ['userAdmin']], function() {
                 Route::get('userAdmin/user', [UserController::class, 'index'])->name('admin.user');
-                Route::get('scholarship/show', [ScholarshipController::class, 'index'])->name('admin.scholarship.show');
-                Route::get('Qualification/show', [QualificationController::class, 'index'])->name('admin.qualification.show');
-                Route::get('Disability/show', [DisabilityController::class, 'index'])->name('admin.disability.show');
-                Route::get('Classification/show', [ClassificationController::class, 'index'])->name('admin.classification.show');
-                Route::get('Student/show', [StudentController::class, 'index'])->name('admin.student.show');
-
-
-
-
-
         });
 
         // =================================================================================================================================
