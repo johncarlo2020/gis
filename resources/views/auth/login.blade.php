@@ -40,7 +40,7 @@
                     @csrf
                     <div class="row mb-3">
                         <div class="username-holder">
-                            <label for="email" class=" label-input text-small">{{ __('Email Address') }}</label>
+                            <label for="email" class=" label-input text-small">{{ __('Username') }}</label>
                             <input id="email" type="email" placeholder="Username"
                                 class="form-control @error('email') is-invalid @enderror" name="email"
                                 value="{{ old('email') }}" required autocomplete="email" autofocus>

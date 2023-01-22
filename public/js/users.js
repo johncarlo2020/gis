@@ -11,7 +11,6 @@ function base_url() {
     } else {
         var url = location.origin + "/gis/";
   }
-console.log(url);
   
     return url;
 }
@@ -118,7 +117,6 @@ $(document).on("click", "#user_add", function () {
 // add user validation
 
 $(document).on("keyup", ".usernamevalidator", function () {
-  
   $.ajax({
       url: base_url() + "public/ajax/user-validate_username",
       data: {
@@ -129,7 +127,8 @@ $(document).on("keyup", ".usernamevalidator", function () {
       success: function (data) {
           if (data > 0) {
             $('#unique-username').removeClass('d-none')
-            $('#unique-username').attr('status','1')
+              $(".usermodalsave").addClass("disabled");
+              $('#unique-username').attr('status','1')
           }else{
             $('#unique-username').addClass('d-none')
             $('#unique-username').attr('status','0')
@@ -138,43 +137,27 @@ $(document).on("keyup", ".usernamevalidator", function () {
   });
 });
 
+$(document).on("keyup", ".usernamevalidatoredit", function () {
+  $.ajax({
+      url: base_url() + "public/ajax/user-validate_username_edit",
+      data: {
+          data: $(this).val(),
+      },
+      dataType: "json",
+      type: "post",
+      success: function (data) {
+          if (data > 0) {
+            $('#unique-username').removeClass('d-none')
+              $(".usermodalsave").addClass("disabled");
+              $('#unique-username').attr('status','1')
+          }else{
+            $('#unique-username').addClass('d-none')
+            $('#unique-username').attr('status','0')
+          }
+      },
+  });
+});
 
-// $(document).on("click", ".user_insert", function () {
-//   var data = {};
-//   $.each($("form").serializeArray(), function (i, field) {
-//       data[field.name] = field.value;
-//   });
-
-//   $.ajax({
-//       url: base_url() + "public/ajax/user-create",
-//       data: {
-//           data: data,
-//       },
-//       dataType: "json",
-//       type: "post",
-//       beforeSend: function(){
-//         Swal.fire({
-//           title: 'Uploading...',
-//           html: 'Please wait...',
-//           allowEscapeKey: false,
-//           allowOutsideClick: false,
-//           didOpen: () => {
-//             Swal.showLoading()
-//           }
-//         });
-//        },success: function (data) {
-//         $("#user_modal").modal("hide");
-//         setTimeout(function() { 
-//           reload_users(); 
-//           Swal.fire(
-//             'User Create!',
-//             'Created Successfully!',
-//             'success'
-//           )
-//         }, 1000);
-//       },
-//   });
-// });
 
 
 
@@ -211,6 +194,12 @@ function validator() {
         $("#required-contact").removeClass("d-none");
     }
 
+    if ($("input[name=username]").val().length > 0) {
+      $("#required-username").addClass("d-none");
+  } else {
+      $("#required-username").removeClass("d-none");
+  }
+
     if ($("input[name=fname]").val().length > 0) {
         $("#required-fname").addClass("d-none");
     } else {
@@ -235,15 +224,13 @@ function validator() {
         $("#required-role").removeClass("d-none");
     }
     
-
     if ($('#unique-username').attr('status') == 0) {
       $.each($(".addvalidator"), function () {
-          if ($(".addselectvalidator").val() != null) {
+      if ($(".addselectvalidator").val() != null) {
               if ($(this).val() == "") {
-                  $(".usermodalsave").addClass("disabled");
+      $(".usermodalsave").addClass("disabled");
                   return false;
               } else {
-                  console.log("else " + $(".addselectvalidator").val());
                   $(".usermodalsave").removeClass("disabled");
               }
           } else {
@@ -295,6 +282,7 @@ $(document).on("click", ".user_insert", function () {
 $(document).on("click", "#user_view", function () {
     var id = $(this).data("user_id");
     $(".modal-dialog").addClass("modal-lg");
+    $(".usermodalsave").removeClass("d-none");
 
     $.ajax({
         url: base_url() + "public/ajax/user-view",
@@ -304,7 +292,6 @@ $(document).on("click", "#user_view", function () {
         dataType: "json",
         type: "post",
         success: function (data) {
-            console.log(data);
 
             var role = "";
             if (data["0"].role == 1) {
@@ -383,7 +370,7 @@ $(document).on("click", "#user_edit", function () {
     var id = $(this).data("user_id");
     $(".modal-dialog").addClass("modal-lg");
     $(".usermodalsave").text("Save");
-
+    $(".usermodalsave").removeClass("d-none");
 
     $.ajax({
         url: base_url() + "public/ajax/user-view",
@@ -442,7 +429,7 @@ $(document).on("click", "#user_edit", function () {
                 <div class="col">
                   <input type="text" name="username" value="` +
                 data["0"].username +
-                `" class="form-control addvalidator " placeholder="Username*" required>
+                `" class="form-control addvalidator usernamevalidatoredit" placeholder="Username*" required>
                   <small id="required-username" class="d-none" style="color:red">Username required</small>
                   <small id="unique-username" class="d-none" style="color:red">Username already exist</small>
                 </div>
@@ -469,10 +456,13 @@ $(document).on("click", "#user_edit", function () {
             $("#modal-form").append(tmp_body);
             $(".usermodalsave").addClass("user_update");
             $("#user_modal").modal("show");
+            $(".user_update").attr("id", id );
+              $('#unique-username').attr('status','0')
 
             if (data['0'].role == 1) {$("select[name=role]").val('1');}
             if (data['0'].role == 2) {$("select[name=role]").val('2');}
             if (data['0'].role == 3) {$("select[name=role]").val('3');}
+
         },
     });
 });
@@ -480,6 +470,7 @@ $(document).on("click", "#user_edit", function () {
 
 $(document).on("click", ".user_update", function () {
   var data = {};
+    data["id"] = $(this).attr("id");
   $.each($("form").serializeArray(), function (i, field) {
       data[field.name] = field.value;
   });
@@ -503,14 +494,25 @@ $(document).on("click", ".user_update", function () {
         });
        },success: function (data) {
         $("#user_modal").modal("hide");
-        setTimeout(function() { 
-          reload_users(); 
-          Swal.fire(
-            'User Update!',
-            'updated Successfully!',
-            'success'
-          )
-        }, 1000);
+        if (data == "success") {
+          setTimeout(function() { 
+            reload_users(); 
+            Swal.fire(
+              'User Update!',
+              'Updated Successfully!',
+              'success'
+            )
+          }, 1000);
+        }else{
+          setTimeout(function() { 
+            reload_users(); 
+            Swal.fire(
+              'User Update!',
+              'Updated Failed Successfully!',
+              'warning'
+            )
+          }, 1000);
+        }
       },
   });
 });
@@ -521,6 +523,7 @@ $(document).on("click", ".user_update", function () {
 
 $(document).on("click", "#user_delete", function () {
     var name = $(this).data("name");
+    $(".usermodalsave").removeClass("d-none");
 
     $(".modal-dialog").removeClass("modal-lg");
 
@@ -545,7 +548,6 @@ $(document).on("click", "#user_delete", function () {
 });
 
 $(document).on("click", ".user-delete", function () {
-    console.log("delete");
     var id = $(this).attr("id");
     $.ajax({
         url: base_url() + "public/ajax/user-delete",
@@ -583,7 +585,7 @@ $(document).on("click", ".user-delete", function () {
 
 $(document).on("click", "#user_recover", function () {
     var name = $(this).data("name");
-
+    $(".usermodalsave").removeClass("d-none");
     $(".modal-dialog").removeClass("modal-lg");
 
     var tmp_body =

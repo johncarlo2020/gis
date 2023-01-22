@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+
 
 class UserController extends Controller
 {
@@ -16,9 +18,20 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')
         // ->where('status', '=', 1)
-                ->get();
+        $users = DB::table('users')
+                ->get([
+                    'id',
+                    'username',
+                    'fname',
+                    'mname',
+                    'lname',
+                    'email',
+                    'role',
+                    'status',
+                    'created_at',
+                    'updated_at',
+            ]);
         return view('useradmin/user' , compact('users'));
     }
 
@@ -31,7 +44,18 @@ class UserController extends Controller
     {
         
         $count = DB::table('users')->count();
-        $users = DB::table('users')->get();
+        $users = DB::table('users')->get([
+            'id',
+            'username',
+            'fname',
+            'mname',
+            'lname',
+            'email',
+            'role',
+            'status',
+            'created_at',
+            'updated_at',
+    ]);;
 
         $users = json_decode($users, true);
         // $count = json_decode($count, true);
@@ -54,6 +78,7 @@ class UserController extends Controller
 
                 return  [
                          $users['id'],
+                         $users['username'],
                          $users['fname'] . " " . $users['mname'] . " " . $users['lname'],
                          $users['email'],
                          '<center>' . $role . '</center>',
@@ -107,6 +132,7 @@ class UserController extends Controller
                 'email'     => $request['data']['email'], 
                 'status'    => 1, 
                 'created_at'=> date("Y-m-d H:i:s")  , 
+                'updated_at'=> date("Y-m-d H:i:s")  , 
                 'password'  => Hash::make('password'),
             ]);
             return response()->json('success');
@@ -134,17 +160,27 @@ class UserController extends Controller
      */
     public function edit(Request $request)
     {
-        // validation
+        $current_date_time = Carbon::now()->toDateTimeString(); // Produces something like "2019-03-11 12:25:00"
+
+        
         $validate_name = DB::table('users')
-                ->where('username', '=', $request['data']['fname'].$request['data']['lname'])
+                ->where([
+                    ['username', '=', $request['data']['username']],
+                    ['id', '!=', $request['data']['id']],
+                ])
                 ->count();
         $validate_email = DB::table('users')
-                ->where('email', '=', $request['data']['email'])
+                ->where([
+                    ['username', '=', $request['data']['username']],
+                    ['id', '!=', $request['data']['id']],
+                ])
                 ->count();
-
+                    // dd($validate_email);
         if ($validate_name == 0 AND $validate_email == 0) {
-        //    dd('no duplicate');
-           DB::table('users')->insert(
+
+           DB::table('users')
+           ->where('id' , '=' , $request['data']['id'])
+           ->update(
             [
                 'username'  => $request['data']['username'],
                 'fname'     => $request['data']['fname'],
@@ -155,14 +191,17 @@ class UserController extends Controller
                 'email'     => $request['data']['email'],
                 'role'      => $request['data']['role'],
                 'email'     => $request['data']['email'], 
-                'status'    => 1, 
-                'created_at'=> date("Y-m-d H:i:s")  , 
+                'updated_at'=> date("Y-m-d H:i:s")  , 
                 'password'  => Hash::make('password'),
             ]);
             return response()->json('success');
         }else{
             return response()->json('failed');
         }
+            // return response()->json($current_date_time);
+
+        
+
     }
 
 
@@ -197,7 +236,20 @@ class UserController extends Controller
 
         $data = DB::table('users')
                 ->where('id', '=', $request['id'])
-                ->get();
+                ->get([
+                    'id',
+                    'username',
+                    'fname',
+                    DB::raw('IFNULL( mname, "") as mname'),
+                    'lname',
+                    'email',
+                    'address',
+                    'mobile_no',
+                    'role',
+                    'status',
+                    'created_at',
+                    'updated_at',
+            ]);;
 
         return response()->json($data);
     }
@@ -206,6 +258,15 @@ class UserController extends Controller
 
         $data = DB::table('users')
                 ->where('username', '=', $request['data'])
+                ->count();
+
+        return response()->json($data);
+    }
+    public function username_validate_edit(Request $request){
+
+        $data = DB::table('users')
+                ->where('username', '=', $request['data'])
+                ->where('id', '!=', Auth::user()->id)
                 ->count();
 
         return response()->json($data);
