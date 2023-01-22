@@ -31,13 +31,9 @@ use App\Http\Controllers\userRegistrar;
 |
 */
 
-Route::get('/', function () { 
-        return view('auth/login');
-});
+Route::get('/', function () { return view('auth/login');});
 
 Auth::routes(['register' => false]);
-
-
 
 Route::group(['middleware' => 'auth'], function (){
 

@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-
+use Redirect;
 
 class LoginController extends Controller
 {
@@ -50,8 +50,13 @@ class LoginController extends Controller
     public function redirectTo()
     {   
 
-        if (Auth::check())
-        {
+
+        if(Auth::user()->status == 0) {
+            Auth::logout();
+            return Redirect::back()->withErrors(['msg' => 'The Message']);
+        }
+
+        if (Auth::check()){
             // 1 admin
             // 2 encoder
             // 3 registrar
@@ -65,7 +70,7 @@ class LoginController extends Controller
                 return ('login')->with('error','User Not Found.');
             }
         }else{
-            return redirect()->route('login')->with('error','Email-Address And Password Are Wrong.');
+            return ('login')->with('error','User Not Found.');
         }
     }
 
@@ -73,7 +78,10 @@ class LoginController extends Controller
     {
         Auth::logoutOtherDevices($request->password);
     }
-    
+    public function username()
+    {
+        return 'username';
+    }
 
     
 }
