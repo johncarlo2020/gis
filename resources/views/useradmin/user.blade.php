@@ -11,6 +11,7 @@
                 <thead>
                     <tr>
                         <th class="text-center">ID</th>
+                        <th class="text-center">Username</th>
                         <th class="text-center">Name</th>
                         <th class="text-center">Email</th>
                         <th class="text-center">Role</th>
@@ -24,6 +25,7 @@
                     @foreach ($users as $user)
                         <tr>
                             <td class="text-center">{{ $user->id }}</td>
+                            <td>{{ $user->username }}</td>
                             <td>{{ $user->fname }} {{ $user->mname }} {{ $user->lname }}</td>
                             <td>{{ $user->email }}</td>
                             <td class="text-center"><b>
