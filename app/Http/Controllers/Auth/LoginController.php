@@ -31,8 +31,8 @@ class LoginController extends Controller
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
 
-    
-    
+
+
     /**
      * Create a new controller instance.
      *
@@ -43,15 +43,15 @@ class LoginController extends Controller
 
         $this->middleware('guest')->except('logout');
     }
-    
- 
+
+
 
     // public function login(Request $request)
     public function redirectTo()
-    {   
+    {
 
-
-        if(Auth::user()->status == 0) {
+        // use strict equality sign every time
+        if(Auth::user()->status === 0) {
             Auth::logout();
             return Redirect::back()->withErrors(['msg' => 'The Message']);
         }
@@ -60,11 +60,11 @@ class LoginController extends Controller
             // 1 admin
             // 2 encoder
             // 3 registrar
-            if (auth()->user()->role == 1) {
+            if (auth()->user()->role === 1) {
                 return ('userAdmin/index');
-            }else if (auth()->user()->role == 2) {
+            }else if (auth()->user()->role === 2) {
                 return ('userRegistrar/index');
-            }else if (auth()->user()->role == 3) {
+            }else if (auth()->user()->role === 3) {
                 return ('userEncoder/index');
             }else{
                 return ('login')->with('error','User Not Found.');
@@ -83,5 +83,5 @@ class LoginController extends Controller
         return 'username';
     }
 
-    
+
 }
