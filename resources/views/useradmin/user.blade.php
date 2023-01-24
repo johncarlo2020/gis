@@ -39,22 +39,8 @@
                                 </b></td>
                             <td class="text-center">{{ $user->created_at }}</td>
                             <td class="text-center">{{ $user->updated_at }}</td>
-                            <!-- <td class="text-center">
-<<<<<<< Updated upstream
-                                @if ($user->status == 1)
-                                    <b style="color:green">Active</b>
-                                @else
-                                    <b style="color:red">Inactive</b>
-                                @endif
-                            </td> -->
-=======
-                                                                @if ($user->status == 1)
-    <b style="color:green">Active</b>
-@else
-    <b style="color:red">Inactive</b>
-    @endif
-                                                                                                </td> -->
->>>>>>> Stashed changes
+
+
                             <td class="text-center">
                                 <span data-user_id="{{ $user->id }}" class="btn btn-sm btn-primary" id="user_view"><i
                                         class="fa-solid fa-eye"></i></span>
@@ -88,7 +74,8 @@
                     <div class="modal-header px-0">
                         <span class="top-design"></span>
                         <h5 class="modal-title" id="staticBackdropLabel"></h5>
-                        <button type="button" class="btn-close btnclose" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btnclose" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body px-0">
                         <form action="" method="POST">
