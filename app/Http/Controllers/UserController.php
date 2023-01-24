@@ -42,7 +42,7 @@ class UserController extends Controller
      */
     public function reload(Request $request)
     {
-        
+
         $count = DB::table('users')->count();
         $users = DB::table('users')->get([
             'id',
@@ -129,10 +129,10 @@ class UserController extends Controller
                 'mobile_no' => $request['data']['contact'],
                 'email'     => $request['data']['email'],
                 'role'      => $request['data']['role'],
-                'email'     => $request['data']['email'], 
-                'status'    => 1, 
-                'created_at'=> date("Y-m-d H:i:s")  , 
-                'updated_at'=> date("Y-m-d H:i:s")  , 
+                'email'     => $request['data']['email'],
+                'status'    => 1,
+                'created_at'=> date("Y-m-d H:i:s")  ,
+                'updated_at'=> date("Y-m-d H:i:s")  ,
                 'password'  => Hash::make('password'),
             ]);
             return response()->json('success');
@@ -149,7 +149,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**
@@ -162,7 +162,7 @@ class UserController extends Controller
     {
         $current_date_time = Carbon::now()->toDateTimeString(); // Produces something like "2019-03-11 12:25:00"
 
-        
+
         $validate_name = DB::table('users')
                 ->where([
                     ['username', '=', $request['data']['username']],
@@ -190,8 +190,8 @@ class UserController extends Controller
                 'mobile_no' => $request['data']['contact'],
                 'email'     => $request['data']['email'],
                 'role'      => $request['data']['role'],
-                'email'     => $request['data']['email'], 
-                'updated_at'=> date("Y-m-d H:i:s")  , 
+                'email'     => $request['data']['email'],
+                'updated_at'=> date("Y-m-d H:i:s")  ,
                 'password'  => Hash::make('password'),
             ]);
             return response()->json('success');
@@ -200,7 +200,7 @@ class UserController extends Controller
         }
             // return response()->json($current_date_time);
 
-        
+
 
     }
 

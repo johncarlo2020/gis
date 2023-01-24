@@ -40,27 +40,29 @@
                             <td class="text-center">{{ $user->created_at }}</td>
                             <td class="text-center">{{ $user->updated_at }}</td>
                             <!-- <td class="text-center">
-                                @if ($user->status == 1)
-                                    <b style="color:green">Active</b>
-                                @else
-                                    <b style="color:red">Inactive</b>
-                                @endif
-                            </td> -->
+                @if ($user->status == 1)
+    <b style="color:green">Active</b>
+@else
+    <b style="color:red">Inactive</b>
+    @endif
+                                                </td> -->
                             <td class="text-center">
-                                <span data-user_id="{{ $user->id }}" class="btn btn-sm btn-primary" id="user_view"><i
+                                <span data-user_id="{{ $user->id }}" class="btn btn-sm btn-primary" id="user_view"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i
                                         class="fa-solid fa-eye"></i></span>
-                                <span data-user_id="{{ $user->id }}" class="btn btn-sm btn-info" id="user_edit"><i
+                                <span data-user_id="{{ $user->id }}" class="btn btn-sm btn-info"
+                                    id="user_edit  data-bs-toggle="tooltip" data-bs-placement="top" title="Edit""><i
                                         class="fa-solid fa-pen"></i></span>
                                 @if ($user->status == 1)
                                     <span span data-user_id="{{ $user->id }}"
                                         data-name="{{ $user->fname }} {{ $user->mname }} {{ $user->lname }}"
-                                        class="btn btn-sm btn-danger" id="user_delete"><i
-                                            class="fa-solid fa-trash-can"></i></span>
+                                        class="btn btn-sm btn-danger" id="user_delete" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Delete"><i class="fa-solid fa-trash-can"></i></span>
                                 @else
                                     <span data-user_id="{{ $user->id }}"
                                         data-name="{{ $user->fname }} {{ $user->mname }} {{ $user->lname }}"
-                                        class="btn btn-sm btn-success" id="user_recover"><i
-                                            class="fa-solid fa-hammer"></i></span>
+                                        class="btn btn-sm btn-success" id="user_recover" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Restore"><i class="fa-solid fa-hammer"></i></span>
                                 @endif
 
                             </td>
@@ -78,7 +80,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel"></h5>
-                        <button type="button" class="btn-close btnclose" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btnclose" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="" method="POST">
