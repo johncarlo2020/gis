@@ -39,13 +39,8 @@
                                 </b></td>
                             <td class="text-center">{{ $user->created_at }}</td>
                             <td class="text-center">{{ $user->updated_at }}</td>
-                            <!-- <td class="text-center">
-                @if ($user->status == 1)
-    <b style="color:green">Active</b>
-@else
-    <b style="color:red">Inactive</b>
-    @endif
-                                                </td> -->
+
+
                             <td class="text-center">
                                 <span data-user_id="{{ $user->id }}" class="btn btn-sm btn-primary" id="user_view"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i
@@ -76,23 +71,24 @@
         <!-- Modal -->
         <div class="modal fade" id="user_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header px-0">
+                        <span class="top-design"></span>
                         <h5 class="modal-title" id="staticBackdropLabel"></h5>
                         <button type="button" class="btn-close btnclose" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body px-0">
                         <form action="" method="POST">
                             @csrf
                             <div id="modal-form">
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btnclose btn btn-success usermodalsave">Save</button>
+                    <div class="modal-footer px-0">
+                        <button type="button" class="btn btn-danger cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btnclose btn btn-primary usermodalsave save-btn">Save</button>
                     </div>
                 </div>
             </div>

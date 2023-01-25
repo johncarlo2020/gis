@@ -11,7 +11,7 @@ function base_url() {
     } else {
         var url = location.origin + "/gis/";
   }
-  
+
     return url;
 }
 // ==============================================================================
@@ -57,45 +57,51 @@ function reload_users(){
 $(document).on("click", "#user_add", function () {
     $(".modal-dialog").addClass("modal-lg");
     var tmp_body = `
-        <h4>Personal Information</h4>
-        <hr>
+        <h4 class="mb-2">Personal Information</h4>
         <div class="form-row">
             <div class="col">
+              <label for="fname" class="form-label">First name*</label>
               <input type="text" name="fname" class="form-control addvalidator" placeholder="First name*" required>
               <small id="required-fname" class="d-none" style="color:red">First name required</small>
               </div>
             <div class="col">
+            <label for="lname" class="form-label">Last name*</label>
               <input type="text" name="lname" class="form-control addvalidator" placeholder="Last name*" required>
               <small id="required-lname" class="d-none" style="color:red">Last name required</small>
               </div>
             <div class="col">
+            <label for="mname" class="form-label">Middle name</label>
               <input type="text" name="mname" class="form-control " placeholder="Middle name" required>
               </div>
           </div>
           <div class="form-row mt-2">
             <div class="col-8">
+            <label for="address" class="form-label">Address*</label>
               <input type="text" name="address" class="form-control addvalidator" placeholder="Address*" required>
               <small id="required-address" class="d-none" style="color:red">Address required</small>
               </div>
             <div class="col-4">
+            <label for="contact" class="form-label">Contact Number*</label>
               <input type="number" name="contact" class="form-control addvalidator" placeholder="Contact Number*" required>
-              <small id="required-contact" class="d-none row" style="color:red">contact required</small>
+              <small id="required-contact" class="d-none" style="color:red">contact required</small>
             </div>
           </div>
-          <h4 class="mt-2">Account Information</h4>
-          <hr>
+          <h4 class="mt-3">Account Information</h4>
           <div class="form-row mt-2">
             <div class="col">
+            <label for="username" class="form-label">Username</label>
                   <input type="text" name="username" class="form-control addvalidator usernamevalidator" placeholder="Username*" required>
                   <small id="required-username" class="d-none" style="color:red">Username required</small>
                   <small id="unique-username" class="d-none" style="color:red" status="0">Username already exist</small>
                 </div>
             <div class="col">
+            <label for="email" class="form-label">Email address*</label>
               <input type="email" name="email" class="form-control addvalidator" placeholder="Email address*" required>
-              <small id="error-email" class="d-none row" style="color:red">email Invalid </small>
-              <small id="required-email" class="d-none row" style="color:red">email required</small>
+              <small id="error-email" class="d-none" style="color:red">email Invalid </small>
+              <small id="required-email" class="d-none " style="color:red">email required</small>
             </div>
             <div class="col">
+            <label for="role" class="form-label">Role*</label>
               <select name="role" class="form-select addselectvalidator" required>
                   <option value="null" selected disabled>Open this select menu</option>
                   <option value="1">Admin</option>
@@ -223,7 +229,7 @@ function validator() {
     } else {
         $("#required-role").removeClass("d-none");
     }
-    
+
     if ($('#unique-username').attr('status') == 0) {
       $.each($(".addvalidator"), function () {
       if ($(".addselectvalidator").val() != null) {
@@ -265,8 +271,8 @@ $(document).on("click", ".user_insert", function () {
         });
        },success: function (data) {
         $("#user_modal").modal("hide");
-        setTimeout(function() { 
-          reload_users(); 
+        setTimeout(function() {
+          reload_users();
           Swal.fire(
             'User Create!',
             'Created Successfully!',
@@ -495,8 +501,8 @@ $(document).on("click", ".user_update", function () {
        },success: function (data) {
         $("#user_modal").modal("hide");
         if (data == "success") {
-          setTimeout(function() { 
-            reload_users(); 
+          setTimeout(function() {
+            reload_users();
             Swal.fire(
               'User Update!',
               'Updated Successfully!',
@@ -504,8 +510,8 @@ $(document).on("click", ".user_update", function () {
             )
           }, 1000);
         }else{
-          setTimeout(function() { 
-            reload_users(); 
+          setTimeout(function() {
+            reload_users();
             Swal.fire(
               'User Update!',
               'Updated Failed Successfully!',
@@ -569,8 +575,8 @@ $(document).on("click", ".user-delete", function () {
           });
          },success: function (data) {
           $("#user_modal").modal("hide");
-          setTimeout(function() { 
-            reload_users(); 
+          setTimeout(function() {
+            reload_users();
             Swal.fire(
               'User Delete!',
               'Deleted Successfully!',
@@ -631,8 +637,8 @@ $(document).on("click", ".user-recover", function () {
          },
         success: function (data) {
           $("#user_modal").modal("hide");
-          setTimeout(function() { 
-            reload_users(); 
+          setTimeout(function() {
+            reload_users();
             Swal.fire(
               'User Recover!',
               'Recover Successfully!',
