@@ -68,7 +68,7 @@ class UserController extends Controller
                 $role = "Registrar";
             }else if ($users['role'] == 3) {
                 $role = "Encoder";
-            }
+            } 
 
             if ($users['status'] == 1) {
                $status = '<span span data-user_id="' . $users['id'] . '" data-name="' . $users['fname'] . ' " "'  . $users['mname'] . ' " "'  . $users['lname'] . '" class="btn btn-sm btn-danger" id="user_delete"> <i class="fa-solid fa-trash-can"></i></span>';
