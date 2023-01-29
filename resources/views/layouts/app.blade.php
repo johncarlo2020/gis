@@ -230,9 +230,10 @@
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
         crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-    <script defer src="{{ asset('js/users.js') }}"></script>
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    
+    <script defer src="{{ asset('js/users.js') }}"></script>
+    <script defer src="{{ asset('js/scholarship.js') }}"></script>
 
 
 </body>
