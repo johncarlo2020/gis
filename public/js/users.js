@@ -43,17 +43,6 @@ function reload_users(){
 
 
 
-
-// $('#example').DataTable({
-//   processing: true,
-//   serverSide: true,
-//   ajax: '../server_side/scripts/server_processing.php',
-// });
-
-
-
-
-
 $(document).on("click", "#user_add", function () {
     $(".modal-dialog").addClass("modal-lg");
     var tmp_body = `
@@ -230,20 +219,25 @@ function validator() {
         $("#required-role").removeClass("d-none");
     }
 
-    if ($('#unique-username').attr('status') == 0) {
-      $.each($(".addvalidator"), function () {
-      if ($(".addselectvalidator").val() != null) {
-              if ($(this).val() == "") {
+    if (re.test($("input[name=email]").val()) === true) {
+      if ($('#unique-username').attr('status') == 0) {
+        $.each($(".addvalidator"), function () {
+        if ($(".addselectvalidator").val() != null) {
+                if ($(this).val() == "") {
+        $(".usermodalsave").addClass("disabled");
+                    return false;
+                } else {
+                    $(".usermodalsave").removeClass("disabled");
+                }
+            } else {
+                $(".usermodalsave").addClass("disabled");
+            }
+        });
+      }
+    } else {
       $(".usermodalsave").addClass("disabled");
-                  return false;
-              } else {
-                  $(".usermodalsave").removeClass("disabled");
-              }
-          } else {
-              $(".usermodalsave").addClass("disabled");
-          }
-      });
-    }
+
+  }
   }
 
 $(document).on("click", ".user_insert", function () {

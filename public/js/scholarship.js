@@ -54,12 +54,12 @@ $(document).on("click", "#scholarship_add", function () {
         <h4>Add Scholarship</h4>
         <hr>
         <div class="form-row">
-              <input type="text" name="name" class="form-control addvalidator scholarshipnamevalidator" placeholder="Scholarship Name* " required>
+              <input type="text" name="name" class="form-control addvalidator_scholarship scholarshipnamevalidator" placeholder="Scholarship Name* " required>
               <small id="required-scholarshipname" class="d-none" style="color:red">Name Required</small>
               <small id="unique-scholarshipname" class="d-none" style="color:red">Name Already Exist</small>
             </div>
           <div class="form-row mt-2">
-              <textarea class="form-control description addvalidator" name="description" placeholder="Description*" rows="6"></textarea>
+              <textarea class="form-control description addvalidator_scholarship" name="description" placeholder="Description*" rows="6"></textarea>
               <small id="required-description" class="d-none" style="color:red">Description Required</small>
           </div>
         </div>`;
@@ -117,11 +117,11 @@ $(document).on("keyup", ".scholarshipnamevalidator", function () {
 //   });
 // });
 
-$(document).on("keyup", ".addvalidator", function () {
-    validator();
+$(document).on("keyup", ".addvalidator_scholarship", function () {
+    validator_scholarship();
 });
 
-function validator() {
+function validator_scholarship() {
 
     if ($('.description').val().length > 0) {
         $("#required-description").addClass("d-none");
