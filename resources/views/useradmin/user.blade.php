@@ -46,7 +46,7 @@
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i
                                         class="fa-solid fa-eye"></i></span>
                                 <span data-user_id="{{ $user->id }}" class="btn btn-sm btn-info"
-                                    id="user_edit  "data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i
+                                    id="user_edit"data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i
                                         class="fa-solid fa-pen"></i></span>
                                 @if ($user->status == 1)
                                     <span span data-user_id="{{ $user->id }}"
