@@ -30,11 +30,11 @@
                             <td>{{ $user->email }}</td>
                             <td class="text-center"><b>
                                     @if ($user->role == 1)
-                                        Admin
+                                        <span class="badge badge-info">Admin</span>
                                     @elseif($user->role == 2)
-                                        Registrar
+                                        <span class="badge badge-info">Registrar</span>
                                     @elseif($user->role == 3)
-                                        Encoder
+                                        <span class="badge badge-info">Encoder</span>
                                     @endif
                                 </b></td>
                             <td class="text-center">{{ $user->created_at }}</td>

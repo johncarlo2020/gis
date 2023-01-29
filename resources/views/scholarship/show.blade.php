@@ -23,7 +23,14 @@
                             <td class="text-center">{{ $scholarship->id }}</td>
                             <td>{{ $scholarship->name }}</td>
                             <td>{{ $scholarship->description }}</td>
-                            <td>{{ $scholarship->status }}</td>
+                            <td>
+                                  @if ($scholarship->status == 1)
+                                  <span class="badge badge-info">Active</span>
+                                @else
+                                  <span class="badge badge-danger">Inctive</span>
+
+                                @endif
+                            </td>
                             <td class="text-center">
                                 <span data-scholarship_id="{{ $scholarship->id }}" class="btn btn-sm btn-primary" id="scholarship_view"><i
                                         class="fa-solid fa-eye"></i></span>
