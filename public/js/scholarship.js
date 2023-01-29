@@ -122,7 +122,6 @@ $(document).on("keyup", ".addvalidator_scholarship", function () {
 });
 
 function validator_scholarship() {
-
     if ($('.description').val().length > 0) {
         $("#required-description").addClass("d-none");
     } else {
@@ -136,7 +135,7 @@ function validator_scholarship() {
   }
 
     if ($('#unique-scholarshipname').attr('status') == 0) {
-      $.each($(".addvalidator"), function () {
+      $.each($(".addvalidator_scholarship"), function () {
               if ($(this).val() == "") {
             $(".scholarshipmodalsave").addClass("disabled");
                   return false;
@@ -146,6 +145,7 @@ function validator_scholarship() {
       });
     }
   }
+
 
 $(document).on("click", ".scholarship_insert", function () {
   var data = {};
