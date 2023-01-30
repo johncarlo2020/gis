@@ -11,7 +11,6 @@ $divToMove.appendTo($parentDiv);
 var next_click=document.querySelectorAll(".next_button");
 var main_form=document.querySelectorAll(".main");
 var step_list = document.querySelectorAll(".progress-bar li");
-var num = document.querySelector(".step-number");
 let formnumber=0;
 
 next_click.forEach(function(next_click_form){
@@ -22,7 +21,6 @@ next_click.forEach(function(next_click_form){
        formnumber++;
        updateform();
        progress_forward();
-       contentchange();
     });
 });
 
@@ -32,7 +30,6 @@ back_click.forEach(function(back_click_form){
        formnumber--;
        updateform();
        progress_backward();
-       contentchange();
     });
 });
 
@@ -77,7 +74,6 @@ function progress_forward(){
     // });
 
 
-    num.innerHTML = formnumber+1;
     step_list[formnumber].classList.add('active');
 }
 
@@ -87,15 +83,7 @@ function progress_backward(){
     num.innerHTML = form_num;
 }
 
-var step_num_content=document.querySelectorAll(".step-number-content");
 
- function contentchange(){
-     step_num_content.forEach(function(content){
-        content.classList.remove('active');
-        content.classList.add('d-none');
-     });
-     step_num_content[formnumber].classList.add('active');
- }
 
 
 function validateform(){
