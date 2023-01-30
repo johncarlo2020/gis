@@ -111,7 +111,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none':'' }}">
+                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }}">
                             <a href="{{ route('admin.scholarship.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.scholarship*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
@@ -120,7 +120,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none':'' }}">
+                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }}">
                             <a href="{{ route('admin.qualification.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.qualification*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
@@ -129,7 +129,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none':'' }} ">
+                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }} ">
                             <a href="{{ route('admin.disability.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.disability*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
@@ -138,7 +138,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none':'' }}">
+                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }}">
                             <a href="{{ route('admin.classification.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.classification*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
@@ -156,7 +156,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item {{ auth()->user()->role != 1 ? 'd-none':'' }}">
+                        <li class="nav-item {{ auth()->user()->role != 1 ? 'd-none' : '' }}">
                             <a href="{{ route('admin.user') }}"
                                 class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-th"></i>
@@ -231,8 +231,9 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script defer src="{{ asset('js/users.js') }}"></script>
+    <script defer src="{{ asset('js/steperForm.js') }}"></script>
     <script defer src="{{ asset('js/scholarship.js') }}"></script>
 
 
