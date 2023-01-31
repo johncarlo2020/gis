@@ -249,7 +249,7 @@ class UserController extends Controller
                     'status',
                     'created_at',
                     'updated_at',
-            ]);;
+            ]);
 
         return response()->json($data);
     }

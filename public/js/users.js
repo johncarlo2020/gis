@@ -81,6 +81,7 @@ $(document).on("click", "#user_add", function () {
             <label for="username" class="form-label">Username</label>
                   <input type="text" name="username" class="form-control addvalidator usernamevalidator" placeholder="Username*" required>
                   <small id="required-username" class="d-none" style="color:red">Username required</small>
+                  <small id="min-username" class="d-none" style="color:red">Minimum 8 Character</small>
                   <small id="unique-username" class="d-none" style="color:red" status="0">Username already exist</small>
                 </div>
             <div class="col">
@@ -195,6 +196,12 @@ function validator() {
       $("#required-username").removeClass("d-none");
   }
 
+    if ($("input[name=username]").val().length > 7) {
+      $("#min-username").addClass("d-none");
+  } else {
+      $("#min-username").removeClass("d-none");
+  }
+
     if ($("input[name=fname]").val().length > 0) {
         $("#required-fname").addClass("d-none");
     } else {
@@ -227,7 +234,13 @@ function validator() {
         $(".usermodalsave").addClass("disabled");
                     return false;
                 } else {
-                    $(".usermodalsave").removeClass("disabled");
+                    if ($("input[name=username]").val().length > 7) {
+                      console.log('cge')
+                        $(".usermodalsave").removeClass("disabled");
+                    }else{
+                       $(".usermodalsave").addClass("disabled");
+
+                    }
                 }
             } else {
                 $(".usermodalsave").addClass("disabled");
