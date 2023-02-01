@@ -306,6 +306,14 @@ table {
 .modal .save-btn {
     background: #3c63d1 !important;
 }
+input[type=number]{
+    -moz-appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 
