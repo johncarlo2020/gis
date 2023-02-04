@@ -47,7 +47,7 @@ class ScholarshipController extends Controller
      */
     public function store(Request $request)
     {
-        // dd('test');
+        // dd($request);
 
         // validation
         $validate_name = DB::table('scholarships')
@@ -59,7 +59,7 @@ class ScholarshipController extends Controller
             [
                 'name'          => $request['data']['name'],
                 'description'   => $request['data']['description'],
-                'status'        => 1,
+                'status'        => $request['data']['status'],
                 'createdBy_id'=> Auth::user()->id  ,
                 'updatedBy_id'=> Auth::user()->id  ,
                 'created_at'=> date("Y-m-d H:i:s")  ,
@@ -77,9 +77,17 @@ class ScholarshipController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function view(Request $request)
     {
-        //
+        $data = DB::table('scholarships')
+                ->where('id', '=', $request['id'])
+                ->get([
+                    'id',
+                    'name',
+                    'description',
+            ]);
+    return response()->json($data);
+
     }
 
     /**
@@ -88,9 +96,9 @@ class ScholarshipController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -100,9 +108,22 @@ class ScholarshipController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+            DB::table('scholarships')
+            ->where('id' , '=' , $request['data']['id'])
+            ->update(
+             [
+                 'name'                 => $request['data']['name'],
+                 'description'          => $request['data']['description'],
+                 'updated_at'           => date("Y-m-d H:i:s") ,
+                 'updatedBy_id'         => Auth::user()->id,
+             ]);
+             return response()->json('success');
+
+        // return response()->json($request);
+        
     }
 
     /**
@@ -111,10 +132,24 @@ class ScholarshipController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+    DB::table('scholarships')
+        ->where('id', $request['id'])
+        ->update(['status' => $request['status']]);
+
+    return response()->json($request['id']);
     }
+
+    public function name_validate_edit(Request $request)
+    {
+        $data = DB::table('scholarships')
+                ->where('name', '=', $request['data'])
+                ->where('id', '!=',$request['id'])
+                ->count();
+        return response()->json($data);
+    }
+
     public function name_validate(Request $request)
     {
         $data = DB::table('scholarships')
@@ -138,18 +173,24 @@ class ScholarshipController extends Controller
 
         $results = array_map(function($scholarships){
 
-            // if ($scholarships['status'] == 1) {
-            //    $status = '<span span data-user_id="' . $users['id'] . '" data-name="' . $users['fname'] . ' " "'  . $users['mname'] . ' " "'  . $users['lname'] . '" class="btn btn-sm btn-danger" id="user_delete"> <i class="fa-solid fa-trash-can"></i></span>';
-            // }else{
-            //    $status = '<span span data-user_id="' . $users['id'] . '" data-name="' . $users['fname'] . ' " "'  . $users['mname'] . ' " "'  . $users['lname'] . '" class="btn btn-sm btn-success" id="user_recover"> <i class="fa-solid fa-hammer"></i></span>';
-            // }
+            if ($scholarships['status'] == 1) {
+               $role = '<center><span class="badge badge-info">Active</span></center>';
+            }else{
+               $role = '<center><span class="badge badge-danger">Inactive</span></center>';
+            }
 
+            if ($scholarships['status'] == 1) {
+                $status = '<span span data-user_id="' . $scholarships['id'] . '" data-name="' . $scholarships['name'] . '" class="btn btn-sm btn-danger" id="scholarship_delete"> <i class="fa-solid fa-trash-can"></i></span>';
+             }else{
+                $status = '<span span data-user_id="' . $scholarships['id'] . '" data-name="' . $scholarships['name'] . '" class="btn btn-sm btn-success" id="scholarship_recover"> <i class="fa-solid fa-hammer"></i></span>';
+             }
+ 
                 return  [
                          $scholarships['id'],
                          $scholarships['name'],
                          $scholarships['description'],
-                         $scholarships['status'],
-                        '<center><span data-user_id="" class="btn btn-sm btn-primary" id="user_view"><i class="fa-solid fa-eye"></i></span>&nbsp;<span data-user_id="" class="btn btn-sm btn-info" id="user_edit"> <i class="fa-solid fa-pen"></i></span>&nbsp;</center>',
+                         $role,
+                        '<center><span data-user_id="'.$scholarships['id'].'" class="btn btn-sm btn-primary" id="user_view"><i class="fa-solid fa-eye"></i></span>&nbsp;<span data-user_id="'.$scholarships['id'].'" class="btn btn-sm btn-info" id="user_edit"> <i class="fa-solid fa-pen"></i></span>&nbsp;' . $status . '</center>',
                 ];
             },$scholarships);
             // $results = $results->toArray();

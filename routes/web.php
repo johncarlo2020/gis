@@ -85,9 +85,13 @@ Route::post('/ajax/user-delete', [UserController::class, 'destroy']);
 Route::post('/ajax/user-validate_username', [UserController::class, 'username_validate']);
 Route::post('/ajax/user-validate_username_edit', [UserController::class, 'username_validate_edit']);
 // Scholarship
+Route::post('/ajax/scholarship-validate_scholarshipname_edit', [scholarshipController::class, 'name_validate_edit']);
 Route::post('/ajax/scholarship-validate_scholarshipname', [scholarshipController::class, 'name_validate']);
 Route::post('/ajax/scholarship-create', [scholarshipController::class, 'store']);
 Route::post('/ajax/scholarship-reload', [scholarshipController::class, 'reload']);
+Route::post('/ajax/scholarship-view', [scholarshipController::class, 'view']);
+Route::post('/ajax/scholarship-edit', [scholarshipController::class, 'update']);
+Route::post('/ajax/scholarship-delete', [scholarshipController::class, 'destroy']);
 
 
 
