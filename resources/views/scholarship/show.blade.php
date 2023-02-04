@@ -114,7 +114,7 @@ function reload_scholarships(){
       "processing": true,
       "serverSide": true,
       "ajax": {
-        url: base_url() + "public/ajax/scholarship-reload",
+        url: "{{ route('scholarship_reload') }}",
         type: 'POST',
       },
   });
@@ -159,7 +159,7 @@ $(document).on("click", "#scholarship_add", function () {
 
 $(document).on("keyup", ".scholarshipnamevalidator", function () {
   $.ajax({
-      url: base_url() + "public/ajax/scholarship-validate_scholarshipname",
+      url: "{{ route('scholarship_validate') }}",
       data: {
           data: $(this).val(),
       },
