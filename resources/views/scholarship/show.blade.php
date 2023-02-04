@@ -72,6 +72,10 @@
                 </div>
             </div>
     </section>
+    @endsection
+
+@section('scripts')
+@parent
     <script type="text/javascript">
         // ================================REQUIRED==============================================
 $.ajaxSetup({

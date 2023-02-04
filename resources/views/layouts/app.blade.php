@@ -235,10 +235,10 @@
 
 
 
-
-    <script defer src="{{ asset('js/users.js') }}"></script>
+    {{-- <script defer src="{{ asset('js/users.js') }}"></script> --}}
     <script defer src="{{ asset('js/steperForm.js') }}"></script>
-    <!-- <script defer src="{{ asset('js/scholarship.js') }}"></script> -->
+    @yield('scripts')
+
     
 
 </body>
