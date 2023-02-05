@@ -180,9 +180,9 @@ class ScholarshipController extends Controller
             }
 
             if ($scholarships['status'] == 1) {
-                $status = '<span span data-user_id="' . $scholarships['id'] . '" data-name="' . $scholarships['name'] . '" class="btn btn-sm btn-danger" id="scholarship_delete"> <i class="fa-solid fa-trash-can"></i></span>';
+                $status = '<span data-scholarship_id="' . $scholarships['id'] . '" data-name="' . $scholarships['name'] . '" class="btn btn-sm btn-danger" id="scholarship_delete"> <i class="fa-solid fa-trash-can"></i></span>';
              }else{
-                $status = '<span span data-user_id="' . $scholarships['id'] . '" data-name="' . $scholarships['name'] . '" class="btn btn-sm btn-success" id="scholarship_recover"> <i class="fa-solid fa-hammer"></i></span>';
+                $status = '<span data-scholarship_id="' . $scholarships['id'] . '" data-name="' . $scholarships['name'] . '" class="btn btn-sm btn-success" id="scholarship_recover"> <i class="fa-solid fa-hammer"></i></span>';
              }
  
                 return  [
@@ -190,7 +190,7 @@ class ScholarshipController extends Controller
                          $scholarships['name'],
                          $scholarships['description'],
                          $role,
-                        '<center><span data-user_id="'.$scholarships['id'].'" class="btn btn-sm btn-primary" id="user_view"><i class="fa-solid fa-eye"></i></span>&nbsp;<span data-user_id="'.$scholarships['id'].'" class="btn btn-sm btn-info" id="user_edit"> <i class="fa-solid fa-pen"></i></span>&nbsp;' . $status . '</center>',
+                        '<center><span data-name="' . $scholarships['name'] . '"  data-scholarship_id="'.$scholarships['id'].'" class="btn btn-sm btn-primary" id="scholarship_view"><i class="fa-solid fa-eye"></i></span>&nbsp;<span data-scholarship_id="'.$scholarships['id'].'" class="btn btn-sm btn-info" id="scholarship_edit"> <i class="fa-solid fa-pen"></i></span>&nbsp;' . $status . '</center>',
                 ];
             },$scholarships);
             // $results = $results->toArray();
