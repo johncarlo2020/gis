@@ -92,6 +92,12 @@ Route::post('/ajax/scholarship-reload', [scholarshipController::class, 'reload']
 Route::post('/ajax/scholarship-view', [scholarshipController::class, 'view'])->name('scholarship_view');
 Route::post('/ajax/scholarship-edit', [scholarshipController::class, 'update'])->name('scholarship_update');
 Route::post('/ajax/scholarship-delete', [scholarshipController::class, 'destroy'])->name('scholarship_destroy');
-
+// disability
+Route::post('/ajax/disability-reload', [DisabilityController::class, 'reload'])->name('disability_reload');
+Route::post('/ajax/disability-view', [DisabilityController::class, 'view'])->name('disability_view');
+Route::post('/ajax/disability-validate_name', [DisabilityController::class, 'validate_name'])->name('disability_validate');
+Route::post('/ajax/disability-store', [DisabilityController::class, 'store'])->name('disability_store');
+Route::post('/ajax/disability-edit', [DisabilityController::class, 'update'])->name('disability_edit');
+Route::post('/ajax/disability-status', [DisabilityController::class, 'destroy'])->name('disability_status');
 
 
