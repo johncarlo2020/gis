@@ -74,7 +74,7 @@
                     </ul>
                 </div>
                 <div class="right-side">
-                    <div class="main ">
+                    <div class="main active  ">
                         <div class="text">
                             <h6>T2MIS Auto Generated
                             </h6>
@@ -174,7 +174,7 @@
                             <button class="next_button">Next Step</button>
                         </div>
                     </div>
-                    <div class="main active ">
+                    <div class="main ">
 
                         <div class="text">
                             <h6>Learner/ Manpower Profile
