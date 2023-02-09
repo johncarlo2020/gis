@@ -40,9 +40,9 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        
-    
-    
+
+
+
 </head>
 <!--
 `body` tag options:
@@ -128,36 +128,50 @@
                             </a>
                         </li>
                         <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }}">
-                            <a href="{{ route('admin.scholarship.show') }}"
-                                class="nav-link {{ request()->routeIs('admin.scholarship*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Scholarship
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }}">
                             <a href="{{ route('admin.qualification.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.qualification*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="fa-solid fa-bars"></i>
                                 <p>
                                     Qualification/Courses
+                                </p>
+                                <i class="right fas fa-angle-left"></i>
+                            </a>
+                            <ul class="nav nav-treeview ">
+                                <li class="nav-item">
+                                    <a href="/docs/3.2/javascript/layout.html" class="nav-link">
+                                        <p>Courses</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/docs/3.2/javascript/push-menu.html" class="nav-link">
+                                        <p>Subject</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }}">
+                            <a href="{{ route('admin.scholarship.show') }}"
+                                class="nav-link {{ request()->routeIs('admin.scholarship*') ? 'active' : '' }}">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                                <p>
+                                    Scholarship
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }} ">
                             <a href="{{ route('admin.disability.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.disability*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="fa-solid fa-wheelchair"></i>
                                 <p>
                                     Disability
                                 </p>
+
                             </a>
                         </li>
                         <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }}">
                             <a href="{{ route('admin.classification.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.classification*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="fa-solid fa-people-group"></i>
                                 <p>
                                     Client Classification
                                 </p>
@@ -166,7 +180,7 @@
                         <li class="nav-item ">
                             <a href="{{ route('admin.student.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.student*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="fa-solid fa-user-graduate"></i>
                                 <p>
                                     Student
                                 </p>
@@ -175,28 +189,25 @@
                         <li class="nav-item {{ auth()->user()->role != 1 ? 'd-none' : '' }}">
                             <a href="{{ route('admin.user') }}"
                                 class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="fa-solid fa-user"></i>
                                 <p>
                                     User
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('logout') }}" class="nav-link"
-                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                <i class="nav-icon fas fa-file"></i>
-                                <p>
-                                    Logout
-                                </p>
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </li>
 
                     </ul>
+                    <div class="log-out">
+                        <a href="{{ route('logout') }}" class="nav-link logout-icon"
+                            onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
@@ -239,7 +250,7 @@
     <script defer src="{{ asset('js/steperForm.js') }}"></script>
     @yield('scripts')
 
-    
+
 
 </body>
 

@@ -306,9 +306,11 @@ table {
 .modal .save-btn {
     background: #3c63d1 !important;
 }
-input[type=number]{
+
+input[type=number] {
     -moz-appearance: textfield;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -817,4 +819,36 @@ select {
 
         display: none;
     }
+}
+
+.log-out {
+    margin-top: 50px;
+}
+
+.logout-icon {
+    width: 50px !important;
+    height: 50px;
+    background: rgba(217, 217, 217, 0.33);
+    border-radius: 50%;
+    text-align: center;
+    padding: 0;
+    padding-top: 12px;
+    margin: 0 auto;
+}
+
+
+
+.nav-treeview li a p::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ffff;
+}
+
+.nav-treeview li a.nav-link {
+    margin-left: 50px;
 }
