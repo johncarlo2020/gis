@@ -80,7 +80,7 @@ input ::placeholder {
 .log-in-btn {
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 16px;
 
     color: #ffffff;
@@ -306,9 +306,11 @@ table {
 .modal .save-btn {
     background: #3c63d1 !important;
 }
-input[type=number]{
+
+input[type=number] {
     -moz-appearance: textfield;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -817,4 +819,14 @@ select {
 
         display: none;
     }
+}
+
+/* login */
+.login-container .form-Container {
+    width: 589px;
+    padding: 55px 87px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 22px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    margin-top: 10%;
 }
