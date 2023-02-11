@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\qualifications;
 
 class QualificationController extends Controller
 {
@@ -13,8 +14,21 @@ class QualificationController extends Controller
      */
     public function index()
     {
-        return view('qualification/show');
+
+        $qualifications = qualifications::select('qualifications.*','qualification_types.name AS type')
+        ->join('qualification_types','qualifications.qualification_type_id','=','qualification_types.id')
+        ->get();
+        return view('qualification/show',compact('qualifications'));
         
+    }
+
+    public function view(Request $request)
+    {
+        $data = $qualifications = qualifications::select('qualifications.*','qualification_types.name AS type')
+        ->join('qualification_types','qualifications.qualification_type_id','=','qualification_types.id')
+        ->get();
+    return response()->json($data);
+
     }
 
     /**

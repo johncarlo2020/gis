@@ -93,5 +93,13 @@ Route::post('/ajax/scholarship-view', [scholarshipController::class, 'view'])->n
 Route::post('/ajax/scholarship-edit', [scholarshipController::class, 'update'])->name('scholarship_update');
 Route::post('/ajax/scholarship-delete', [scholarshipController::class, 'destroy'])->name('scholarship_destroy');
 
+Route::post('/ajax/qualification-validate_qualificationname_edit', [qualificationController::class, 'name_validate_edit'])->name('qualification_validate_edit');
+Route::post('/ajax/qualification-validate_qualificationname', [qualificationController::class, 'name_validate'])->name('qualification_validate');
+Route::post('/ajax/qualification-create', [qualificationController::class, 'store'])->name('qualification_store');
+Route::post('/ajax/qualification-reload', [qualificationController::class, 'reload'])->name('qualification_reload');
+Route::post('/ajax/qualification-view', [qualificationController::class, 'view'])->name('qualification_view');
+Route::post('/ajax/qualification-edit', [qualificationController::class, 'update'])->name('qualification_update');
+Route::post('/ajax/qualification-delete', [qualificationController::class, 'destroy'])->name('qualification_destroy');
+
 
 
