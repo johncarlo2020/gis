@@ -222,7 +222,7 @@
 
         <!-- Main Footer -->
         <footer class="main-footer d-none">
-            <strong>Copyright &copy; 2014-2021 << /strong>
+            <strong>Copyright &copy; 2014-2021 </strong>
                     All rights reserved.
                     <div class="float-right d-none d-sm-inline-block">
                         <b>Version</b> 3.2.0

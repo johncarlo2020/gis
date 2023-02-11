@@ -76,13 +76,23 @@
 
 @section('scripts')
 @parent
-<script type="text/javascript">
-// ================================REQUIRED==============================================
+    <script type="text/javascript">
+        // ================================REQUIRED==============================================
 $.ajaxSetup({
     headers: {
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
     },
 });
+function base_url() {
+    var pathparts = location.pathname.split("/");
+    if (location.host == "localhost") {
+        var url = location.origin + "/" + pathparts[1].trim("/") + "/";
+    } else {
+        var url = location.origin + "/gis/";
+  }
+  
+    return url;
+}
 // ==============================================================================
 
 $(document).ready(function () {
@@ -248,10 +258,9 @@ $(document).on("click", "#scholarship_view", function () {
     var id = $(this).data("scholarship_id");
     $(".modal-dialog").addClass("modal-lg");
     $(".scholarshipmodalsave").removeClass("d-none");
-    $(".scholarshipmodalsave").removeClass("disabled");
 
     $.ajax({
-        url: "{{ route('scholarship_view') }}",
+        url: base_url() + "public/ajax/scholarship-view",
         data: {
             id: id,
         },
@@ -288,10 +297,9 @@ $(document).on("click", "#scholarship_edit", function () {
     $(".modal-dialog").addClass("modal-lg");
     $(".scholarshipmodalsave").text("Save");
     $(".scholarshipmodalsave").removeClass("d-none");
-    $(".scholarshipmodalsave").removeClass("disabled");
 
     $.ajax({
-      url: "{{ route('scholarship_view') }}",
+      url: base_url() + "public/ajax/scholarship-view",
       data: {
           id: id,
       },
@@ -339,7 +347,7 @@ $(document).on("keyup", ".scholarshipnamevalidatoredit", function () {
   }
 
   $.ajax({
-      url: "{{ route('scholarship_validate_edit') }}",
+      url: base_url() + "public/ajax/scholarship-validate_scholarshipname_edit",
       data: {
           data: $(this).val(),
       },
@@ -375,7 +383,7 @@ $(document).on("click", ".scholarship_update", function () {
   });
 
   $.ajax({
-      url: "{{ route('scholarship_update') }}",
+      url: base_url() + "public/ajax/scholarship-edit",
       data: {
           data: data,
       },
@@ -424,7 +432,6 @@ $(document).on("click", "#scholarship_delete", function () {
     var name = $(this).data("name");
     $(".scholarshipmodalsave").removeClass("d-none");
     $(".scholarshipmodalsave").removeClass("scholarship_recover");
-    $(".scholarshipmodalsave").removeClass("disabled");
 
     $(".modal-dialog").removeClass("modal-lg");
 
@@ -445,7 +452,7 @@ $(document).on("click", "#scholarship_delete", function () {
 $(document).on("click", ".scholarship-delete", function () {
     var id = $(this).attr("id");
     $.ajax({
-        url: "{{ route('scholarship_destroy') }}",
+        url: base_url() + "public/ajax/scholarship-delete",
         data: {
             id: id,
             status: 0,
@@ -483,7 +490,6 @@ $(document).on("click", "#scholarship_recover", function () {
     $(".scholarshipmodalsave").removeClass("d-none");
     $(".scholarshipmodalsave").removeClass("scholarship_delete");
     $(".modal-dialog").removeClass("modal-lg");
-    $(".scholarshipmodalsave").removeClass("disabled");
 
     var tmp_body =
         `
@@ -504,7 +510,7 @@ $(document).on("click", "#scholarship_recover", function () {
 $(document).on("click", ".scholarship-recover", function () {
     var id = $(this).attr("id");
     $.ajax({
-        url: "{{ route('scholarship_destroy') }}",
+        url: base_url() + "public/ajax/scholarship-delete",
         data: {
             id: id,
             status: 1,
