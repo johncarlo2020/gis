@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\Models\disability;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 
@@ -90,6 +91,14 @@ class DisabilityController extends Controller
     return response()->json($data);
 
     }
+
+    public function show()
+    {
+        $data = disability::where('status', 1)->get();
+
+    return $data;
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -130,16 +139,7 @@ class DisabilityController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+ 
 
     /**
      * Show the form for editing the specified resource.

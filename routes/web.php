@@ -43,30 +43,33 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('Disability/show', [DisabilityController::class, 'index'])->name('admin.disability.show');
         Route::get('Classification/show', [ClassificationController::class, 'index'])->name('admin.classification.show');
         Route::get('Student/show', [StudentController::class, 'index'])->name('admin.student.show');
+        Route::get('Student/add', [StudentController::class, 'create'])->name('admin.student.add');
+
+
         // =================================================================================================================================
         //admin routes
         Route::get('userAdmin/index', [HomeController::class, 'AdminHome'])->name('admin.home')->middleware('userAdmin');
-
         Route::group(['middleware' => ['userAdmin']], function() {
                 Route::get('userAdmin/user', [UserController::class, 'index'])->name('admin.user');
         });
+
 
         // =================================================================================================================================
         //encoder routes
         Route::get('userRegistrar/index', [HomeController::class, 'RegistrarHome'])->name('registrar.home')->middleware('userEncoder');
-
         Route::group(['middleware' => ['userAdmin']], function() {
                 Route::get('userAdmin/user', [UserController::class, 'index'])->name('admin.user');
         });
+
 
         // =================================================================================================================================
         //registrar routes
         Route::get('userEncoder/index', [HomeController::class, 'EncoderHome'])->name('encoder.home')->middleware('userRegistrar');
-
         Route::group(['middleware' => ['userAdmin']], function() {
                 Route::get('userAdmin/user', [UserController::class, 'index'])->name('admin.user');
         });
         // =================================================================================================================================
+
 
 });
 
@@ -95,6 +98,8 @@ Route::post('/ajax/scholarship-delete', [scholarshipController::class, 'destroy'
 // disability
 Route::post('/ajax/disability-reload', [DisabilityController::class, 'reload'])->name('disability_reload');
 Route::post('/ajax/disability-view', [DisabilityController::class, 'view'])->name('disability_view');
+Route::post('/ajax/disability-show', [DisabilityController::class, 'show'])->name('disability_show');
+
 Route::post('/ajax/disability-validate_name', [DisabilityController::class, 'validate_name'])->name('disability_validate');
 Route::post('/ajax/disability-store', [DisabilityController::class, 'store'])->name('disability_store');
 Route::post('/ajax/disability-edit', [DisabilityController::class, 'update'])->name('disability_edit');

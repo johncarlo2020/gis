@@ -240,14 +240,6 @@
                     </div>
         </footer>
     </div>
-    <!-- ./wrapper -->
-
-    <!-- REQUIRED SCRIPTS -->
-
-
-
-    {{-- <script defer src="{{ asset('js/users.js') }}"></script> --}}
-    <script defer src="{{ asset('js/steperForm.js') }}"></script>
     @yield('scripts')
 
 

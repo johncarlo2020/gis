@@ -16,6 +16,8 @@ class StudentController extends Controller
         return view('student/show');
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -23,7 +25,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('student/add');
+        
     }
 
     /**
