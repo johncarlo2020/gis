@@ -19,9 +19,11 @@ class DisabilityController extends Controller
      */
     public function reload(Request $request)
     {
-
         $count = DB::table('disabilities')->count();
-        $disabilities = DB::table('disabilities')->get([
+        $disabilities = DB::table('disabilities')
+        ->offset($request['start'])
+        ->limit($request['length'])
+        ->get([
             'id',
             'name',
             'description',
@@ -181,21 +183,21 @@ class DisabilityController extends Controller
      */
     public function destroy(Request $request)
     {
-    $data = DB::table('disabilities')
-        ->where('id', '=', $request['id'])
-        ->get([
-            'status',
-    ]);
+        $data = DB::table('disabilities')
+            ->where('id', '=', $request['id'])
+            ->get([
+                'status',
+        ]);
 
-    if ($data[0]->status == 1) {
-        $status = 0;
-    }else{
-        $status = 1;
-    }
+        if ($data[0]->status == 1) {
+            $status = 0;
+        }else{
+            $status = 1;
+        }
 
-    DB::table('disabilities')
-        ->where('id', $request['id'])
-        ->update(['status' => $status]);
+        DB::table('disabilities')
+            ->where('id', $request['id'])
+            ->update(['status' => $status]);
 
     return response()->json($status);
     }
