@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class StudentController extends Controller
 {
@@ -25,7 +26,10 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('student/add');
+        $student=Student::create();
+
+        return redirect()->route('admin.student.edit', ['id' => $student->id]);
+        // return view('student/add');
         
     }
 
@@ -59,7 +63,28 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $students=Student::where('id',$id)->get();
+        $student=json_decode($students[0]['data']);
+
+        $data['t2mis']                              =           $student->t2mis ?? '';
+        $data['vouchers_number']                    =           $student->vouchers_number ?? '';
+        $data['training_status']                    =           $student->training_status ?? '';
+        $data['training_date_started']              =           $student->training_date_started ?? '';
+        $data['training_date_end']                  =           $student->training_date_end ?? '';
+        $data['trainor_name']                       =           $student->trainor_name ?? '';
+        $data['name_of_assessor']                   =           $student->name_of_assessor ?? '';
+        $data['training_date_assessed']             =           $student->training_date_assessed ?? '';
+        $data['assessment_result']                  =           $student->assessment_result ?? '';
+        $data['assessment_venue']                   =           $student->assessment_venue ?? '';
+        $data['first_name']                         =           $student->first_name ?? '';
+        $data['middle_name']                        =           $student->middle_name ?? '';
+        $data['last_name']                          =           $student->last_name ?? '';
+        $data['extension']                          =           $student->extension ?? '';
+
+
+
+
+        return view('student/add', compact('students','data'));
     }
 
     /**
@@ -71,7 +96,31 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data['t2mis']                                  =       $request->t2mis;
+        $data['vouchers_number']                        =       $request->vouchers_number;
+        $data['training_status']                        =       $request->training_status;
+        $data['training_date_started']                  =       $request->training_date_started;
+        $data['training_date_end']                      =       $request->training_date_end;
+        $data['trainor_name']                           =       $request->trainor_name;
+        $data['name_of_assessor']                       =       $request->name_of_assessor;
+        $data['training_date_assessed']                 =       $request->training_date_assessed;
+        $data['assessment_result']                      =       $request->assessment_result;
+        $data['assessment_venue']                       =       $request->assessment_venue;
+        $data['first_name']                             =       $request->first_name;
+        $data['last_name']                              =       $request->last_name;
+        $data['middle_name']                            =       $request->middle_name;
+        $data['extension']                              =       $request->extension;
+
+
+        $input=[
+            'data'=>json_encode($data)
+        ];
+
+
+        Student::where('id',$id)->update($input);
+
+        return redirect()->route('admin.student.edit', ['id' => $id]);
+
     }
 
     /**

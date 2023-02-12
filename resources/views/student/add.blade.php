@@ -74,6 +74,11 @@
                     </ul>
                 </div>
                 <div class="right-side">
+                <form method="POST" id="resumeGenForm" name="resumeGenForm"
+                action="{{ route('admin.student.update', [$students[0]->id]) }}" enctype="multipart/form-data">
+
+                @method('PUT')
+                @csrf
                     <div class="main active  ">
                         <div class="text">
                             <h6>T2MIS Auto Generated
@@ -83,23 +88,22 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Unique Learner Identifier*
-                                    </label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="Unique Learner Identifier*
-                                        ">
+                                    </label> 
+                                    <input type="text" class="form-control" name="t2mis" id="exampleFormControlInput1" value="{{$data['t2mis']}}" 
+                                    placeholder="Unique Learner Identifier*" required >
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Vouchers Number</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                    <input type="text" class="form-control" name="vouchers_number" id="exampleFormControlInput1" value="{{$data['vouchers_number']}}"
                                         placeholder="Vouchers Number"  >
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Training Status</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                    <input type="text" class="form-control" name="training_status" id="exampleFormControlInput1" value="{{$data['training_status']}}"
                                         placeholder="Training Status"  >
                                 </div>
                             </div>
@@ -109,25 +113,21 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Trainor Name
                                     </label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="Trainor Name
-                                        " 
-                                        >
+                                    <input type="text" class="form-control" name="trainor_name" id="exampleFormControlInput1" value="{{$data['trainor_name']}}"
+                                        placeholder="Trainor Name" >
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Date Started of
                                         training</label>
-                                    <input type="date" class="form-control" id="exampleFormControlInput1" 
-                                        >
+                                    <input type="date" class="form-control" name="training_date_started" id="exampleFormControlInput1" value="{{$data['training_date_started']}}" >
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Date end of training</label>
-                                    <input type="date" class="form-control" id="exampleFormControlInput1" 
-                                        >
+                                    <input type="date" class="form-control" name="training_date_end" id="exampleFormControlInput1" value="{{$data['training_date_end']}}" >
                                 </div>
                             </div>
                         </div>
@@ -136,22 +136,21 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Name of Assessor
                                     </label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="Trainor Name" 
-                                        >
+                                    <input type="text" class="form-control" name="name_of_assessor" id="exampleFormControlInput1" value="{{$data['name_of_assessor']}}"
+                                        placeholder="Assesor Name"  >
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Date Assessed
                                         training</label>
-                                    <input type="date" class="form-control" id="exampleFormControlInput1">
+                                    <input type="date" class="form-control" name="training_date_assessed" id="exampleFormControlInput1" value="{{$data['training_date_assessed']}}">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Assessment Result</label>
-                                    <input type="date" class="form-control" id="exampleFormControlInput1"
+                                    <input type="text" class="form-control" name="assessment_result" id="exampleFormControlInput1" value="{{$data['assessment_result']}}"
                                         placeholder="Assessment Result
                                     ">
                                 </div>
@@ -162,13 +161,15 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Assessment Venue
                                     </label>
-                                    <input type="text" class="form-control" id="Assesment_venue"
+                                    <input type="text" class="form-control" name="assessment_venue" id="Assesment_venue" value="{{$data['assessment_venue']}}"
                                         placeholder="Assessment Venue">
                                 </div>
                             </div>
                         </div>
+
                         <div class="buttons">
-                            <button class="next_button">Next Step</button>
+                            <button type="button" class="next_button">Next Step</button>
+
                         </div>
                     </div>
                     <div class="main ">
@@ -182,7 +183,7 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">First name*
                                     </label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                    <input type="text" name="first_name" class="form-control" id="exampleFormControlInput1" value="{{$data['first_name']}}"
                                         placeholder="First name">
                                 </div>
                             </div>
@@ -190,27 +191,24 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Last name*
                                     </label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="Trainor Name
-                                        ">
+                                    <input type="text" name="last_name" class="form-control" id="exampleFormControlInput1" value="{{$data['last_name']}}"
+                                        placeholder="Last Name ">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Middle name
                                     </label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="Middle name
-                                        ">
+                                    <input type="text" name="middle_name" class="form-control" id="exampleFormControlInput1" value="{{$data['middle_name']}}"
+                                        placeholder="Middle name ">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Extension
                                     </label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="jr,sr,3rd
-                                        ">
+                                    <input type="text" name="extension" class="form-control" id="exampleFormControlInput1" value="{{$data['extension']}}"
+                                        placeholder="jr,sr,3rd ">
                                 </div>
                             </div>
                         </div>
@@ -293,10 +291,11 @@
                             </div>
 
                         </div>
+                        <input type="submit" value="submit">
 
                         <div class="buttons button_space">
-                            <button class="back_button">Back</button>
-                            <button class="next_button">Next Step</button>
+                            <button type="button" class="back_button">Back</button>
+                            <button type="button" class="next_button">Next Step</button>
                         </div>
                     </div>
                     <div class="main  ">
@@ -453,8 +452,8 @@
                             </div>
                         </div>
                         <div class="buttons button_space">
-                            <button class="back_button">Back</button>
-                            <button class="next_button">Next Step</button>
+                            <button type="button" class="back_button">Back</button>
+                            <button type="button" class="next_button">Next Step</button>
                         </div>
                     </div>
                     <div class="main ">
@@ -580,8 +579,8 @@
                             </div>
                         </div>
                         <div class="buttons button_space">
-                            <button class="back_button">Back</button>
-                            <button class="next_button">Next Step</button>
+                            <button type="button" class="back_button">Back</button>
+                            <button type="button" class="next_button">Next Step</button>
                         </div>
                     </div>
                     <div class="main ">
@@ -707,8 +706,8 @@
                             </div>
                         </div>
                         <div class="buttons button_space">
-                            <button class="back_button">Back</button>
-                            <button class="next_button">Next Step</button>
+                            <button type="button" class="back_button">Back</button>
+                            <button type="button" class="next_button">Next Step</button>
                         </div>
                     </div>
                     <div class="main ">
@@ -878,8 +877,8 @@
                             </div>
                         </div>
                         <div class="buttons button_space">
-                            <button class="back_button">Back</button>
-                            <button class="next_button">Next Step</button>
+                            <button type="button" class="back_button">Back</button>
+                            <button type="button" class="next_button">Next Step</button>
                         </div>
                     </div>
                     <div class="main ">
@@ -1069,8 +1068,9 @@
                         </div>
 
                         <div class="buttons button_space">
-                            <button class="back_button">Back</button>
-                            <button class="next_button">Next Step</button>
+                            <button type="button" class="back_button">Back</button>
+
+                            <button type="button" class="next_button">Next Step</button>
                         </div>
                     </div>
 
@@ -1117,7 +1117,7 @@
                             </div>
                         </div>
                     </div>
-
+                </form>
                 </div>
             </div>
         </div>

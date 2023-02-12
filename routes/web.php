@@ -44,6 +44,9 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('Classification/show', [ClassificationController::class, 'index'])->name('admin.classification.show');
         Route::get('Student/show', [StudentController::class, 'index'])->name('admin.student.show');
         Route::get('Student/add', [StudentController::class, 'create'])->name('admin.student.add');
+        Route::get('Student/{id}/edit', [StudentController::class, 'edit'])->name('admin.student.edit');
+        Route::PUT('Student/update/{id}', [StudentController::class, 'update'])->name('admin.student.update');
+
 
 
         // =================================================================================================================================
