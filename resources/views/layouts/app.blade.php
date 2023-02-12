@@ -138,12 +138,12 @@
                             </a>
                             <ul class="nav nav-treeview ">
                                 <li class="nav-item">
-                                    <a href="/docs/3.2/javascript/layout.html" class="nav-link">
+                                    <a href="" class="nav-link">
                                         <p>Courses</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/docs/3.2/javascript/push-menu.html" class="nav-link">
+                                    <a href="{{ route('qualification.subject') }}" class="nav-link">
                                         <p>Subject</p>
                                     </a>
                                 </li>
@@ -234,10 +234,10 @@
         <!-- Main Footer -->
         <footer class="main-footer d-none">
             <strong>Copyright &copy; 2014-2021 </strong>
-                    All rights reserved.
-                    <div class="float-right d-none d-sm-inline-block">
-                        <b>Version</b> 3.2.0
-                    </div>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 3.2.0
+            </div>
         </footer>
     </div>
     @yield('scripts')
