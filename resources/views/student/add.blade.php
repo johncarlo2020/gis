@@ -1342,6 +1342,7 @@
             };
 
             $(function(){
+
                 $('#region').on('change', my_handlers.fill_provinces);
                 $('#province').on('change', my_handlers.fill_cities);
                 $('#city').on('change', my_handlers.fill_barangays);
@@ -1352,6 +1353,7 @@
                 $('#barangay').ph_locations({'location_type': 'barangays'});
 
                 $('#region').ph_locations('fetch_list');
+
             });
 
         var my_handlers1 = {
