@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use GuzzleHttp\Client;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
@@ -82,6 +83,12 @@ class StudentController extends Controller
         $data['extension']                          =           $student->extension ?? '';
 
 
+        $data['Permanent_address']['region']['id']  =           $student->Permanent_address->region->id ?? '';
+        dd($data);
+
+
+
+
 
 
         return view('student/add', compact('students','data'));
@@ -96,6 +103,8 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $Permanent_address_region = json_decode(file_get_contents('https://ph-locations-api.buonzz.com/v1/regions/'.$request->permanent_address_region), true);
+
         $data['t2mis']                                  =       $request->t2mis;
         $data['vouchers_number']                        =       $request->vouchers_number;
         $data['training_status']                        =       $request->training_status;
@@ -110,8 +119,8 @@ class StudentController extends Controller
         $data['last_name']                              =       $request->last_name;
         $data['middle_name']                            =       $request->middle_name;
         $data['extension']                              =       $request->extension;
-
-
+        $data['Permanent_address']['region']['id']      =       $Permanent_address_region['id'];
+        $data['Permanent_address']['region']['name']    =       $Permanent_address_region['name'];
         $input=[
             'data'=>json_encode($data)
         ];

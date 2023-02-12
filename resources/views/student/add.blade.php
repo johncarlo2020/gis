@@ -90,7 +90,7 @@
                                     <label for="exampleFormControlInput1" class="form-label">Unique Learner Identifier*
                                     </label> 
                                     <input type="text" class="form-control" name="t2mis" id="exampleFormControlInput1" value="{{$data['t2mis']}}" 
-                                    placeholder="Unique Learner Identifier*" required >
+                                    placeholder="Unique Learner Identifier*" >
                                 </div>
                             </div>
                             <div class="col">
@@ -220,7 +220,7 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="disabledSelect" class="form-label">Region</label>
-                                    <select id="region"></select>
+                                    <select name="permanent_address_region" id="region" value="{{$data['Permanent_address']['region']['id']}}"></select>
                                 </div>
                             </div>
                             <div class="col">
