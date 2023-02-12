@@ -18,9 +18,11 @@ class DisabilityController extends Controller
      */
     public function reload(Request $request)
     {
-
         $count = DB::table('disabilities')->count();
-        $disabilities = DB::table('disabilities')->get([
+        $disabilities = DB::table('disabilities')
+        ->offset($request['start'])
+        ->limit($request['length'])
+        ->get([
             'id',
             'name',
             'description',

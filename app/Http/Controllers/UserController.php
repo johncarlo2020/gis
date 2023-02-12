@@ -44,7 +44,10 @@ class UserController extends Controller
     {
 
         $count = DB::table('users')->count();
-        $users = DB::table('users')->get([
+        $users = DB::table('users')
+        ->offset($request['start'])
+        ->limit($request['length'])
+        ->get([
             'id',
             'username',
             'fname',
