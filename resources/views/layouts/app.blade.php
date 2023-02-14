@@ -92,7 +92,11 @@
                     <div class="user-panel  d-flex">
                         <div class="info">
                             <a href="#" class="d-block user-Name">
-                                {{ $name }}
+                                {{-- session data --}}
+                                @php
+                                    $myData = session('my_data');
+                                @endphp
+                                {{ $myData }}
                             </a>
                         </div>
                         <div class="image">
@@ -275,9 +279,12 @@
 
         #navDropItem ul {}
     </style>
-
     <script>
         $(document).ready(function() {
+
+            var myData = '{{ $myData }}';
+            console.log(myData);
+
             $("#navDropItem").hide();
             var open = false;
             $("#navDropDown").click(function() {

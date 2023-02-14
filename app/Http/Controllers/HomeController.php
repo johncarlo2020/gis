@@ -27,31 +27,21 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    // Get Name
-    public function getName(){
-        $user = Auth::user();
-        $name = $user->fname . ' ' . $user->lname;
-
-        return  $name;
-    }
     // User Admin
     public function AdminHome()
     {
-        $name = $this->getName();
-        return view('useradmin.index', compact('name'));
+        return view('useradmin.index');
     }
     // User Encoder
     public function EncoderHome()
     {
        //here
-       $name = $this->getName();
-        return view('userencoder.index',compact('name'));
+        return view('userencoder.index');
     }
     // User Registrar
     public function RegistrarHome()
     {
          //here
-         $name = $this->getName();
-        return view('userregistrar.index',compact('name'));
+        return view('userregistrar.index');
     }
 }
