@@ -110,10 +110,27 @@
             </ul>
         </nav>
         <div class="nav-drop" id="navDropItem">
-            <ul>
-                <li>sddadad</li>
-                <li>sddadad</li>
-                <li>sddadad</li>
+            <ul class="nav">
+                <li>
+                    <a href="" class="nav-link">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="nav-link">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Setting</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('logout') }}" class="nav-link"
+                        onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar -->
@@ -213,9 +230,7 @@
 
                     </ul>
                     <div class="log-out">
-                        <a href="{{ route('logout') }}" class="nav-link logout-icon"
-                            onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
+                        <a class="nav-link logout-icon">
                             <i class="fa-solid fa-chevron-left"></i>
                         </a>
 
@@ -267,7 +282,7 @@
         }
 
         #navDropItem {
-            width: 200px;
+            width: 136PX;
             position: absolute;
             background: #FFFFFF;
             box-shadow: 0px -2px 12px rgb(0 0 0 / 11%);
@@ -275,9 +290,13 @@
             top: 60px;
             right: 25px;
             z-index: 9999;
+            PADDING: 10PX;
         }
 
-        #navDropItem ul {}
+        #navDropItem ul li a {
+            font-size: 13px;
+            padding: 5px 1rem;
+        }
     </style>
     <script>
         $(document).ready(function() {
