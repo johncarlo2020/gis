@@ -91,16 +91,27 @@
                 <li class="nav-item mr-4">
                     <div class="user-panel  d-flex">
                         <div class="info">
-                            <a href="#" class="d-block user-Name">Alexander Pierce</a>
+                            <a href="#" class="d-block user-Name">
+                                {{ $name }}
+                            </a>
                         </div>
                         <div class="image">
-                            <img src="{{ asset('images/user2-160x160.jpg') }}" class="img-circle border-light"
-                                alt="User Image">
+                            <button class="btn p-0" id="navDropDown" data-clicked="false">
+                                <img src="{{ asset('images/user2-160x160.jpg') }}" class="img-circle border-light"
+                                    alt="User Image">
+                            </button>
                         </div>
                     </div>
                 </li>
             </ul>
         </nav>
+        <div class="nav-drop" id="navDropItem">
+            <ul>
+                <li>sddadad</li>
+                <li>sddadad</li>
+                <li>sddadad</li>
+            </ul>
+        </div>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
@@ -234,13 +245,59 @@
         <!-- Main Footer -->
         <footer class="main-footer d-none">
             <strong>Copyright &copy; 2014-2021 </strong>
-                    All rights reserved.
-                    <div class="float-right d-none d-sm-inline-block">
-                        <b>Version</b> 3.2.0
-                    </div>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 3.2.0
+            </div>
         </footer>
     </div>
     @yield('scripts')
+
+    <style>
+        .image {
+            position: relative;
+        }
+
+        #navDropDown {
+            position: relative;
+        }
+
+        #navDropItem {
+            width: 200px;
+            position: absolute;
+            background: #FFFFFF;
+            box-shadow: 0px -2px 12px rgb(0 0 0 / 11%);
+            border-radius: 5px;
+            top: 60px;
+            right: 25px;
+            z-index: 9999;
+        }
+
+        #navDropItem ul {}
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            $("#navDropItem").hide();
+            var open = false;
+            $("#navDropDown").click(function() {
+                console.log(open);
+                open = !open;
+                showdrop();
+            });
+
+            function showdrop() {
+                if (open === false) {
+                    $("#navDropItem").hide().fadeOut(1000);
+
+
+                } else {
+                    $("#navDropItem").show().fadeIn(1000);
+                }
+            }
+
+        });
+    </script>
 
 
 

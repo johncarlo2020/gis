@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -26,19 +27,31 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    // Get Name
+    public function getName(){
+        $user = Auth::user();
+        $name = $user->fname . ' ' . $user->lname;
+
+        return  $name;
+    }
     // User Admin
     public function AdminHome()
     {
-        return view('useradmin.index');
+        $name = $this->getName();
+        return view('useradmin.index', compact('name'));
     }
     // User Encoder
     public function EncoderHome()
     {
-        return view('userencoder.index');
+       //here
+       $name = $this->getName();
+        return view('userencoder.index',compact('name'));
     }
     // User Registrar
     public function RegistrarHome()
     {
-        return view('userregistrar.index');
+         //here
+         $name = $this->getName();
+        return view('userregistrar.index',compact('name'));
     }
 }
