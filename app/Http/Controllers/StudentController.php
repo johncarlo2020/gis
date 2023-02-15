@@ -18,7 +18,7 @@ class StudentController extends Controller
         return view('student/show');
     }
 
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -31,7 +31,7 @@ class StudentController extends Controller
 
         return redirect()->route('admin.student.edit', ['id' => $student->id]);
         // return view('student/add');
-        
+
     }
 
     /**
@@ -84,7 +84,6 @@ class StudentController extends Controller
 
 
         $data['Permanent_address']['region']['id']  =           $student->Permanent_address->region->id ?? '';
-        // dd($data);
 
 
 
