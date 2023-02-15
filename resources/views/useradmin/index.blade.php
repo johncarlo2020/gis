@@ -123,6 +123,8 @@
 
         var canvas = document.getElementById("myChart");
         var ctx = canvas.getContext("2d");
+        ctx.canvas.width = 250;
+        ctx.canvas.height = 250;
         var myChart = new Chart(ctx, {
             type: 'pie',
             data: {
