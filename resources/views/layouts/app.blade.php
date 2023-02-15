@@ -27,11 +27,10 @@
     <link href="{{ asset('css/adminlte.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- AdminLTE -->
     <script src="{{ asset('js/adminlte.js') }}" defer></script>
 
-    <!-- OPTIONAL SCRIPTS -->
-    <script src="{{ asset('chart.js/Chart.min.js') }}" defer></script>
 
 
     <!-- Additional Scripts -->
@@ -40,6 +39,7 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('chart.js/Chart.min.js') }}" defer></script>
 
 
 
@@ -241,9 +241,6 @@
         </footer>
     </div>
     @yield('scripts')
-
-
-
 </body>
 
 </html>
