@@ -219,19 +219,19 @@
                         <div class="row student-input">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="disabledSelect" class="form-label">Region</label>
-                                    <select name="permanent_address_region" id="region" value="{{$data['Permanent_address']['region']['id']}}"></select>
+                                    <label class="form-label">Region</label>
+                                    <select name="permanent_address_region" id="region"></select>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="disabledSelect" class="form-label">Province</label>
+                                    <label class="form-label">Province</label>
                                    <select id="province"></select>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="disabledSelect" class="form-label">City/Municipality</label>
+                                    <label class="form-label">City/Municipality</label>
                                     <select id="city"></select>
                                 </div>
                             </div>
@@ -239,7 +239,7 @@
                         <div class="row student-input">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="disabledSelect" class="form-label">Barangay</label>
+                                    <label class="form-label">Barangay</label>
                                     <select id="barangay"></select>
                                 </div>
                             </div>
@@ -305,10 +305,10 @@
                         <div class="row student-input">
                             <div class="col-2">
                                 <div class="mb-3">
-                                    <label for="disabledSelect" class="form-label">Gender *</label>
+                                    <label class="form-label">Gender *</label>
                                     <select id="disabledSelect" class="form-select">
-                                        <option>Disabled select</option>
-                                        <option>Disabled select</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
                                     </select>
                                 </div>
                             </div>
@@ -1288,7 +1288,6 @@
             var checboxContainerClassification = document.getElementById("checboxContainerClassification");
 
             $.each(sampleData, function(index, value) {
-                console.log('asdasd');
                 const split = Math.floor(sampleData.length / 4) + 1;
 
                 var checkboxColumn;
@@ -1351,10 +1350,15 @@
                 $('#province').ph_locations({'location_type': 'provinces'});
                 $('#city').ph_locations({'location_type': 'cities'});
                 $('#barangay').ph_locations({'location_type': 'barangays'});
+                $('#province').ph_locations('fetch_list',[{"region_code":"03"}]);
 
+                $('#city').ph_locations('fetch_list',[{"province_code":"0371"}]);
                 $('#region').ph_locations('fetch_list');
+                $("#region").val("03").change();
 
             });
+            
+
 
         var my_handlers1 = {
                 fill_provinces:  function(){
@@ -1443,7 +1447,10 @@
                 $('#region3').ph_locations('fetch_list');
             });
 
+
         });
+
+
 
 </script>
 

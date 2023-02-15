@@ -84,7 +84,7 @@ class StudentController extends Controller
 
 
         $data['Permanent_address']['region']['id']  =           $student->Permanent_address->region->id ?? '';
-        dd($data);
+        // dd($data);
 
 
 
