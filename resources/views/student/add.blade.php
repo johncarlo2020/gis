@@ -237,18 +237,21 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="disabledSelect" class="form-label">Region</label>
-                                    <select name="permanent_address_region" id="region" value="{{$data['Permanent_address']['region']['id']}}"></select>
+                                    <input type="hidden" name="permanent_address_region" class="form-control" id="permanent_address_region" value="{{$data['permanent_address_region']}}">
+                                    <select id="region" ></select>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="disabledSelect" class="form-label">Province</label>
+                                    <input type="hidden" name="permanent_address_province" class="form-control" id="permanent_address_province" value="{{$data['permanent_address_province']}}">
                                    <select id="province"></select>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="disabledSelect" class="form-label">City/Municipality</label>
+                                    <input type="hidden" name="permanent_address_city" class="form-control" id="permanent_address_city" value="{{$data['permanent_address_city']}}">
                                     <select id="city"></select>
                                 </div>
                             </div>
@@ -257,6 +260,7 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="disabledSelect" class="form-label">Barangay</label>
+                                    <input type="hidden" name="permanent_address_barangay" class="form-control" id="permanent_address_barangay" value="{{$data['permanent_address_barangay']}}">
                                     <select id="barangay"></select>
                                 </div>
                             </div>
@@ -264,9 +268,8 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Number Street
                                     </label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="Number Street
-                                        ">
+                                    <input type="text" name="permanent_address_street" class="form-control" id="permanent_address_street" value="{{$data['permanent_address_street']}}">
+
                                     </div>
                                 </div>
                             </div>
@@ -275,18 +278,16 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Contact number
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Contact number
-                                        ">
+                                        <input type="text" name="contact_number" class="form-control" id="exampleFormControlInput1" value="{{$data['contact_number']}}"
+                                            placeholder="Contact number">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Contact number 2
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Contact number 2
-                                        ">
+                                        <input type="text" name="contact_number_2" class="form-control" id="exampleFormControlInput1" value="{{$data['contact_number_2']}}"
+                                            placeholder="Contact number 2 ">
                                     </div>
                                 </div>
                             </div>
@@ -295,9 +296,7 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Email
                                         </label>
-                                        <input type="email" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="email@example.com
-                                            ">
+                                        <input type="email" class="form-control" name="email" id="exampleFormControlInput1" value="{{$data['email']}}" placeholder="email@example.com">
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -308,7 +307,6 @@
                                 </div>
 
                             </div>
-                            <input type="submit" value="submit">
 
                         <div class="buttons button_space">
                             <button type="button" class="back_button">Back</button>
@@ -323,9 +321,9 @@
                             <div class="col-2">
                                 <div class="mb-3">
                                     <label for="disabledSelect" class="form-label">Gender *</label>
-                                    <select id="disabledSelect" class="form-select">
-                                        <option>Disabled select</option>
-                                        <option>Disabled select</option>
+                                    <select name="gender" class="form-select" value="{{$data['gender']}}">
+                                        <option {{ $data["gender"] =='Male' ? 'selected' : '' }} value="Male">Male</option>
+                                        <option {{ $data["gender"] =='Female' ? 'selected' : '' }} value="Female">Female</option>
                                     </select>
                                 </div>
                             </div>
@@ -333,8 +331,12 @@
                                 <div class="mb-3">
                                     <label for="disabledSelect" class="form-label">Civil Status </label>
                                     <select id="disabledSelect" class="form-select">
-                                        <option>Disabled select</option>
-                                        <option>Disabled select</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Widow/er">Widow/er</option>
+                                        <option value="Separated/Annulled">Separated/Annulled</option>
+                                        <option value="Solo Parent">Solo Parent</option> 
+
                                     </select>
                                 </div>
                             </div>
@@ -343,8 +345,19 @@
                                     <label for="disabledSelect" class="form-label">Educational Attainment Before the
                                         Training (Trainee)</label>
                                     <select id="disabledSelect" class="form-select">
-                                        <option>Disabled select</option>
-                                        <option>Disabled select</option>
+                                        <option value="No Grade Completed">No Grade Completed</option>
+                                        <option value="Elementary Graduate">Elementary Graduate</option>
+                                        <option value="Elementary Graduate">Elementary Graduate</option>
+                                        <option value="Pre-School(Nursery/Kinder/Prep)">Pre-School(Nursery/Kinder/Prep)</option>
+                                        <option value="Post Secondary Undergraduate">Post Secondary Undergraduate</option>
+                                        <option value="Post Secondary graduate">Post Secondary graduate</option>
+                                        <option value="High School Undergraduate">High School Undergraduate</option>
+                                        <option value="College Undergraduate">College Undergraduate</option>
+                                        <option value="Senior High Graduate">Senior High Graduate</option>
+                                        <option value="High School Graduate">High School Graduate</option>
+                                        <option value="College Gradaute or Higher">College Gradaute or Higher</option>
+                                        <option value="Senior High Graduate">Senior High Graduate</option>
+
                                     </select>
                                 </div>
                             </div>
@@ -469,6 +482,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="submit">
                             <div class="buttons button_space">
                                 <button type="button" class="back_button">Back</button>
                                 <button type="button" class="next_button">Next Step</button>
@@ -1388,174 +1402,85 @@
                 var autocomplete = new google.maps.places.Autocomplete(input3);
 
             }
-
-            var my_handlers = {
-                fill_provinces: function() {
-                    var region_code = $(this).val();
-                    $('#province').ph_locations('fetch_list', [{
-                        "region_code": region_code
-                    }]);
-
+            
+            $.ajax({
+                url: "https://psgc.gitlab.io/api/regions/",
+                dataType: "json",
+                type: "get",
+                success: function (data) {
+                    var options;
+                    $.each(data, function(index, value) {
+                        options += '<option data-name="'+value.regionName+'" value="'+value.code+'">'+value.regionName+'</option>';
+                    });
+                    $('#region').html(options); 
+                
                 },
-                fill_cities: function() {
-                    var province_code = $(this).val();
-                    $('#city').ph_locations('fetch_list', [{
-                        "province_code": province_code
-                    }]);
-                },
-                fill_barangays: function() {
-                    var city_code = $(this).val();
-                    $('#barangay').ph_locations('fetch_list', [{
-                        "city_code": city_code
-                    }]);
-                }
-            };
-
-            $(function() {
-
-                $('#region').on('change', my_handlers.fill_provinces);
-                $('#province').on('change', my_handlers.fill_cities);
-                $('#city').on('change', my_handlers.fill_barangays);
-
-                $('#region').ph_locations({'location_type': 'regions'});
-                $('#province').ph_locations({'location_type': 'provinces'});
-                $('#city').ph_locations({'location_type': 'cities'});
-                $('#barangay').ph_locations({'location_type': 'barangays'});
-
-                $('#city').ph_locations('fetch_list',[{"province_code":"0371"}]);
-                $('#region').ph_locations('fetch_list');
-                $("#region").val("03").change();
-
             });
 
-        var my_handlers1 = {
-                fill_provinces:  function(){
-                    var region_code = $(this).val();
-                    $('#province1').ph_locations('fetch_list', [{
-                        "region_code": region_code
-                    }]);
+            $('#region').on('change', function(){
+                var region_selected=$(this).find(':selected').attr('data-name');
+                var id=$(this).val();
+                $('#permanent_address_region').val(region_selected);
 
-                },
-                fill_cities: function() {
-                    var province_code = $(this).val();
-                    $('#city1').ph_locations('fetch_list', [{
-                        "province_code": province_code
-                    }]);
-                },
-                fill_barangays: function() {
-                    var city_code = $(this).val();
-                    $('#barangay1').ph_locations('fetch_list', [{
-                        "city_code": city_code
-                    }]);
-                }
-            };
-
-            $(function() {
-                $('#region1').on('change', my_handlers1.fill_provinces);
-                $('#province1').on('change', my_handlers1.fill_cities);
-                $('#city1').on('change', my_handlers1.fill_barangays);
-
-                $('#region1').ph_locations({
-                    'location_type': 'regions'
+                $.ajax({
+                    url: "https://psgc.gitlab.io/api/regions/"+id+"/provinces/",
+                    dataType: "json",
+                    type: "get",
+                    success: function (data) {
+                        var options;
+                        $.each(data, function(index, value) {
+                            options += '<option data-name="'+value.name+'" value="'+value.code+'">'+value.name+'</option>';
+                        });
+                        $('#province').html(options); 
+                    },
                 });
-                $('#province1').ph_locations({
-                    'location_type': 'provinces'
-                });
-                $('#city1').ph_locations({
-                    'location_type': 'cities'
-                });
-                $('#barangay1').ph_locations({
-                    'location_type': 'barangays'
-                });
-
-                $('#region1').ph_locations('fetch_list');
             });
 
-            var my_handlers2 = {
-                fill_provinces: function() {
-                    var region_code = $(this).val();
-                    $('#province2').ph_locations('fetch_list', [{
-                        "region_code": region_code
-                    }]);
+            $('#province').on('change', function(){
+                var province_selected=$(this).find(':selected').attr('data-name');
+                var id=$(this).val();
+                $('#permanent_address_province').val(province_selected);
 
-                },
-                fill_cities: function() {
-                    var province_code = $(this).val();
-                    $('#city2').ph_locations('fetch_list', [{
-                        "province_code": province_code
-                    }]);
-                },
-                fill_barangays: function() {
-                    var city_code = $(this).val();
-                    $('#barangay2').ph_locations('fetch_list', [{
-                        "city_code": city_code
-                    }]);
-                }
-            };
-
-            $(function() {
-                $('#region2').on('change', my_handlers2.fill_provinces);
-                $('#province2').on('change', my_handlers2.fill_cities);
-                $('#city2').on('change', my_handlers2.fill_barangays);
-
-                $('#region2').ph_locations({
-                    'location_type': 'regions'
+                $.ajax({
+                    url: "https://psgc.gitlab.io/api/provinces/"+id+"/cities-municipalities/",
+                    dataType: "json",
+                    type: "get",
+                    success: function (data) {
+                        var options;
+                        $.each(data, function(index, value) {
+                            options += '<option data-name="'+value.name+'" value="'+value.code+'">'+value.name+'</option>';
+                        });
+                        $('#city').html(options); 
+                    },
                 });
-                $('#province2').ph_locations({
-                    'location_type': 'provinces'
-                });
-                $('#city2').ph_locations({
-                    'location_type': 'cities'
-                });
-                $('#barangay2').ph_locations({
-                    'location_type': 'barangays'
-                });
-
-                $('#region2').ph_locations('fetch_list');
             });
 
-            var my_handlers3 = {
-                fill_provinces: function() {
-                    var region_code = $(this).val();
-                    $('#province3').ph_locations('fetch_list', [{
-                        "region_code": region_code
-                    }]);
+            $('#city').on('change', function(){
+                var city_selected=$(this).find(':selected').attr('data-name');
+                var id=$(this).val();
+                $('#permanent_address_city').val(city_selected);
 
-                },
-                fill_cities: function() {
-                    var province_code = $(this).val();
-                    $('#city3').ph_locations('fetch_list', [{
-                        "province_code": province_code
-                    }]);
-                },
-                fill_barangays: function() {
-                    var city_code = $(this).val();
-                    $('#barangay3').ph_locations('fetch_list', [{
-                        "city_code": city_code
-                    }]);
-                }
-            };
-
-            $(function() {
-                $('#region3').on('change', my_handlers3.fill_provinces);
-                $('#province3').on('change', my_handlers3.fill_cities);
-                $('#city3').on('change', my_handlers3.fill_barangays);
-
-                $('#region3').ph_locations({
-                    'location_type': 'regions'
+                $.ajax({
+                    url: "https://psgc.gitlab.io/api/cities-municipalities/"+id+"/barangays/",
+                    dataType: "json",
+                    type: "get",
+                    success: function (data) {
+                        var options;
+                        $.each(data, function(index, value) {
+                            options += '<option data-name="'+value.name+'" value="'+value.code+'">'+value.name+'</option>';
+                        });
+                        $('#barangay').html(options); 
+                    },
                 });
-                $('#province3').ph_locations({
-                    'location_type': 'provinces'
-                });
-                $('#city3').ph_locations({
-                    'location_type': 'cities'
-                });
-                $('#barangay3').ph_locations({
-                    'location_type': 'barangays'
-                });
-
-                $('#region3').ph_locations('fetch_list');
             });
+
+            $('#barangay').on('change', function(){
+                var barangay_selected=$(this).find(':selected').attr('data-name');
+                var id=$(this).val();
+                $('#permanent_address_barangay').val(barangay_selected);
+            });
+
+           
 
 
         });

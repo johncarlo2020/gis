@@ -81,9 +81,21 @@ class StudentController extends Controller
         $data['middle_name']                        =           $student->middle_name ?? '';
         $data['last_name']                          =           $student->last_name ?? '';
         $data['extension']                          =           $student->extension ?? '';
+        $data['permanent_address_region']           =           $student->permanent_address_region ?? '';
+        $data['permanent_address_province']         =           $student->permanent_address_province ?? '';
+        $data['permanent_address_city']             =           $student->permanent_address_city ?? '';
+        $data['permanent_address_barangay']         =           $student->permanent_address_barangay ?? '';
+        $data['permanent_address_street']           =           $student->permanent_address_street ?? '';
+        $data['contact_number']                     =           $student->contact_number ?? '';
+        $data['contact_number_2']                   =           $student->contact_number_2 ?? '';
+        $data['email']                              =           $student->email ?? '';
+        $data['gender']                              =           $student->gender ?? '';
+        
 
 
-        $data['Permanent_address']['region']['id']  =           $student->Permanent_address->region->id ?? '';
+       
+
+
 
 
 
@@ -102,8 +114,6 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Permanent_address_region = json_decode(file_get_contents('https://ph-locations-api.buonzz.com/v1/regions/'.$request->permanent_address_region), true);
-
         $data['t2mis']                                  =       $request->t2mis;
         $data['vouchers_number']                        =       $request->vouchers_number;
         $data['training_status']                        =       $request->training_status;
@@ -118,11 +128,24 @@ class StudentController extends Controller
         $data['last_name']                              =       $request->last_name;
         $data['middle_name']                            =       $request->middle_name;
         $data['extension']                              =       $request->extension;
-        $data['Permanent_address']['region']['id']      =       $Permanent_address_region['id'];
-        $data['Permanent_address']['region']['name']    =       $Permanent_address_region['name'];
+        $data['permanent_address_region']               =       $request->permanent_address_region;
+        $data['permanent_address_province']             =       $request->permanent_address_province;
+        $data['permanent_address_city']                 =       $request->permanent_address_city;
+        $data['permanent_address_barangay']             =       $request->permanent_address_barangay;
+        $data['permanent_address_street']               =       $request->permanent_address_street;
+        $data['contact_number']                         =       $request->contact_number ?? '';
+        $data['contact_number_2']                       =       $request->contact_number_2 ?? '';
+        $data['email']                                  =       $request->email ?? '';
+        $data['gender']                                 =       $request->gender ?? '';
+
+
+
+
+
         $input=[
-            'data'=>json_encode($data)
+            'data'=> $data
         ];
+       
 
 
         Student::where('id',$id)->update($input);
