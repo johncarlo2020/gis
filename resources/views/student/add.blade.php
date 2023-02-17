@@ -330,12 +330,12 @@
                             <div class="col-3">
                                 <div class="mb-3">
                                     <label for="disabledSelect" class="form-label">Civil Status </label>
-                                    <select id="disabledSelect" class="form-select">
-                                        <option value="Single">Single</option>
-                                        <option value="Married">Married</option>
-                                        <option value="Widow/er">Widow/er</option>
-                                        <option value="Separated/Annulled">Separated/Annulled</option>
-                                        <option value="Solo Parent">Solo Parent</option> 
+                                    <select name="civil_status" class="form-select" value="{{$data['civil_status']}}">
+                                        <option {{ $data["civil_status"] =='Single' ? 'selected' : '' }} value="Single">Single</option>
+                                        <option {{ $data["civil_status"] =='Married' ? 'selected' : '' }} value="Married">Married</option>
+                                        <option {{ $data["civil_status"] =='Widow/er' ? 'selected' : '' }} value="Widow/er">Widow/er</option>
+                                        <option {{ $data["civil_status"] =='Separated/Annulled' ? 'selected' : '' }} value="Separated/Annulled">Separated/Annulled</option>
+                                        <option {{ $data["civil_status"] =='Solo Parent' ? 'selected' : '' }} value="Solo Parent">Solo Parent</option> 
 
                                     </select>
                                 </div>
@@ -344,19 +344,19 @@
                                 <div class="mb-3">
                                     <label for="disabledSelect" class="form-label">Educational Attainment Before the
                                         Training (Trainee)</label>
-                                    <select id="disabledSelect" class="form-select">
-                                        <option value="No Grade Completed">No Grade Completed</option>
-                                        <option value="Elementary Graduate">Elementary Graduate</option>
-                                        <option value="Elementary Graduate">Elementary Graduate</option>
-                                        <option value="Pre-School(Nursery/Kinder/Prep)">Pre-School(Nursery/Kinder/Prep)</option>
-                                        <option value="Post Secondary Undergraduate">Post Secondary Undergraduate</option>
-                                        <option value="Post Secondary graduate">Post Secondary graduate</option>
-                                        <option value="High School Undergraduate">High School Undergraduate</option>
-                                        <option value="College Undergraduate">College Undergraduate</option>
-                                        <option value="Senior High Graduate">Senior High Graduate</option>
-                                        <option value="High School Graduate">High School Graduate</option>
-                                        <option value="College Gradaute or Higher">College Gradaute or Higher</option>
-                                        <option value="Senior High Graduate">Senior High Graduate</option>
+                                    <select name="educational_attainment" class="form-select">
+                                        <option {{ $data["educational_attainment"] =='No Grade Completed' ? 'selected' : '' }} value="No Grade Completed">No Grade Completed</option>
+                                        <option {{ $data["educational_attainment"] =='Elementary Graduate' ? 'selected' : '' }} value="Elementary Graduate">Elementary Graduate</option>
+                                        <option {{ $data["educational_attainment"] =='Elementary Graduate' ? 'selected' : '' }} value="Elementary Graduate">Elementary Graduate</option>
+                                        <option {{ $data["educational_attainment"] =='Pre-School(Nursery/Kinder/Prep)' ? 'selected' : '' }} value="Pre-School(Nursery/Kinder/Prep)">Pre-School(Nursery/Kinder/Prep)</option>
+                                        <option {{ $data["educational_attainment"] =='Post Secondary Undergraduate' ? 'selected' : '' }} value="Post Secondary Undergraduate">Post Secondary Undergraduate</option>
+                                        <option {{ $data["educational_attainment"] =='Post Secondary graduate' ? 'selected' : '' }} value="Post Secondary graduate">Post Secondary graduate</option>
+                                        <option {{ $data["educational_attainment"] =='High School Undergraduate' ? 'selected' : '' }} value="High School Undergraduate">High School Undergraduate</option>
+                                        <option {{ $data["educational_attainment"] =='College Undergraduate' ? 'selected' : '' }} value="College Undergraduate">College Undergraduate</option>
+                                        <option {{ $data["educational_attainment"] =='Senior High Graduate' ? 'selected' : '' }} value="Senior High Graduate">Senior High Graduate</option>
+                                        <option {{ $data["educational_attainment"] =='High School Graduate' ? 'selected' : '' }} value="High School Graduate">High School Graduate</option>
+                                        <option {{ $data["educational_attainment"] =='College Gradaute or Higher' ? 'selected' : '' }} value="College Gradaute or Higher">College Gradaute or Higher</option>
+                                        <option {{ $data["educational_attainment"] =='Senior High Graduate' ? 'selected' : '' }} value="Senior High Graduate">Senior High Graduate</option>
 
                                     </select>
                                 </div>
@@ -365,9 +365,18 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Religion
                                     </label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="Religion
-                                        ">
+                                    <select name="religion" class="form-select">
+                                        <option {{ $data["religion"] =='None' ? 'selected' : '' }} value="None">None</option>
+                                        <option {{ $data["religion"] =='Roman Catholic' ? 'selected' : '' }} value="Roman Catholic">Roman Catholic</option>
+                                        <option {{ $data["religion"] =='Iglesia Ni Cristo' ? 'selected' : '' }} value="Iglesia Ni Cristo">Iglesia Ni Cristo</option>
+                                        <option {{ $data["religion"] =='Evangelicals' ? 'selected' : '' }} value="Evangelicals">Evangelicals</option>
+                                        <option {{ $data["religion"] =='Protestant' ? 'selected' : '' }} value="Protestant">Protestant</option>
+                                        <option {{ $data["religion"] =='Aglipayan' ? 'selected' : '' }} value="Aglipayan">Aglipayan</option>
+                                        <option {{ $data["religion"] =='Seventh-day Adventist' ? 'selected' : '' }} value="Seventh-day Adventist">Seventh-day Adventist</option>
+                                        <option {{ $data["religion"] =='Bible Baptist Church' ? 'selected' : '' }} value="Bible Baptist Church">Bible Baptist Church</option>
+                                        <option {{ $data["religion"] =='Jehovahs Witnesses' ? 'selected' : '' }} value="Jehovahs Witnesses">Jehovahs Witnesses</option>
+                                        <option {{ $data["religion"] =='Islam' ? 'selected' : '' }} value="Islam">Islam</option>
+                                    </select>
                                     </div>
                                 </div>
                             </div>
@@ -377,37 +386,9 @@
                             <div class="row student-input">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="disabledSelect" class="form-label">Region</label>
-                                        <select id="region1"></select>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="disabledSelect" class="form-label">Province</label>
-                                        <select id="province1"></select>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="disabledSelect" class="form-label">City/Municipality</label>
-                                        <select id="city1"></select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row student-input">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="disabledSelect" class="form-label">Barangay</label>
-                                        <select id="barangay1"></select>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">Number Street
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Number Street
-                                        ">
+                                        <input type="text" name="complete_address" class="form-control" id="complete_address" value="{{$data['complete_address']}}"
+                                            placeholder="Complete Address">
                                     </div>
                                 </div>
                             </div>
@@ -419,7 +400,7 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Nationality
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
+                                        <input type="text" name="nationality" class="form-control" id="exampleFormControlInput1" value="{{$data['nationality']}}"
                                             placeholder="Nationality
                                         ">
                                     </div>
@@ -429,9 +410,11 @@
                                         <label for="disabledSelect" class="form-label">Employment Status (before the
                                             training)
                                             * </label>
-                                        <select id="disabledSelect" class="form-select">
-                                            <option>Disabled select</option>
-                                            <option>Disabled select</option>
+                                        <select name="employment_status" class="form-select">
+                                            <option {{ $data["employment_status"] =='Employed' ? 'selected' : '' }} value="Employed">Employed</option>
+                                            <option {{ $data["employment_status"] =='Unemployed' ? 'selected' : '' }} value="Unemployed">Unemployed</option>
+
+
                                         </select>
                                     </div>
                                 </div>
@@ -439,18 +422,15 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Date of Employment
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Date of Employment
-                                        ">
+                                        <input type="date" class="form-control" name="date_of_employment" value="{{$data['date_of_employment']}}">
+
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Name of employer
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Name of employer
-                                        ">
+                                        <input type="text" class="form-control" name="name_of_employer" value="{{$data['name_of_employer']}}" placeholder="Name of employer">
                                     </div>
                                 </div>
                             </div>
@@ -459,30 +439,25 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Employment address
                                         </label>
-                                        <input type="text" class="form-control" id="employment_address"
-                                            placeholder="Employment address
-                                        ">
+                                        <input type="text" class="form-control" id="employment_address" name="employment_address" value="{{$data['employment_address']}}" placeholder="Employment address">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Salary
                                             * </label>
-                                        <select id="disabledSelect" class="form-select">
-                                            <option>Disabled select</option>
-                                            <option>Disabled select</option>
-                                        </select>
+                                            <input type="text" class="form-control" name="salary" value="{{$data['salary']}}" placeholder="Salary">
+
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Date of Birth
                                         </label>
-                                        <input type="date" class="form-control" id="exampleFormControlInput1">
+                                        <input type="date" class="form-control" name="date_of_birth" value="{{$data['date_of_birth']}}">
                                     </div>
                                 </div>
                             </div>
-                            <input type="submit">
                             <div class="buttons button_space">
                                 <button type="button" class="back_button">Back</button>
                                 <button type="button" class="next_button">Next Step</button>
@@ -498,36 +473,28 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">First name*
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="First name
-                                        ">
+                                        <input type="text" class="form-control" name="parent_first_name" value="{{$data['parent_first_name']}}" placeholder="First name">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Last name*
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Trainor Name
-                                        ">
+                                        <input type="text" class="form-control" name="parent_last_name" value="{{$data['parent_last_name']}}" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Middle name
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Middle name
-                                        ">
+                                        <input type="text" class="form-control" name="parent_middle_name" value="{{$data['parent_middle_name']}}" placeholder="Middle name">
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Extension
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="jr,sr,3rd
-                                        ">
+                                        <input type="text" class="form-control" name="parent_extension" value="{{$data['parent_extension']}}" placeholder="jr,sr,3rd">
                                     </div>
                                 </div>
                             </div>
@@ -536,57 +503,27 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Relation (to Guardian)*
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Relation (to Guardian)
-                                        ">
+                                        <input type="text" class="form-control" name="parent_relation" value="{{$data['parent_relation']}}" placeholder="Relation (to Guardian)">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Date of Birth
                                         </label>
-                                        <input type="date" class="form-control" id="exampleFormControlInput1">
+                                        <input type="date" class="form-control" name="parent_dob" value="{{$data['parent_dob']}}">
                                     </div>
                                 </div>
                             </div>
                             <div class="text">
-                                <h6>Parent/Gueardian Complete Permanent Mailing Address
+                                <h6>Parent/Guardian Complete Permanent Mailing Address
                                 </h6>
                             </div>
                             <div class="row student-input">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="disabledSelect" class="form-label">Region</label>
-                                        <select id="region2"></select>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="disabledSelect" class="form-label">Province</label>
-                                        <select id="province2"></select>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="disabledSelect" class="form-label">City/Municipality</label>
-                                        <select id="city2"></select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row student-input">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="disabledSelect" class="form-label">Barangay</label>
-                                        <select id="barangay2"></select>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">Number Street
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Number Street
-                                        ">
+                                        <input type="text" name="parent_address" class="form-control" id="parent_address" value="{{$data['parent_address']}}"
+                                            placeholder="Complete Address">
                                     </div>
                                 </div>
                             </div>
@@ -595,18 +532,14 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Email
                                         </label>
-                                        <input type="email" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="email@example.com
-                                            ">
+                                        <input type="email" class="form-control" name="parent_email" value="{{$data['parent_email']}}" placeholder="email@example.com ">
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Contact number
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Contact number
-                                        ">
+                                        <input type="text" class="form-control" name="parent_contact" value="{{$data['parent_contact']}}" placeholder="Contact number">
                                     </div>
                                 </div>
                             </div>
@@ -625,36 +558,28 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">First name*
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="First name
-                                        ">
+                                        <input type="text" class="form-control" name="benefitiary_first_name" value="{{$data['benefitiary_first_name']}}" placeholder="First name">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Last name*
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Trainor Name
-                                        ">
+                                        <input type="text" class="form-control" name="benefitiary_last_name" value="{{$data['benefitiary_last_name']}}" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Middle name
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Middle name
-                                        ">
+                                        <input type="text" class="form-control" name="benefitiary_middle_name" value="{{$data['benefitiary_middle_name']}}" placeholder="Middle name">
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Extension
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="jr,sr,3rd
-                                        ">
+                                        <input type="text" class="form-control" name="benefitiary_extension" value="{{$data['benefitiary_extension']}}" placeholder="jr,sr,3rd">
                                     </div>
                                 </div>
                             </div>
@@ -663,16 +588,14 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Relation (to Guardian)*
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Relation (to Guardian)
-                                        ">
+                                        <input type="text" class="form-control" name="benefitiary_relation" value="{{$data['benefitiary_relation']}}" placeholder="Relation (to Benefitiary)">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Date of Birth
                                         </label>
-                                        <input type="date" class="form-control" id="exampleFormControlInput1">
+                                        <input type="date" class="form-control" name="benefitiary_dob" value="{{$data['benefitiary_dob']}}">
                                     </div>
                                 </div>
                             </div>
@@ -683,37 +606,9 @@
                             <div class="row student-input">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="disabledSelect" class="form-label">Region</label>
-                                        <select id="region3"></select>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="disabledSelect" class="form-label">Province</label>
-                                        <select id="province3"></select>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="disabledSelect" class="form-label">City/Municipality</label>
-                                        <select id="city3"></select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row student-input">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="disabledSelect" class="form-label">Barangay</label>
-                                        <select id="barangay3"></select>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">Number Street
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Number Street
-                                        ">
+                                        <input type="text" name="benefitiary_address" class="form-control" id="benefitiary_address" value="{{$data['benefitiary_address']}}"
+                                            placeholder="Complete Address">
                                     </div>
                                 </div>
                             </div>
@@ -722,21 +617,19 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Email
                                         </label>
-                                        <input type="email" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="email@example.com
-                                            ">
+                                        <input type="email" class="form-control" name="benefitiary_email" value="{{$data['benefitiary_email']}} "placeholder="email@example.com ">
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Contact number
                                         </label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Contact number
-                                        ">
+                                        <input type="text" class="form-control" name="benefitiary_contact" value="{{$data['benefitiary_dob']}}" placeholder="Contact number">
                                     </div>
                                 </div>
                             </div>
+                            <input type="submit">
+
                             <div class="buttons button_space">
                                 <button type="button" class="back_button">Back</button>
                                 <button type="button" class="next_button">Next Step</button>
@@ -1394,12 +1287,23 @@
                 var input1 = document.getElementById('employment_address');
                 var input2 = document.getElementById('training_venue');
                 var input3 = document.getElementById('examination_venue');
+                var input4 = document.getElementById('complete_address');
+                var input5 = document.getElementById('parent_address');
+                var input6 = document.getElementById('benefitiary_address');
+
+
 
 
                 var autocomplete = new google.maps.places.Autocomplete(input);
                 var autocomplete = new google.maps.places.Autocomplete(input1);
                 var autocomplete = new google.maps.places.Autocomplete(input2);
                 var autocomplete = new google.maps.places.Autocomplete(input3);
+                var autocomplete = new google.maps.places.Autocomplete(input4);
+                var autocomplete = new google.maps.places.Autocomplete(input5);
+                var autocomplete = new google.maps.places.Autocomplete(input6);
+
+
+
 
             }
             
