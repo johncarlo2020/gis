@@ -12,10 +12,7 @@ use App\Http\Controllers\ClassificationController;
 use App\Http\Controllers\StudentController;
 
 
-
-
-
-// users 
+// users
 use App\Http\Controllers\userAdmin;
 use App\Http\Controllers\userEncoder;
 use App\Http\Controllers\userRegistrar;
@@ -33,6 +30,10 @@ use App\Http\Controllers\userRegistrar;
 
 Route::get('/', function () { return view('auth/login');});
 
+Route::get('/qualification/subject', function () {
+    return view('qualification.subject');
+})->name('qualification.subject');
+
 Auth::routes(['register' => false]);
 
 Route::group(['middleware' => 'auth'], function (){
@@ -44,6 +45,9 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('Classification/show', [ClassificationController::class, 'index'])->name('admin.classification.show');
         Route::get('Student/show', [StudentController::class, 'index'])->name('admin.student.show');
         Route::get('Student/add', [StudentController::class, 'create'])->name('admin.student.add');
+        Route::get('Student/{id}/edit', [StudentController::class, 'edit'])->name('admin.student.edit');
+        Route::PUT('Student/update/{id}', [StudentController::class, 'update'])->name('admin.student.update');
+
 
 
         // =================================================================================================================================
@@ -72,13 +76,7 @@ Route::group(['middleware' => 'auth'], function (){
 
 
 });
-
-
-
-
-
 // ajax
-
 // user
 Route::post('/ajax/user-reload', [UserController::class, 'reload']);
 Route::post('/ajax/user-create', [UserController::class, 'store']);
@@ -104,5 +102,3 @@ Route::post('/ajax/disability-validate_name', [DisabilityController::class, 'val
 Route::post('/ajax/disability-store', [DisabilityController::class, 'store'])->name('disability_store');
 Route::post('/ajax/disability-edit', [DisabilityController::class, 'update'])->name('disability_edit');
 Route::post('/ajax/disability-status', [DisabilityController::class, 'destroy'])->name('disability_status');
-
-

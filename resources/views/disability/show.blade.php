@@ -97,6 +97,7 @@ function disability_reload(){
         type: 'POST',
       },
   });
+  
 }
 // ================================REQUIRED==============================================
 
@@ -219,8 +220,8 @@ $(document).on("click", ".trigger_btn", function () {
 $(document).on("click", ".save_btn", function () {
 
     var id = $(this).attr('data-id')
-    var type = $(this).data('type')
-    var status = $(this).data('status')
+    var type = $(this).attr('data-type')
+    var status = $(this).attr('data-status')
 
     if (type == "store") {
             var data = {};

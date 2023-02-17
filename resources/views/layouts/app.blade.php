@@ -170,12 +170,12 @@
                             </a>
                             <ul class="nav nav-treeview ">
                                 <li class="nav-item">
-                                    <a href="/docs/3.2/javascript/layout.html" class="nav-link">
+                                    <a href="" class="nav-link">
                                         <p>Courses</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/docs/3.2/javascript/push-menu.html" class="nav-link">
+                                    <a href="{{ route('qualification.subject') }}" class="nav-link">
                                         <p>Subject</p>
                                     </a>
                                 </li>
