@@ -57,6 +57,10 @@ class LoginController extends Controller
         }
 
         if (Auth::check()){
+            //store session data
+            $user = Auth::user();
+            $name = $user->fname . ' ' . $user->lname;
+            session(['my_data' =>  $name]);
             // 1 admin
             // 2 encoder
             // 3 registrar
@@ -82,6 +86,5 @@ class LoginController extends Controller
     {
         return 'username';
     }
-
 
 }

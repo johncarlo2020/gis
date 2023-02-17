@@ -27,10 +27,11 @@
     <link href="{{ asset('css/adminlte.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- AdminLTE -->
     <script src="{{ asset('js/adminlte.js') }}" defer></script>
 
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="{{ asset('chart.js/Chart.min.js') }}" defer></script>
 
 
     <!-- Additional Scripts -->
@@ -39,7 +40,6 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('chart.js/Chart.min.js') }}" defer></script>
 
 
 
@@ -91,16 +91,48 @@
                 <li class="nav-item mr-4">
                     <div class="user-panel  d-flex">
                         <div class="info">
-                            <a href="#" class="d-block user-Name">Alexander Pierce</a>
+                            <a href="#" class="d-block user-Name">
+                                {{-- session data --}}
+                                @php
+                                    $myData = session('my_data');
+                                @endphp
+                                {{ $myData }}
+                            </a>
                         </div>
                         <div class="image">
-                            <img src="{{ asset('images/user2-160x160.jpg') }}" class="img-circle border-light"
-                                alt="User Image">
+                            <button class="btn p-0" id="navDropDown" data-clicked="false">
+                                <img src="{{ asset('images/user2-160x160.jpg') }}" class="img-circle border-light"
+                                    alt="User Image">
+                            </button>
                         </div>
                     </div>
                 </li>
             </ul>
         </nav>
+        <div class="nav-drop" id="navDropItem">
+            <ul class="nav">
+                <li>
+                    <a href="" class="nav-link">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="nav-link">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Setting</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('logout') }}" class="nav-link"
+                        onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
@@ -198,9 +230,7 @@
 
                     </ul>
                     <div class="log-out">
-                        <a href="{{ route('logout') }}" class="nav-link logout-icon"
-                            onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
+                        <a class="nav-link logout-icon">
                             <i class="fa-solid fa-chevron-left"></i>
                         </a>
 
@@ -241,6 +271,62 @@
         </footer>
     </div>
     @yield('scripts')
+
+    <style>
+        .image {
+            position: relative;
+        }
+
+        #navDropDown {
+            position: relative;
+        }
+
+        #navDropItem {
+            width: 136PX;
+            position: absolute;
+            background: #FFFFFF;
+            box-shadow: 0px -2px 12px rgb(0 0 0 / 11%);
+            border-radius: 5px;
+            top: 60px;
+            right: 25px;
+            z-index: 9999;
+            PADDING: 10PX;
+        }
+
+        #navDropItem ul li a {
+            font-size: 13px;
+            padding: 5px 1rem;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+
+            var myData = '{{ $myData }}';
+            console.log(myData);
+
+            $("#navDropItem").hide();
+            var open = false;
+            $("#navDropDown").click(function() {
+                console.log(open);
+                open = !open;
+                showdrop();
+            });
+
+            function showdrop() {
+                if (open === false) {
+                    $("#navDropItem").hide().fadeOut(1000);
+
+
+                } else {
+                    $("#navDropItem").show().fadeIn(1000);
+                }
+            }
+
+        });
+    </script>
+
+
+
 </body>
 
 </html>
