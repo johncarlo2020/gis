@@ -27,6 +27,7 @@
     <link href="{{ asset('css/adminlte.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- AdminLTE -->
     <script src="{{ asset('js/adminlte.js') }}" defer></script>
 
@@ -40,9 +41,9 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        
-    
-    
+
+
+
 </head>
 <!--
 `body` tag options:
@@ -91,16 +92,48 @@
                 <li class="nav-item mr-4">
                     <div class="user-panel  d-flex">
                         <div class="info">
-                            <a href="#" class="d-block user-Name">Alexander Pierce</a>
+                            <a href="#" class="d-block user-Name">
+                                {{-- session data --}}
+                                @php
+                                    $myData = session('my_data');
+                                @endphp
+                                {{ $myData }}
+                            </a>
                         </div>
                         <div class="image">
-                            <img src="{{ asset('images/user2-160x160.jpg') }}" class="img-circle border-light"
-                                alt="User Image">
+                            <button class="btn p-0" id="navDropDown" data-clicked="false">
+                                <img src="{{ asset('images/user2-160x160.jpg') }}" class="img-circle border-light"
+                                    alt="User Image">
+                            </button>
                         </div>
                     </div>
                 </li>
             </ul>
         </nav>
+        <div class="nav-drop" id="navDropItem">
+            <ul class="nav">
+                <li>
+                    <a href="" class="nav-link">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="nav-link">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Setting</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('logout') }}" class="nav-link"
+                        onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
@@ -128,36 +161,50 @@
                             </a>
                         </li>
                         <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }}">
-                            <a href="{{ route('admin.scholarship.show') }}"
-                                class="nav-link {{ request()->routeIs('admin.scholarship*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Scholarship
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }}">
                             <a href="{{ route('admin.qualification.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.qualification*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="fa-solid fa-bars"></i>
                                 <p>
                                     Qualification/Courses
+                                </p>
+                                <i class="right fas fa-angle-left"></i>
+                            </a>
+                            <ul class="nav nav-treeview ">
+                                <li class="nav-item">
+                                    <a href="/docs/3.2/javascript/layout.html" class="nav-link">
+                                        <p>Courses</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/docs/3.2/javascript/push-menu.html" class="nav-link">
+                                        <p>Subject</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }}">
+                            <a href="{{ route('admin.scholarship.show') }}"
+                                class="nav-link {{ request()->routeIs('admin.scholarship*') ? 'active' : '' }}">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                                <p>
+                                    Scholarship
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }} ">
                             <a href="{{ route('admin.disability.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.disability*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="fa-solid fa-wheelchair"></i>
                                 <p>
                                     Disability
                                 </p>
+
                             </a>
                         </li>
                         <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }}">
                             <a href="{{ route('admin.classification.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.classification*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="fa-solid fa-people-group"></i>
                                 <p>
                                     Client Classification
                                 </p>
@@ -166,7 +213,7 @@
                         <li class="nav-item ">
                             <a href="{{ route('admin.student.show') }}"
                                 class="nav-link {{ request()->routeIs('admin.student*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="fa-solid fa-user-graduate"></i>
                                 <p>
                                     Student
                                 </p>
@@ -175,28 +222,23 @@
                         <li class="nav-item {{ auth()->user()->role != 1 ? 'd-none' : '' }}">
                             <a href="{{ route('admin.user') }}"
                                 class="nav-link {{ request()->routeIs('admin.user*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="fa-solid fa-user"></i>
                                 <p>
                                     User
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('logout') }}" class="nav-link"
-                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                <i class="nav-icon fas fa-file"></i>
-                                <p>
-                                    Logout
-                                </p>
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </li>
 
                     </ul>
+                    <div class="log-out">
+                        <a class="nav-link logout-icon">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
@@ -222,24 +264,69 @@
 
         <!-- Main Footer -->
         <footer class="main-footer d-none">
-            <strong>Copyright &copy; 2014-2021 << /strong>
-                    All rights reserved.
-                    <div class="float-right d-none d-sm-inline-block">
-                        <b>Version</b> 3.2.0
-                    </div>
+            <strong>Copyright &copy; 2014-2021 </strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 3.2.0
+            </div>
         </footer>
     </div>
-    <!-- ./wrapper -->
-
-    <!-- REQUIRED SCRIPTS -->
-
-
-
-    {{-- <script defer src="{{ asset('js/users.js') }}"></script> --}}
-    <script defer src="{{ asset('js/steperForm.js') }}"></script>
     @yield('scripts')
 
-    
+    <style>
+        .image {
+            position: relative;
+        }
+
+        #navDropDown {
+            position: relative;
+        }
+
+        #navDropItem {
+            width: 136PX;
+            position: absolute;
+            background: #FFFFFF;
+            box-shadow: 0px -2px 12px rgb(0 0 0 / 11%);
+            border-radius: 5px;
+            top: 60px;
+            right: 25px;
+            z-index: 9999;
+            PADDING: 10PX;
+        }
+
+        #navDropItem ul li a {
+            font-size: 13px;
+            padding: 5px 1rem;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+
+            var myData = '{{ $myData }}';
+            console.log(myData);
+
+            $("#navDropItem").hide();
+            var open = false;
+            $("#navDropDown").click(function() {
+                console.log(open);
+                open = !open;
+                showdrop();
+            });
+
+            function showdrop() {
+                if (open === false) {
+                    $("#navDropItem").hide().fadeOut(1000);
+
+
+                } else {
+                    $("#navDropItem").show().fadeIn(1000);
+                }
+            }
+
+        });
+    </script>
+
+
 
 </body>
 

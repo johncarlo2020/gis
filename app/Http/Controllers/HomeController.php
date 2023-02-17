@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -34,11 +35,13 @@ class HomeController extends Controller
     // User Encoder
     public function EncoderHome()
     {
+       //here
         return view('userencoder.index');
     }
     // User Registrar
     public function RegistrarHome()
     {
+         //here
         return view('userregistrar.index');
     }
 }

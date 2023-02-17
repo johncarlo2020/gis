@@ -12,10 +12,7 @@ use App\Http\Controllers\ClassificationController;
 use App\Http\Controllers\StudentController;
 
 
-
-
-
-// users 
+// users
 use App\Http\Controllers\userAdmin;
 use App\Http\Controllers\userEncoder;
 use App\Http\Controllers\userRegistrar;
@@ -33,6 +30,10 @@ use App\Http\Controllers\userRegistrar;
 
 Route::get('/', function () { return view('auth/login');});
 
+Route::get('/qualification/subject', function () {
+    return view('qualification.subject');
+})->name('qualification.subject');
+
 Auth::routes(['register' => false]);
 
 Route::group(['middleware' => 'auth'], function (){
@@ -43,39 +44,39 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('Disability/show', [DisabilityController::class, 'index'])->name('admin.disability.show');
         Route::get('Classification/show', [ClassificationController::class, 'index'])->name('admin.classification.show');
         Route::get('Student/show', [StudentController::class, 'index'])->name('admin.student.show');
+        Route::get('Student/add', [StudentController::class, 'create'])->name('admin.student.add');
+        Route::get('Student/{id}/edit', [StudentController::class, 'edit'])->name('admin.student.edit');
+        Route::PUT('Student/update/{id}', [StudentController::class, 'update'])->name('admin.student.update');
+
+
+
         // =================================================================================================================================
         //admin routes
         Route::get('userAdmin/index', [HomeController::class, 'AdminHome'])->name('admin.home')->middleware('userAdmin');
-
         Route::group(['middleware' => ['userAdmin']], function() {
                 Route::get('userAdmin/user', [UserController::class, 'index'])->name('admin.user');
         });
+
 
         // =================================================================================================================================
         //encoder routes
         Route::get('userRegistrar/index', [HomeController::class, 'RegistrarHome'])->name('registrar.home')->middleware('userEncoder');
-
         Route::group(['middleware' => ['userAdmin']], function() {
                 Route::get('userAdmin/user', [UserController::class, 'index'])->name('admin.user');
         });
+
 
         // =================================================================================================================================
         //registrar routes
         Route::get('userEncoder/index', [HomeController::class, 'EncoderHome'])->name('encoder.home')->middleware('userRegistrar');
-
         Route::group(['middleware' => ['userAdmin']], function() {
                 Route::get('userAdmin/user', [UserController::class, 'index'])->name('admin.user');
         });
         // =================================================================================================================================
 
+
 });
-
-
-
-
-
 // ajax
-
 // user
 Route::post('/ajax/user-reload', [UserController::class, 'reload']);
 Route::post('/ajax/user-create', [UserController::class, 'store']);
@@ -100,6 +101,12 @@ Route::post('/ajax/qualification-reload', [qualificationController::class, 'relo
 Route::post('/ajax/qualification-view', [qualificationController::class, 'view'])->name('qualification_view');
 Route::post('/ajax/qualification-edit', [qualificationController::class, 'update'])->name('qualification_update');
 Route::post('/ajax/qualification-delete', [qualificationController::class, 'destroy'])->name('qualification_destroy');
+// disability
+Route::post('/ajax/disability-reload', [DisabilityController::class, 'reload'])->name('disability_reload');
+Route::post('/ajax/disability-view', [DisabilityController::class, 'view'])->name('disability_view');
+Route::post('/ajax/disability-show', [DisabilityController::class, 'show'])->name('disability_show');
 
-
-
+Route::post('/ajax/disability-validate_name', [DisabilityController::class, 'validate_name'])->name('disability_validate');
+Route::post('/ajax/disability-store', [DisabilityController::class, 'store'])->name('disability_store');
+Route::post('/ajax/disability-edit', [DisabilityController::class, 'update'])->name('disability_edit');
+Route::post('/ajax/disability-status', [DisabilityController::class, 'destroy'])->name('disability_status');

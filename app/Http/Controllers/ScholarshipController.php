@@ -162,7 +162,11 @@ class ScholarshipController extends Controller
     {
 
         $count = DB::table('scholarships')->count();
-        $scholarships = DB::table('scholarships')->get([
+        $scholarships = DB::table('scholarships')
+        ->offset($request['start'])
+        ->limit($request['length'])
+        ->get([
+            
             'id',
             'name',
             'description',
