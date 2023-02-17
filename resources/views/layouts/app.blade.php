@@ -27,6 +27,7 @@
     <link href="{{ asset('css/adminlte.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- AdminLTE -->
     <script src="{{ asset('js/adminlte.js') }}" defer></script>
 
@@ -170,12 +171,12 @@
                             </a>
                             <ul class="nav nav-treeview ">
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="/docs/3.2/javascript/layout.html" class="nav-link">
                                         <p>Courses</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('qualification.subject') }}" class="nav-link">
+                                    <a href="/docs/3.2/javascript/push-menu.html" class="nav-link">
                                         <p>Subject</p>
                                     </a>
                                 </li>
