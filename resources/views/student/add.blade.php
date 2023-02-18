@@ -55,7 +55,7 @@
 
     <div class="container main-container-steper">
 
-        <div class="card ">
+        <div class="">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Student List</a></li>
@@ -82,7 +82,7 @@
                 <div class="right-side">
                     <form method="POST" id="resumeGenForm" name="resumeGenForm"
                         action="{{ route('admin.student.update', [$students[0]->id]) }}" enctype="multipart/form-data">
-                       <input type="hidden" id="student_id" value={{$students[0]->id}}>
+                        <input type="hidden" id="student_id" value={{ $students[0]->id }}>
 
                         @method('PUT')
                         @csrf
@@ -192,84 +192,97 @@
                         </div>
                         <div class="main ">
 
-                        <div class="text">
-                            <h6>Learner/ Manpower Profile
-                            </h6>
-                        </div>
-                        <div class="row student-input">
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">First name*
-                                    </label>
-                                    <input type="text" name="first_name" class="form-control" id="exampleFormControlInput1" value="{{$data['first_name']}}"
-                                        placeholder="First name">
+                            <div class="text">
+                                <h6>Learner/ Manpower Profile
+                                </h6>
+                            </div>
+                            <div class="row student-input">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">First name*
+                                        </label>
+                                        <input type="text" name="first_name" class="form-control"
+                                            id="exampleFormControlInput1" value="{{ $data['first_name'] }}"
+                                            placeholder="First name">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Last name*
+                                        </label>
+                                        <input type="text" name="last_name" class="form-control"
+                                            id="exampleFormControlInput1" value="{{ $data['last_name'] }}"
+                                            placeholder="Last Name ">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Middle name
+                                        </label>
+                                        <input type="text" name="middle_name" class="form-control"
+                                            id="exampleFormControlInput1" value="{{ $data['middle_name'] }}"
+                                            placeholder="Middle name ">
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Extension
+                                        </label>
+                                        <input type="text" name="extension" class="form-control"
+                                            id="exampleFormControlInput1" value="{{ $data['extension'] }}"
+                                            placeholder="jr,sr,3rd ">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Last name*
-                                    </label>
-                                    <input type="text" name="last_name" class="form-control" id="exampleFormControlInput1" value="{{$data['last_name']}}"
-                                        placeholder="Last Name ">
+                            <div class="text">
+                                <h6>Complete Permanent Mailing Address
+                                </h6>
+                            </div>
+                            <div class="row student-input">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="disabledSelect" class="form-label">Region</label>
+                                        <input type="hidden" name="permanent_address_region" class="form-control"
+                                            id="permanent_address_region"
+                                            value="{{ $data['permanent_address_region'] }}">
+                                        <select id="region"></select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="disabledSelect" class="form-label">Province</label>
+                                        <input type="hidden" name="permanent_address_province" class="form-control"
+                                            id="permanent_address_province"
+                                            value="{{ $data['permanent_address_province'] }}">
+                                        <select id="province"></select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="disabledSelect" class="form-label">City/Municipality</label>
+                                        <input type="hidden" name="permanent_address_city" class="form-control"
+                                            id="permanent_address_city" value="{{ $data['permanent_address_city'] }}">
+                                        <select id="city"></select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Middle name
-                                    </label>
-                                    <input type="text" name="middle_name" class="form-control" id="exampleFormControlInput1" value="{{$data['middle_name']}}"
-                                        placeholder="Middle name ">
+                            <div class="row student-input">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="disabledSelect" class="form-label">Barangay</label>
+                                        <input type="hidden" name="permanent_address_barangay" class="form-control"
+                                            id="permanent_address_barangay"
+                                            value="{{ $data['permanent_address_barangay'] }}">
+                                        <select id="barangay"></select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Extension
-                                    </label>
-                                    <input type="text" name="extension" class="form-control" id="exampleFormControlInput1" value="{{$data['extension']}}"
-                                        placeholder="jr,sr,3rd ">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text">
-                            <h6>Complete Permanent Mailing Address
-                            </h6>
-                        </div>
-                        <div class="row student-input">
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="disabledSelect" class="form-label">Region</label>
-                                    <input type="hidden" name="permanent_address_region" class="form-control" id="permanent_address_region" value="{{$data['permanent_address_region']}}">
-                                    <select id="region" ></select>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="disabledSelect" class="form-label">Province</label>
-                                    <input type="hidden" name="permanent_address_province" class="form-control" id="permanent_address_province" value="{{$data['permanent_address_province']}}">
-                                   <select id="province"></select>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="disabledSelect" class="form-label">City/Municipality</label>
-                                    <input type="hidden" name="permanent_address_city" class="form-control" id="permanent_address_city" value="{{$data['permanent_address_city']}}">
-                                    <select id="city"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row student-input">
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="disabledSelect" class="form-label">Barangay</label>
-                                    <input type="hidden" name="permanent_address_barangay" class="form-control" id="permanent_address_barangay" value="{{$data['permanent_address_barangay']}}">
-                                    <select id="barangay"></select>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Number Street
-                                    </label>
-                                    <input type="text" name="permanent_address_street" class="form-control" id="permanent_address_street" value="{{$data['permanent_address_street']}}">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Number Street
+                                        </label>
+                                        <input type="text" name="permanent_address_street" class="form-control"
+                                            id="permanent_address_street"
+                                            value="{{ $data['permanent_address_street'] }}">
 
                                     </div>
                                 </div>
@@ -279,7 +292,8 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Contact number
                                         </label>
-                                        <input type="text" name="contact_number" class="form-control" id="exampleFormControlInput1" value="{{$data['contact_number']}}"
+                                        <input type="text" name="contact_number" class="form-control"
+                                            id="exampleFormControlInput1" value="{{ $data['contact_number'] }}"
                                             placeholder="Contact number">
                                     </div>
                                 </div>
@@ -287,7 +301,8 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Contact number 2
                                         </label>
-                                        <input type="text" name="contact_number_2" class="form-control" id="exampleFormControlInput1" value="{{$data['contact_number_2']}}"
+                                        <input type="text" name="contact_number_2" class="form-control"
+                                            id="exampleFormControlInput1" value="{{ $data['contact_number_2'] }}"
                                             placeholder="Contact number 2 ">
                                     </div>
                                 </div>
@@ -297,7 +312,9 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Email
                                         </label>
-                                        <input type="email" class="form-control" name="email" id="exampleFormControlInput1" value="{{$data['email']}}" placeholder="email@example.com">
+                                        <input type="email" class="form-control" name="email"
+                                            id="exampleFormControlInput1" value="{{ $data['email'] }}"
+                                            placeholder="email@example.com">
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -309,75 +326,119 @@
 
                             </div>
 
-                        <div class="buttons button_space">
-                            <button type="button" class="back_button">Back</button>
-                            <button type="button" class="next_button">Next Step</button>
+                            <div class="buttons button_space">
+                                <button type="button" class="back_button">Back</button>
+                                <button type="button" class="next_button">Next Step</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="main  ">
-                        <div class="text">
-                            <h6>Personal Information</h6>
-                        </div>
-                        <div class="row student-input">
-                            <div class="col-2">
-                                <div class="mb-3">
-                                    <label for="disabledSelect" class="form-label">Gender *</label>
-                                    <select name="gender" class="form-select" value="{{$data['gender']}}">
-                                        <option {{ $data["gender"] =='Male' ? 'selected' : '' }} value="Male">Male</option>
-                                        <option {{ $data["gender"] =='Female' ? 'selected' : '' }} value="Female">Female</option>
-                                    </select>
-                                </div>
+                        <div class="main  ">
+                            <div class="text">
+                                <h6>Personal Information</h6>
                             </div>
-                            <div class="col-3">
-                                <div class="mb-3">
-                                    <label for="disabledSelect" class="form-label">Civil Status </label>
-                                    <select name="civil_status" class="form-select" value="{{$data['civil_status']}}">
-                                        <option {{ $data["civil_status"] =='Single' ? 'selected' : '' }} value="Single">Single</option>
-                                        <option {{ $data["civil_status"] =='Married' ? 'selected' : '' }} value="Married">Married</option>
-                                        <option {{ $data["civil_status"] =='Widow/er' ? 'selected' : '' }} value="Widow/er">Widow/er</option>
-                                        <option {{ $data["civil_status"] =='Separated/Annulled' ? 'selected' : '' }} value="Separated/Annulled">Separated/Annulled</option>
-                                        <option {{ $data["civil_status"] =='Solo Parent' ? 'selected' : '' }} value="Solo Parent">Solo Parent</option> 
+                            <div class="row student-input">
+                                <div class="col-2">
+                                    <div class="mb-3">
+                                        <label for="disabledSelect" class="form-label">Gender *</label>
+                                        <select name="gender" class="form-select" value="{{ $data['gender'] }}">
+                                            <option {{ $data['gender'] == 'Male' ? 'selected' : '' }} value="Male">Male
+                                            </option>
+                                            <option {{ $data['gender'] == 'Female' ? 'selected' : '' }} value="Female">
+                                                Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="mb-3">
+                                        <label for="disabledSelect" class="form-label">Civil Status </label>
+                                        <select name="civil_status" class="form-select"
+                                            value="{{ $data['civil_status'] }}">
+                                            <option {{ $data['civil_status'] == 'Single' ? 'selected' : '' }}
+                                                value="Single">Single</option>
+                                            <option {{ $data['civil_status'] == 'Married' ? 'selected' : '' }}
+                                                value="Married">Married</option>
+                                            <option {{ $data['civil_status'] == 'Widow/er' ? 'selected' : '' }}
+                                                value="Widow/er">Widow/er</option>
+                                            <option {{ $data['civil_status'] == 'Separated/Annulled' ? 'selected' : '' }}
+                                                value="Separated/Annulled">Separated/Annulled</option>
+                                            <option {{ $data['civil_status'] == 'Solo Parent' ? 'selected' : '' }}
+                                                value="Solo Parent">Solo Parent</option>
 
-                                    </select>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="mb-3">
-                                    <label for="disabledSelect" class="form-label">Educational Attainment Before the
-                                        Training (Trainee)</label>
-                                    <select name="educational_attainment" class="form-select">
-                                        <option {{ $data["educational_attainment"] =='No Grade Completed' ? 'selected' : '' }} value="No Grade Completed">No Grade Completed</option>
-                                        <option {{ $data["educational_attainment"] =='Elementary Graduate' ? 'selected' : '' }} value="Elementary Graduate">Elementary Graduate</option>
-                                        <option {{ $data["educational_attainment"] =='Elementary Graduate' ? 'selected' : '' }} value="Elementary Graduate">Elementary Graduate</option>
-                                        <option {{ $data["educational_attainment"] =='Pre-School(Nursery/Kinder/Prep)' ? 'selected' : '' }} value="Pre-School(Nursery/Kinder/Prep)">Pre-School(Nursery/Kinder/Prep)</option>
-                                        <option {{ $data["educational_attainment"] =='Post Secondary Undergraduate' ? 'selected' : '' }} value="Post Secondary Undergraduate">Post Secondary Undergraduate</option>
-                                        <option {{ $data["educational_attainment"] =='Post Secondary graduate' ? 'selected' : '' }} value="Post Secondary graduate">Post Secondary graduate</option>
-                                        <option {{ $data["educational_attainment"] =='High School Undergraduate' ? 'selected' : '' }} value="High School Undergraduate">High School Undergraduate</option>
-                                        <option {{ $data["educational_attainment"] =='College Undergraduate' ? 'selected' : '' }} value="College Undergraduate">College Undergraduate</option>
-                                        <option {{ $data["educational_attainment"] =='Senior High Graduate' ? 'selected' : '' }} value="Senior High Graduate">Senior High Graduate</option>
-                                        <option {{ $data["educational_attainment"] =='High School Graduate' ? 'selected' : '' }} value="High School Graduate">High School Graduate</option>
-                                        <option {{ $data["educational_attainment"] =='College Gradaute or Higher' ? 'selected' : '' }} value="College Gradaute or Higher">College Gradaute or Higher</option>
-                                        <option {{ $data["educational_attainment"] =='Senior High Graduate' ? 'selected' : '' }} value="Senior High Graduate">Senior High Graduate</option>
+                                <div class="col-4">
+                                    <div class="mb-3">
+                                        <label for="disabledSelect" class="form-label">Educational Attainment Before the
+                                            Training (Trainee)</label>
+                                        <select name="educational_attainment" class="form-select">
+                                            <option
+                                                {{ $data['educational_attainment'] == 'No Grade Completed' ? 'selected' : '' }}
+                                                value="No Grade Completed">No Grade Completed</option>
+                                            <option
+                                                {{ $data['educational_attainment'] == 'Elementary Graduate' ? 'selected' : '' }}
+                                                value="Elementary Graduate">Elementary Graduate</option>
+                                            <option
+                                                {{ $data['educational_attainment'] == 'Elementary Graduate' ? 'selected' : '' }}
+                                                value="Elementary Graduate">Elementary Graduate</option>
+                                            <option
+                                                {{ $data['educational_attainment'] == 'Pre-School(Nursery/Kinder/Prep)' ? 'selected' : '' }}
+                                                value="Pre-School(Nursery/Kinder/Prep)">Pre-School(Nursery/Kinder/Prep)
+                                            </option>
+                                            <option
+                                                {{ $data['educational_attainment'] == 'Post Secondary Undergraduate' ? 'selected' : '' }}
+                                                value="Post Secondary Undergraduate">Post Secondary Undergraduate</option>
+                                            <option
+                                                {{ $data['educational_attainment'] == 'Post Secondary graduate' ? 'selected' : '' }}
+                                                value="Post Secondary graduate">Post Secondary graduate</option>
+                                            <option
+                                                {{ $data['educational_attainment'] == 'High School Undergraduate' ? 'selected' : '' }}
+                                                value="High School Undergraduate">High School Undergraduate</option>
+                                            <option
+                                                {{ $data['educational_attainment'] == 'College Undergraduate' ? 'selected' : '' }}
+                                                value="College Undergraduate">College Undergraduate</option>
+                                            <option
+                                                {{ $data['educational_attainment'] == 'Senior High Graduate' ? 'selected' : '' }}
+                                                value="Senior High Graduate">Senior High Graduate</option>
+                                            <option
+                                                {{ $data['educational_attainment'] == 'High School Graduate' ? 'selected' : '' }}
+                                                value="High School Graduate">High School Graduate</option>
+                                            <option
+                                                {{ $data['educational_attainment'] == 'College Gradaute or Higher' ? 'selected' : '' }}
+                                                value="College Gradaute or Higher">College Gradaute or Higher</option>
+                                            <option
+                                                {{ $data['educational_attainment'] == 'Senior High Graduate' ? 'selected' : '' }}
+                                                value="Senior High Graduate">Senior High Graduate</option>
 
-                                    </select>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label">Religion
-                                    </label>
-                                    <select name="religion" class="form-select">
-                                        <option {{ $data["religion"] =='None' ? 'selected' : '' }} value="None">None</option>
-                                        <option {{ $data["religion"] =='Roman Catholic' ? 'selected' : '' }} value="Roman Catholic">Roman Catholic</option>
-                                        <option {{ $data["religion"] =='Iglesia Ni Cristo' ? 'selected' : '' }} value="Iglesia Ni Cristo">Iglesia Ni Cristo</option>
-                                        <option {{ $data["religion"] =='Evangelicals' ? 'selected' : '' }} value="Evangelicals">Evangelicals</option>
-                                        <option {{ $data["religion"] =='Protestant' ? 'selected' : '' }} value="Protestant">Protestant</option>
-                                        <option {{ $data["religion"] =='Aglipayan' ? 'selected' : '' }} value="Aglipayan">Aglipayan</option>
-                                        <option {{ $data["religion"] =='Seventh-day Adventist' ? 'selected' : '' }} value="Seventh-day Adventist">Seventh-day Adventist</option>
-                                        <option {{ $data["religion"] =='Bible Baptist Church' ? 'selected' : '' }} value="Bible Baptist Church">Bible Baptist Church</option>
-                                        <option {{ $data["religion"] =='Jehovahs Witnesses' ? 'selected' : '' }} value="Jehovahs Witnesses">Jehovahs Witnesses</option>
-                                        <option {{ $data["religion"] =='Islam' ? 'selected' : '' }} value="Islam">Islam</option>
-                                    </select>
+                                <div class="col-3">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Religion
+                                        </label>
+                                        <select name="religion" class="form-select">
+                                            <option {{ $data['religion'] == 'None' ? 'selected' : '' }} value="None">
+                                                None
+                                            </option>
+                                            <option {{ $data['religion'] == 'Roman Catholic' ? 'selected' : '' }}
+                                                value="Roman Catholic">Roman Catholic</option>
+                                            <option {{ $data['religion'] == 'Iglesia Ni Cristo' ? 'selected' : '' }}
+                                                value="Iglesia Ni Cristo">Iglesia Ni Cristo</option>
+                                            <option {{ $data['religion'] == 'Evangelicals' ? 'selected' : '' }}
+                                                value="Evangelicals">Evangelicals</option>
+                                            <option {{ $data['religion'] == 'Protestant' ? 'selected' : '' }}
+                                                value="Protestant">Protestant</option>
+                                            <option {{ $data['religion'] == 'Aglipayan' ? 'selected' : '' }}
+                                                value="Aglipayan">Aglipayan</option>
+                                            <option {{ $data['religion'] == 'Seventh-day Adventist' ? 'selected' : '' }}
+                                                value="Seventh-day Adventist">Seventh-day Adventist</option>
+                                            <option {{ $data['religion'] == 'Bible Baptist Church' ? 'selected' : '' }}
+                                                value="Bible Baptist Church">Bible Baptist Church</option>
+                                            <option {{ $data['religion'] == 'Jehovahs Witnesses' ? 'selected' : '' }}
+                                                value="Jehovahs Witnesses">Jehovahs Witnesses</option>
+                                            <option {{ $data['religion'] == 'Islam' ? 'selected' : '' }} value="Islam">
+                                                Islam</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -388,7 +449,8 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         </label>
-                                        <input type="text" name="complete_address" class="form-control" id="complete_address" value="{{$data['complete_address']}}"
+                                        <input type="text" name="complete_address" class="form-control"
+                                            id="complete_address" value="{{ $data['complete_address'] }}"
                                             placeholder="Complete Address">
                                     </div>
                                 </div>
@@ -401,7 +463,8 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Nationality
                                         </label>
-                                        <input type="text" name="nationality" class="form-control" id="exampleFormControlInput1" value="{{$data['nationality']}}"
+                                        <input type="text" name="nationality" class="form-control"
+                                            id="exampleFormControlInput1" value="{{ $data['nationality'] }}"
                                             placeholder="Nationality
                                         ">
                                     </div>
@@ -412,8 +475,10 @@
                                             training)
                                             * </label>
                                         <select name="employment_status" class="form-select">
-                                            <option {{ $data["employment_status"] =='Employed' ? 'selected' : '' }} value="Employed">Employed</option>
-                                            <option {{ $data["employment_status"] =='Unemployed' ? 'selected' : '' }} value="Unemployed">Unemployed</option>
+                                            <option {{ $data['employment_status'] == 'Employed' ? 'selected' : '' }}
+                                                value="Employed">Employed</option>
+                                            <option {{ $data['employment_status'] == 'Unemployed' ? 'selected' : '' }}
+                                                value="Unemployed">Unemployed</option>
 
 
                                         </select>
@@ -423,7 +488,8 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Date of Employment
                                         </label>
-                                        <input type="date" class="form-control" name="date_of_employment" value="{{$data['date_of_employment']}}">
+                                        <input type="date" class="form-control" name="date_of_employment"
+                                            value="{{ $data['date_of_employment'] }}">
 
                                     </div>
                                 </div>
@@ -431,7 +497,8 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Name of employer
                                         </label>
-                                        <input type="text" class="form-control" name="name_of_employer" value="{{$data['name_of_employer']}}" placeholder="Name of employer">
+                                        <input type="text" class="form-control" name="name_of_employer"
+                                            value="{{ $data['name_of_employer'] }}" placeholder="Name of employer">
                                     </div>
                                 </div>
                             </div>
@@ -440,14 +507,17 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Employment address
                                         </label>
-                                        <input type="text" class="form-control" id="employment_address" name="employment_address" value="{{$data['employment_address']}}" placeholder="Employment address">
+                                        <input type="text" class="form-control" id="employment_address"
+                                            name="employment_address" value="{{ $data['employment_address'] }}"
+                                            placeholder="Employment address">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Salary
                                             * </label>
-                                            <input type="text" class="form-control" name="salary" value="{{$data['salary']}}" placeholder="Salary">
+                                        <input type="text" class="form-control" name="salary"
+                                            value="{{ $data['salary'] }}" placeholder="Salary">
 
                                     </div>
                                 </div>
@@ -455,7 +525,8 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Date of Birth
                                         </label>
-                                        <input type="date" class="form-control" name="date_of_birth" value="{{$data['date_of_birth']}}">
+                                        <input type="date" class="form-control" name="date_of_birth"
+                                            value="{{ $data['date_of_birth'] }}">
                                     </div>
                                 </div>
                             </div>
@@ -474,28 +545,32 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">First name*
                                         </label>
-                                        <input type="text" class="form-control" name="parent_first_name" value="{{$data['parent_first_name']}}" placeholder="First name">
+                                        <input type="text" class="form-control" name="parent_first_name"
+                                            value="{{ $data['parent_first_name'] }}" placeholder="First name">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Last name*
                                         </label>
-                                        <input type="text" class="form-control" name="parent_last_name" value="{{$data['parent_last_name']}}" placeholder="Last Name">
+                                        <input type="text" class="form-control" name="parent_last_name"
+                                            value="{{ $data['parent_last_name'] }}" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Middle name
                                         </label>
-                                        <input type="text" class="form-control" name="parent_middle_name" value="{{$data['parent_middle_name']}}" placeholder="Middle name">
+                                        <input type="text" class="form-control" name="parent_middle_name"
+                                            value="{{ $data['parent_middle_name'] }}" placeholder="Middle name">
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Extension
                                         </label>
-                                        <input type="text" class="form-control" name="parent_extension" value="{{$data['parent_extension']}}" placeholder="jr,sr,3rd">
+                                        <input type="text" class="form-control" name="parent_extension"
+                                            value="{{ $data['parent_extension'] }}" placeholder="jr,sr,3rd">
                                     </div>
                                 </div>
                             </div>
@@ -504,14 +579,16 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Relation (to Guardian)*
                                         </label>
-                                        <input type="text" class="form-control" name="parent_relation" value="{{$data['parent_relation']}}" placeholder="Relation (to Guardian)">
+                                        <input type="text" class="form-control" name="parent_relation"
+                                            value="{{ $data['parent_relation'] }}" placeholder="Relation (to Guardian)">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Date of Birth
                                         </label>
-                                        <input type="date" class="form-control" name="parent_dob" value="{{$data['parent_dob']}}">
+                                        <input type="date" class="form-control" name="parent_dob"
+                                            value="{{ $data['parent_dob'] }}">
                                     </div>
                                 </div>
                             </div>
@@ -523,7 +600,8 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         </label>
-                                        <input type="text" name="parent_address" class="form-control" id="parent_address" value="{{$data['parent_address']}}"
+                                        <input type="text" name="parent_address" class="form-control"
+                                            id="parent_address" value="{{ $data['parent_address'] }}"
                                             placeholder="Complete Address">
                                     </div>
                                 </div>
@@ -533,14 +611,16 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Email
                                         </label>
-                                        <input type="email" class="form-control" name="parent_email" value="{{$data['parent_email']}}" placeholder="email@example.com ">
+                                        <input type="email" class="form-control" name="parent_email"
+                                            value="{{ $data['parent_email'] }}" placeholder="email@example.com ">
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Contact number
                                         </label>
-                                        <input type="text" class="form-control" name="parent_contact" value="{{$data['parent_contact']}}" placeholder="Contact number">
+                                        <input type="text" class="form-control" name="parent_contact"
+                                            value="{{ $data['parent_contact'] }}" placeholder="Contact number">
                                     </div>
                                 </div>
                             </div>
@@ -559,28 +639,32 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">First name*
                                         </label>
-                                        <input type="text" class="form-control" name="benefitiary_first_name" value="{{$data['benefitiary_first_name']}}" placeholder="First name">
+                                        <input type="text" class="form-control" name="benefitiary_first_name"
+                                            value="{{ $data['benefitiary_first_name'] }}" placeholder="First name">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Last name*
                                         </label>
-                                        <input type="text" class="form-control" name="benefitiary_last_name" value="{{$data['benefitiary_last_name']}}" placeholder="Last Name">
+                                        <input type="text" class="form-control" name="benefitiary_last_name"
+                                            value="{{ $data['benefitiary_last_name'] }}" placeholder="Last Name">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Middle name
                                         </label>
-                                        <input type="text" class="form-control" name="benefitiary_middle_name" value="{{$data['benefitiary_middle_name']}}" placeholder="Middle name">
+                                        <input type="text" class="form-control" name="benefitiary_middle_name"
+                                            value="{{ $data['benefitiary_middle_name'] }}" placeholder="Middle name">
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Extension
                                         </label>
-                                        <input type="text" class="form-control" name="benefitiary_extension" value="{{$data['benefitiary_extension']}}" placeholder="jr,sr,3rd">
+                                        <input type="text" class="form-control" name="benefitiary_extension"
+                                            value="{{ $data['benefitiary_extension'] }}" placeholder="jr,sr,3rd">
                                     </div>
                                 </div>
                             </div>
@@ -589,14 +673,17 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Relation (to Guardian)*
                                         </label>
-                                        <input type="text" class="form-control" name="benefitiary_relation" value="{{$data['benefitiary_relation']}}" placeholder="Relation (to Benefitiary)">
+                                        <input type="text" class="form-control" name="benefitiary_relation"
+                                            value="{{ $data['benefitiary_relation'] }}"
+                                            placeholder="Relation (to Benefitiary)">
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Date of Birth
                                         </label>
-                                        <input type="date" class="form-control" name="benefitiary_dob" value="{{$data['benefitiary_dob']}}">
+                                        <input type="date" class="form-control" name="benefitiary_dob"
+                                            value="{{ $data['benefitiary_dob'] }}">
                                     </div>
                                 </div>
                             </div>
@@ -608,7 +695,8 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         </label>
-                                        <input type="text" name="benefitiary_address" class="form-control" id="benefitiary_address" value="{{$data['benefitiary_address']}}"
+                                        <input type="text" name="benefitiary_address" class="form-control"
+                                            id="benefitiary_address" value="{{ $data['benefitiary_address'] }}"
                                             placeholder="Complete Address">
                                     </div>
                                 </div>
@@ -618,14 +706,16 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Email
                                         </label>
-                                        <input type="email" class="form-control" name="benefitiary_email" value="{{$data['benefitiary_email']}} "placeholder="email@example.com ">
+                                        <input type="email" class="form-control" name="benefitiary_email"
+                                            value="{{ $data['benefitiary_email'] }} "placeholder="email@example.com ">
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Contact number
                                         </label>
-                                        <input type="text" class="form-control" name="benefitiary_contact" value="{{$data['benefitiary_dob']}}" placeholder="Contact number">
+                                        <input type="text" class="form-control" name="benefitiary_contact"
+                                            value="{{ $data['benefitiary_dob'] }}" placeholder="Contact number">
                                     </div>
                                 </div>
                             </div>
@@ -660,8 +750,8 @@
                                 </div>
                                 <div class="student-input mt-3 d-none" id="disabilityTeaxtarea">
                                     <label for="floatingTextarea2">Please specify:</label>
-                                    <textarea class="form-control" name="disability_others" placeholder="Write the discription here ..." id="disability_others"
-                                        style="height: 100px" >{{$data['disability_others']}}</textarea>
+                                    <textarea class="form-control" name="disability_others" placeholder="Write the discription here ..."
+                                        id="disability_others" style="height: 100px">{{ $data['disability_others'] }}</textarea>
                                 </div>
                             </div>
                             <div class="row student-input">
@@ -669,9 +759,13 @@
                                     <div class="mb-3">
                                         <label for="disabledSelect" class="form-label">Cause of Disability:</label>
                                         <select id="disabledSelect" name="disability_cause" class="form-select">
-                                            <option {{ $data["disability_cause"] =='Congenital/Inborn' ? 'selected' : '' }} value="Congenital/Inborn">Congenital/Inborn</option>
-                                            <option {{ $data["disability_cause"] =='Illness' ? 'selected' : '' }} value="Illness">Illness</option>
-                                            <option {{ $data["disability_cause"] =='Injury' ? 'selected' : '' }} value="Injury">Injury</option>
+                                            <option
+                                                {{ $data['disability_cause'] == 'Congenital/Inborn' ? 'selected' : '' }}
+                                                value="Congenital/Inborn">Congenital/Inborn</option>
+                                            <option {{ $data['disability_cause'] == 'Illness' ? 'selected' : '' }}
+                                                value="Illness">Illness</option>
+                                            <option {{ $data['disability_cause'] == 'Injury' ? 'selected' : '' }}
+                                                value="Injury">Injury</option>
 
                                         </select>
                                     </div>
@@ -695,13 +789,15 @@
                                     </label>
                                     <div class="mb-3  border-bottom">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input qualification_type" type="radio" name="qualification_type"
-                                                id="inlineRadio1" value="1" {{ $data["qualification_type"] =='1' ? 'checked' : '' }}>
+                                            <input class="form-check-input qualification_type" type="radio"
+                                                name="qualification_type" id="inlineRadio1" value="1"
+                                                {{ $data['qualification_type'] == '1' ? 'checked' : '' }}>
                                             <label class="form-check-label p-0" for="inlineRadio1">Long term</label>
                                         </div>
                                         <div class="form-check form-check-inline qualification_type">
-                                            <input class="form-check-input" type="radio" name="qualification_type" 
-                                                id="inlineRadio2" value="2" {{ $data["qualification_type"] =='2' ? 'checked' : '' }}>
+                                            <input class="form-check-input" type="radio" name="qualification_type"
+                                                id="inlineRadio2" value="2"
+                                                {{ $data['qualification_type'] == '2' ? 'checked' : '' }}>
                                             <label class="form-check-label p-0" for="inlineRadio2">Short term</label>
                                         </div>
                                     </div>
@@ -713,11 +809,14 @@
                                             <label for="disabledSelect" class="form-label">Name of Course/Qualification:
                                             </label>
                                             <select id="courses" name="qualification" class="form-select">
-                                            <option >Select Course</option>
+                                                <option>Select Course</option>
 
-                                            @foreach($qualifications as $key => $qualification)
-                                                <option {{ $data["qualification"] ==$qualification->id ? 'selected' : '' }}  value="{{$qualification->id}}">{{$qualification->name}}</option>    
-                                            @endforeach
+                                                @foreach ($qualifications as $key => $qualification)
+                                                    <option
+                                                        {{ $data['qualification'] == $qualification->id ? 'selected' : '' }}
+                                                        value="{{ $qualification->id }}">{{ $qualification->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -725,18 +824,25 @@
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1" class="form-label">School Year
                                             </label>
-                                            <input type="text" class="form-control" name="qualification_school_year" value="{{$data['qualification_school_year']}}" id="exampleFormControlInput1"
+                                            <input type="text" class="form-control" name="qualification_school_year"
+                                                value="{{ $data['qualification_school_year'] }}"
+                                                id="exampleFormControlInput1"
                                                 placeholder="Contact number
                                             ">
                                         </div>
                                     </div>
-                                    <div class="col {{ $data["qualification_type"] =='1' ? 'd-none' : '' }}" id="semester">
+                                    <div class="col {{ $data['qualification_type'] == '1' ? 'd-none' : '' }}"
+                                        id="semester">
                                         <div class="mb-3">
                                             <label for="disabledSelect" class="form-label">Semester
                                             </label>
                                             <select name="qualification_semester" class="form-select">
-                                                <option {{ $data["qualification_semester"] == '1st Sem' ? 'selected' : '' }} value="1st Sem">1st Sem</option>
-                                                <option {{ $data["qualification_semester"] == '2nd Sem' ? 'selected' : '' }} value="2nd Sem">2nd Sem</option>
+                                                <option
+                                                    {{ $data['qualification_semester'] == '1st Sem' ? 'selected' : '' }}
+                                                    value="1st Sem">1st Sem</option>
+                                                <option
+                                                    {{ $data['qualification_semester'] == '2nd Sem' ? 'selected' : '' }}
+                                                    value="2nd Sem">2nd Sem</option>
                                             </select>
                                         </div>
                                     </div>
@@ -744,8 +850,8 @@
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1" class="form-label">Batch
                                             </label>
-                                            <input type="text" class="form-control" name="qualification_batch" value="{{$data['qualification_batch']}}"
-                                                placeholder="Batch number">
+                                            <input type="text" class="form-control" name="qualification_batch"
+                                                value="{{ $data['qualification_batch'] }}" placeholder="Batch number">
                                         </div>
                                     </div>
                                 </div>
@@ -754,7 +860,9 @@
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1" class="form-label">Training Day Duration
                                             </label>
-                                            <input type="text" class="form-control" name="qualification_training_day_duration" value="{{$data['qualification_training_day_duration']}}"
+                                            <input type="text" class="form-control"
+                                                name="qualification_training_day_duration"
+                                                value="{{ $data['qualification_training_day_duration'] }}"
                                                 placeholder="Training Day Duration">
                                         </div>
                                     </div>
@@ -763,7 +871,9 @@
                                             <label for="exampleFormControlInput1" class="form-label">Training Hours
                                                 Duration
                                             </label>
-                                            <input type="text" class="form-control" name="qualification_training_hours_duration" value="{{$data['qualification_training_hours_duration']}}"
+                                            <input type="text" class="form-control"
+                                                name="qualification_training_hours_duration"
+                                                value="{{ $data['qualification_training_hours_duration'] }}"
                                                 placeholder="Training Hours Duration">
                                         </div>
                                     </div>
@@ -792,9 +902,11 @@
                                             <label for="disabledSelect" class="form-label">Type of Scholarship
                                             </label>
                                             <select name="scholarship" class="form-select">
-                                            @foreach($scholarships as $key => $scholarship)
-                                                <option {{ $data["scholarship"] ==$scholarship->id ? 'selected' : '' }}  value="{{$scholarship->id}}">{{$scholarship->name}}</option>    
-                                            @endforeach
+                                                @foreach ($scholarships as $key => $scholarship)
+                                                    <option
+                                                        {{ $data['scholarship'] == $scholarship->id ? 'selected' : '' }}
+                                                        value="{{ $scholarship->id }}">{{ $scholarship->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -813,191 +925,232 @@
                             </div>
                         </div>
                         <div class="main ">
-                            <div class="text">
-                                <h6>Other training
-                                </h6>
-                            </div>
-                            <div class="other-training border rounded py-3 px-2 pr-5 mb-4">
-                                <div class="row student-input">
-                                    <div class="col-4">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Qualification
-                                            </label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                                placeholder="Qualification
-                                            ">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                        data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                                        aria-selected="true">
+                                        <h6>Other training
+                                        </h6>
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                        data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
+                                        aria-selected="false">
+                                        <h6>License Examination Passed:
+                                        </h6>
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                        data-bs-target="#contact" type="button" role="tab" aria-controls="contact"
+                                        aria-selected="false">
+                                        <h6>Competency Assessment Passed
+                                        </h6>
+                                    </button>
+                                </li>
+                            </ul>
+                            <div class="tab-content mt-3" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                    aria-labelledby="home-tab">
+                                    <div class="other-training border rounded py-3 px-2 pr-5 mb-4">
+                                        <div class="row student-input">
+                                            <div class="col-4">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Qualification
+                                                    </label>
+                                                    <input type="text" class="form-control"
+                                                        id="exampleFormControlInput1"
+                                                        placeholder="Qualification
+                                                    ">
+                                                </div>
+                                            </div>
+                                            <div class="col-5">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Training
+                                                        venue
+                                                    </label>
+                                                    <input type="text" class="form-control" id="training_venue"
+                                                        placeholder="Training venue
+                                                    ">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Start date
+                                                    </label>
+                                                    <input type="date" class="form-control"
+                                                        id="exampleFormControlInput1">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">End date
+                                                    </label>
+                                                    <input type="date" class="form-control"
+                                                        id="exampleFormControlInput1"
+                                                        placeholder="End date
+                                                    ">
+                                                </div>
+                                            </div>
+                                            <div class="col-1">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">No# hours
+                                                    </label>
+                                                    <input type="number" class="form-control"
+                                                        id="exampleFormControlInput1">
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Conducted by
+                                                    </label>
+                                                    <input type="text" class="form-control"
+                                                        id="exampleFormControlInput1"
+                                                        placeholder="Conducted by
+                                                    ">
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-5">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Training venue
-                                            </label>
-                                            <input type="text" class="form-control" id="training_venue"
-                                                placeholder="Training venue
-                                            ">
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Start date
-                                            </label>
-                                            <input type="date" class="form-control" id="exampleFormControlInput1">
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">End date
-                                            </label>
-                                            <input type="date" class="form-control" id="exampleFormControlInput1"
-                                                placeholder="End date
-                                            ">
-                                        </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">No# hours
-                                            </label>
-                                            <input type="number" class="form-control" id="exampleFormControlInput1">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Conducted by
-                                            </label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                                placeholder="Conducted by
-                                            ">
-                                        </div>
+                                        <button class="btn btn-success rounded-circle add-tile"><i
+                                                class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <button class="btn btn-success rounded-circle add-tile"><i
-                                        class="fa-solid fa-plus"></i></button>
-                            </div>
+                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                    <div class="other-training border rounded py-3 px-2 pr-5 mb-4">
+                                        <div class="row student-input">
+                                            <div class="col-4">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Title
+                                                    </label>
+                                                    <input type="text" class="form-control"
+                                                        id="exampleFormControlInput1"
+                                                        placeholder="Qualification
+                                                    ">
+                                                </div>
+                                            </div>
+                                            <div class="col-5">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Examination
+                                                        venue
+                                                    </label>
+                                                    <input type="text" class="form-control" id="examination_venue"
+                                                        placeholder="Training venue
+                                                    ">
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Year taken
+                                                    </label>
+                                                    <input type="date" class="form-control"
+                                                        id="exampleFormControlInput1">
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Rating
+                                                    </label>
+                                                    <input type="text" class="form-control"
+                                                        id="exampleFormControlInput1"
+                                                        placeholder="Rating
+                                                    ">
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Remarks
+                                                    </label>
+                                                    <input type="text" class="form-control"
+                                                        id="exampleFormControlInput1"
+                                                        placeholder="Remarks
+                                                    ">
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Expired date
+                                                    </label>
+                                                    <input type="date" class="form-control"
+                                                        id="exampleFormControlInput1">
+                                                </div>
+                                            </div>
 
-                            <div class="text">
-                                <h6>License Examination Passed:
-                                </h6>
-                            </div>
-                            <div class="other-training border rounded py-3 px-2 pr-5 mb-4">
-                                <div class="row student-input">
-                                    <div class="col-4">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Title
-                                            </label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                                placeholder="Qualification
-                                            ">
                                         </div>
+                                        <button class="btn btn-success rounded-circle add-tile"><i
+                                                class="fa-solid fa-plus"></i></button>
                                     </div>
-                                    <div class="col-5">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Examination venue
-                                            </label>
-                                            <input type="text" class="form-control" id="examination_venue"
-                                                placeholder="Training venue
-                                            ">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Year taken
-                                            </label>
-                                            <input type="date" class="form-control" id="exampleFormControlInput1">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Rating
-                                            </label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                                placeholder="Rating
-                                            ">
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Remarks
-                                            </label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                                placeholder="Remarks
-                                            ">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Expired date
-                                            </label>
-                                            <input type="date" class="form-control" id="exampleFormControlInput1">
-                                        </div>
-                                    </div>
-
                                 </div>
-                                <button class="btn btn-success rounded-circle add-tile"><i
-                                        class="fa-solid fa-plus"></i></button>
-                            </div>
+                                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                    <div class="other-training border rounded py-3 px-2 pr-5 mb-4">
+                                        <div class="row student-input">
+                                            <div class="col-3">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Qualification
+                                                    </label>
+                                                    <input type="text" class="form-control"
+                                                        id="exampleFormControlInput1"
+                                                        placeholder="Qualification
+                                                    ">
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Qualification
+                                                        level
+                                                    </label>
+                                                    <input type="text" class="form-control"
+                                                        id="exampleFormControlInput1"
+                                                        placeholder="Qualification level
+                                                    ">
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Industry
+                                                        Inspector
+                                                    </label>
+                                                    <input type="text" class="form-control"
+                                                        id="exampleFormControlInput1"
+                                                        placeholder="Industry Inspector
+                                                    ">
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Certificate
+                                                        Number
+                                                    </label>
+                                                    <input type="text" class="form-control"
+                                                        id="exampleFormControlInput1"
+                                                        placeholder="Certificate Number
+                                                    ">
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Date issued
+                                                    </label>
+                                                    <input type="date" class="form-control"
+                                                        id="exampleFormControlInput1">
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="">
+                                                    <label for="exampleFormControlInput1" class="form-label">Expired date
+                                                    </label>
+                                                    <input type="date" class="form-control"
+                                                        id="exampleFormControlInput1">
+                                                </div>
+                                            </div>
 
-                            <div class="text">
-                                <h6>Competency Assessment Passed
-                                </h6>
-                            </div>
-                            <div class="other-training border rounded py-3 px-2 pr-5 mb-4">
-                                <div class="row student-input">
-                                    <div class="col-3">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Qualification
-                                            </label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                                placeholder="Qualification
-                                            ">
                                         </div>
+                                        <button class="btn btn-success rounded-circle add-tile"><i
+                                                class="fa-solid fa-plus"></i></button>
                                     </div>
-                                    <div class="col-3">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Qualification level
-                                            </label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                                placeholder="Qualification level
-                                            ">
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Industry Inspector
-                                            </label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                                placeholder="Industry Inspector
-                                            ">
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Certificate Number
-                                            </label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                                placeholder="Certificate Number
-                                            ">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Date issued
-                                            </label>
-                                            <input type="date" class="form-control" id="exampleFormControlInput1">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="">
-                                            <label for="exampleFormControlInput1" class="form-label">Expired date
-                                            </label>
-                                            <input type="date" class="form-control" id="exampleFormControlInput1">
-                                        </div>
-                                    </div>
-
                                 </div>
-                                <button class="btn btn-success rounded-circle add-tile"><i
-                                        class="fa-solid fa-plus"></i></button>
                             </div>
-
                             <div class="buttons button_space">
                                 <button type="button" class="back_button">Back</button>
 
@@ -1185,133 +1338,132 @@
             }
 
 
-            const sampleData = [
-            {
-                'label': 'Student',
-                'id': '1'
-            },
-            {
-                'label': 'Out of School Youth',
-                'id': '2'
-            },
-            {
-                'label': 'Solo Parent',
-                'id': '3'
-            },
-            {
-                'label': 'Solo Parents Children',
-                'id': '1'
-            },
-            {
-                'label': 'Senior Citizen',
-                'id': '2'
-            },
-            {
-                'label': 'TVET Trainers',
-                'id': '3'
-            },{
-                'label': 'Displaced HEIs Teaching Personnel',
-                'id': '1'
-            },
-            {
-                'label': 'Persons with Disabilities',
-                'id': '2'
-            },
-            {
-                'label': 'Currently Employed Workers',
-                'id': '3'
-            },{
-                'label': 'Employees with Contractual/ Job order Status',
-                'id': '1'
-            },
-            {
-                'label': 'Urban and Rural Poor',
-                'id': '2'
-            },
-            {
-                'label': 'Informal Workers',
-                'id': '3'
-            },{
-                'label': 'Industry Workers',
-                'id': '1'
-            },
-            {
-                'label': 'Cooperatives',
-                'id': '2'
-            },
-            {
-                'label': 'Family Enterprises',
-                'id': '3'
-            },{
-                'label': 'Family Members of Microenterpreneurs',
-                'id': '1'
-            },
-            {
-                'label': 'Micro Enterpreneurs',
-                'id': '2'
-            },
-            {
-                'label': 'Farmers and fisherman',
-                'id': '3'
-            },{
-                'label': 'Family Members of Farmers and Fisherman',
-                'id': '1'
-            },
-            {
-                'label': 'Community Training and Employment Coordinator',
-                'id': '2'
-            },
-            {
-                'label': 'Overseas Filipino Workers (OFW) Dependents',
-                'id': '3'
-            },{
-                'label': 'Returning/Repatriated Overseas Filipino',
-                'id': '1'
-            },
-            {
-                'label': 'Indigenous People and Cultural Communities',
-                'id': '2'
-            },
-            {
-                'label': 'Disadvantage Woman',
-                'id': '3'
-            },{
-                'label': 'Victims of Natural Disasters and Calamities',
-                'id': '1'
-            },
-            {
-                'label': 'Victims or Survivor of Human Trafficking',
-                'id': '2'
-            },
-            {
-                'label': 'Drug Dependent Surrenderers',
-                'id': '3'
-            },{
-                'label': 'Rebel Returnees or Decommissioned Combanants',
-                'id': '1'
-            },
-            {
-                'label': 'Inmates and Detainees',
-                'id': '2'
-            },
-            {
-                'label': 'Family Members of Inmates and Detainees',
-                'id': '3'
-            },{
-                'label': 'Uniformed Personnel',
-                'id': '1'
-            },
-            {
-                'label': 'Wounded-in Action AFP and PNP-Personnel',
-                'id': '2'
-            },
-            {
-                'label': 'Family Members of AFP and PNP Killed-and Wounded in Action',
-                'id': '3'
-            }, {
-                'label': 'Tesda Alumni',
-                'id': '3'
-            },
+            const sampleData = [{
+                    'label': 'Student',
+                    'id': '1'
+                },
+                {
+                    'label': 'Out of School Youth',
+                    'id': '2'
+                },
+                {
+                    'label': 'Solo Parent',
+                    'id': '3'
+                },
+                {
+                    'label': 'Solo Parents Children',
+                    'id': '1'
+                },
+                {
+                    'label': 'Senior Citizen',
+                    'id': '2'
+                },
+                {
+                    'label': 'TVET Trainers',
+                    'id': '3'
+                }, {
+                    'label': 'Displaced HEIs Teaching Personnel',
+                    'id': '1'
+                },
+                {
+                    'label': 'Persons with Disabilities',
+                    'id': '2'
+                },
+                {
+                    'label': 'Currently Employed Workers',
+                    'id': '3'
+                }, {
+                    'label': 'Employees with Contractual/ Job order Status',
+                    'id': '1'
+                },
+                {
+                    'label': 'Urban and Rural Poor',
+                    'id': '2'
+                },
+                {
+                    'label': 'Informal Workers',
+                    'id': '3'
+                }, {
+                    'label': 'Industry Workers',
+                    'id': '1'
+                },
+                {
+                    'label': 'Cooperatives',
+                    'id': '2'
+                },
+                {
+                    'label': 'Family Enterprises',
+                    'id': '3'
+                }, {
+                    'label': 'Family Members of Microenterpreneurs',
+                    'id': '1'
+                },
+                {
+                    'label': 'Micro Enterpreneurs',
+                    'id': '2'
+                },
+                {
+                    'label': 'Farmers and fisherman',
+                    'id': '3'
+                }, {
+                    'label': 'Family Members of Farmers and Fisherman',
+                    'id': '1'
+                },
+                {
+                    'label': 'Community Training and Employment Coordinator',
+                    'id': '2'
+                },
+                {
+                    'label': 'Overseas Filipino Workers (OFW) Dependents',
+                    'id': '3'
+                }, {
+                    'label': 'Returning/Repatriated Overseas Filipino',
+                    'id': '1'
+                },
+                {
+                    'label': 'Indigenous People and Cultural Communities',
+                    'id': '2'
+                },
+                {
+                    'label': 'Disadvantage Woman',
+                    'id': '3'
+                }, {
+                    'label': 'Victims of Natural Disasters and Calamities',
+                    'id': '1'
+                },
+                {
+                    'label': 'Victims or Survivor of Human Trafficking',
+                    'id': '2'
+                },
+                {
+                    'label': 'Drug Dependent Surrenderers',
+                    'id': '3'
+                }, {
+                    'label': 'Rebel Returnees or Decommissioned Combanants',
+                    'id': '1'
+                },
+                {
+                    'label': 'Inmates and Detainees',
+                    'id': '2'
+                },
+                {
+                    'label': 'Family Members of Inmates and Detainees',
+                    'id': '3'
+                }, {
+                    'label': 'Uniformed Personnel',
+                    'id': '1'
+                },
+                {
+                    'label': 'Wounded-in Action AFP and PNP-Personnel',
+                    'id': '2'
+                },
+                {
+                    'label': 'Family Members of AFP and PNP Killed-and Wounded in Action',
+                    'id': '3'
+                }, {
+                    'label': 'Tesda Alumni',
+                    'id': '3'
+                },
             ];
 
             var disabilityData = [];
@@ -1381,7 +1533,7 @@
 
             var checboxContainerClassification = document.getElementById("checboxContainerClassification");
 
-            $.each(sampleData, function(index, value) { 
+            $.each(sampleData, function(index, value) {
                 const split = Math.floor(sampleData.length / 4) + 1;
 
                 var checkboxColumn;
@@ -1431,143 +1583,149 @@
                 var autocomplete = new google.maps.places.Autocomplete(input6);
             }
 
-            $('input:radio[name="qualification_type"]').on('change', function(){
-                var type=$(this).val();
-                if(type==1){
+            $('input:radio[name="qualification_type"]').on('change', function() {
+                var type = $(this).val();
+                if (type == 1) {
                     $('#semester').addClass('d-none');
-                }else{
+                } else {
 
                     $('#semester').removeClass('d-none');
                 }
 
                 $.ajax({
-                url: "{{ route('qualification_show') }}",
-                data:{
-                    "_token": "{{ csrf_token() }}",
-                    "id":$(this).val()
-                },
-                dataType: "json",
-                type: "post",
-                success: function (data) {
-
-                    
-
-                    $('#courses').empty();
-                    $.each(data, function(index, value) {
+                    url: "{{ route('qualification_show') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": $(this).val()
+                    },
+                    dataType: "json",
+                    type: "post",
+                    success: function(data) {
 
 
-                        var options='<option>Select Course</option>';
+
+                        $('#courses').empty();
                         $.each(data, function(index, value) {
-                            options += '<option value="'+value.id+'">'+value.name+'</option>';
+
+
+                            var options = '<option>Select Course</option>';
+                            $.each(data, function(index, value) {
+                                options += '<option value="' + value.id + '">' +
+                                    value.name + '</option>';
+                            });
+                            $('#courses').html(options);
                         });
-                    $('#courses').html(options); 
-                    });
-                
-                },
-            });
-                
+
+                    },
+                });
+
             });
 
             $.ajax({
                 url: "{{ route('disability_user') }}",
-                data:{
+                data: {
                     "_token": "{{ csrf_token() }}",
-                    "student_id":$('#student_id').val()
+                    "student_id": $('#student_id').val()
                 },
                 dataType: "json",
                 type: "post",
-                success: function (data) {
+                success: function(data) {
                     $.each(data['disability'], function(index, value) {
-                            var id='#checkboxDisability'+value;
-                            $('#disabilityTeaxtarea').addClass('d-none');
-                            $(id).attr( 'checked', true );
+                        var id = '#checkboxDisability' + value;
+                        $('#disabilityTeaxtarea').addClass('d-none');
+                        $(id).attr('checked', true);
                     });
-                
+
                 },
             });
-            
+
             $.ajax({
                 url: "https://psgc.gitlab.io/api/regions/",
                 dataType: "json",
                 type: "get",
-                success: function (data) {
+                success: function(data) {
                     var options;
                     $.each(data, function(index, value) {
-                        options += '<option data-name="'+value.regionName+'" value="'+value.code+'">'+value.regionName+'</option>';
+                        options += '<option data-name="' + value.regionName + '" value="' +
+                            value.code + '">' + value.regionName + '</option>';
                     });
-                    $('#region').html(options); 
-                
+                    $('#region').html(options);
+
                 },
             });
 
-            $('#region').on('change', function(){
-                var region_selected=$(this).find(':selected').attr('data-name');
-                var id=$(this).val();
+            $('#region').on('change', function() {
+                var region_selected = $(this).find(':selected').attr('data-name');
+                var id = $(this).val();
                 $('#permanent_address_region').val(region_selected);
 
                 $.ajax({
-                    url: "https://psgc.gitlab.io/api/regions/"+id+"/provinces/",
+                    url: "https://psgc.gitlab.io/api/regions/" + id + "/provinces/",
                     dataType: "json",
                     type: "get",
-                    success: function (data) {
+                    success: function(data) {
                         var options;
                         $.each(data, function(index, value) {
-                            options += '<option data-name="'+value.name+'" value="'+value.code+'">'+value.name+'</option>';
+                            options += '<option data-name="' + value.name +
+                                '" value="' + value.code + '">' + value.name +
+                                '</option>';
                         });
-                        $('#province').html(options); 
+                        $('#province').html(options);
                     },
                 });
             });
 
-            $('#province').on('change', function(){
-                var province_selected=$(this).find(':selected').attr('data-name');
-                var id=$(this).val();
+            $('#province').on('change', function() {
+                var province_selected = $(this).find(':selected').attr('data-name');
+                var id = $(this).val();
                 $('#permanent_address_province').val(province_selected);
 
                 $.ajax({
-                    url: "https://psgc.gitlab.io/api/provinces/"+id+"/cities-municipalities/",
+                    url: "https://psgc.gitlab.io/api/provinces/" + id + "/cities-municipalities/",
                     dataType: "json",
                     type: "get",
-                    success: function (data) {
+                    success: function(data) {
                         var options;
                         $.each(data, function(index, value) {
-                            options += '<option data-name="'+value.name+'" value="'+value.code+'">'+value.name+'</option>';
+                            options += '<option data-name="' + value.name +
+                                '" value="' + value.code + '">' + value.name +
+                                '</option>';
                         });
-                        $('#city').html(options); 
+                        $('#city').html(options);
                     },
                 });
             });
 
-            $('#city').on('change', function(){
-                var city_selected=$(this).find(':selected').attr('data-name');
-                var id=$(this).val();
+            $('#city').on('change', function() {
+                var city_selected = $(this).find(':selected').attr('data-name');
+                var id = $(this).val();
                 $('#permanent_address_city').val(city_selected);
 
                 $.ajax({
-                    url: "https://psgc.gitlab.io/api/cities-municipalities/"+id+"/barangays/",
+                    url: "https://psgc.gitlab.io/api/cities-municipalities/" + id + "/barangays/",
                     dataType: "json",
                     type: "get",
-                    success: function (data) {
+                    success: function(data) {
                         var options;
                         $.each(data, function(index, value) {
-                            options += '<option data-name="'+value.name+'" value="'+value.code+'">'+value.name+'</option>';
+                            options += '<option data-name="' + value.name +
+                                '" value="' + value.code + '">' + value.name +
+                                '</option>';
                         });
-                        $('#barangay').html(options); 
+                        $('#barangay').html(options);
                     },
                 });
             });
 
-            $('#barangay').on('change', function(){
-                var barangay_selected=$(this).find(':selected').attr('data-name');
-                var id=$(this).val();
+            $('#barangay').on('change', function() {
+                var barangay_selected = $(this).find(':selected').attr('data-name');
+                var id = $(this).val();
                 $('#permanent_address_barangay').val(barangay_selected);
             });
 
-           
+
 
 
         });
-
-</script>
-
+    </script>
 @endsection
