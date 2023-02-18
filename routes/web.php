@@ -97,8 +97,15 @@ Route::post('/ajax/scholarship-delete', [scholarshipController::class, 'destroy'
 Route::post('/ajax/disability-reload', [DisabilityController::class, 'reload'])->name('disability_reload');
 Route::post('/ajax/disability-view', [DisabilityController::class, 'view'])->name('disability_view');
 Route::post('/ajax/disability-show', [DisabilityController::class, 'show'])->name('disability_show');
-
 Route::post('/ajax/disability-validate_name', [DisabilityController::class, 'validate_name'])->name('disability_validate');
 Route::post('/ajax/disability-store', [DisabilityController::class, 'store'])->name('disability_store');
 Route::post('/ajax/disability-edit', [DisabilityController::class, 'update'])->name('disability_edit');
 Route::post('/ajax/disability-status', [DisabilityController::class, 'destroy'])->name('disability_status');
+// classification
+Route::post('/ajax/classification-reload', [ClassificationController::class, 'reload'])->name('classification_reload');
+Route::post('/ajax/classification-view', [ClassificationController::class, 'view'])->name('classification_view');
+Route::post('/ajax/classification-show', [ClassificationController::class, 'show'])->name('classification_show');
+Route::post('/ajax/classification-validate_name', [ClassificationController::class, 'validate_name'])->name('classification_validate');
+Route::post('/ajax/classification-store', [ClassificationController::class, 'store'])->name('classification_store');
+Route::post('/ajax/classification-edit', [ClassificationController::class, 'update'])->name('classification_edit');
+Route::post('/ajax/classification-status', [ClassificationController::class, 'destroy'])->name('classification_status');
