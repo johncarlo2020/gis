@@ -161,8 +161,7 @@
                             </a>
                         </li>
                         <li class="nav-item {{ auth()->user()->role == 3 ? 'd-none' : '' }}">
-                            <a href="{{ route('admin.qualification.show') }}"
-                                class="nav-link {{ request()->routeIs('admin.qualification*') ? 'active' : '' }}">
+                            <a class="nav-link {{ request()->routeIs('admin.qualification*') ? 'active' : '' }}">
                                 <i class="fa-solid fa-bars"></i>
                                 <p>
                                     Qualification/Courses
@@ -171,7 +170,7 @@
                             </a>
                             <ul class="nav nav-treeview ">
                                 <li class="nav-item">
-                                    <a href="/docs/3.2/javascript/layout.html" class="nav-link">
+                                    <a href="{{ route('admin.qualification.show') }}" class="nav-link">
                                         <p>Courses</p>
                                     </a>
                                 </li>

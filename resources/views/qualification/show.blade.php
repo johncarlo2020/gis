@@ -78,13 +78,6 @@
 @section('scripts')
 @parent
 <script type="text/javascript">
-// ================================REQUIRED==============================================
-$.ajaxSetup({
-    headers: {
-        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-    },
-});
-// ==============================================================================
 
 $(document).ready(function () {
     $("#table_id").DataTable();
@@ -106,6 +99,9 @@ function reload_qualifications(){
       "serverSide": true,
       "ajax": {
         url: "{{ route('qualification_reload') }}",
+        data:{
+          "_token": "{{ csrf_token() }}"
+        },
         type: 'POST',
       },
   });
@@ -118,22 +114,18 @@ $(document).on("click", "#qualification_add", function () {
     var tmp_body = `
         <h4>Add qualification</h4>
         <hr>
-         <div class="form-row">
-              <select class="form-select form-control" aria-label="Default select example">
+          <div class="form-row">
+              <select class="form-select form-control" name="type" aria-label="Default select example">
                 <option selected>Qualification Type</option>
-                <option value="1">Short Term</option>
-                <option value="2">Long Term</option>
+                <option value="2">Short Term</option>
+                <option value="1">Long Term</option>
               </select>
-            </div>
-        <div class="form-row mt-2">
+          </div>
+          <div class="form-row mt-2">
               <input type="text" name="name" class="form-control addvalidator_qualification qualificationnamevalidator" placeholder="qualification Name* " required>
               <small id="required-qualificationname" class="d-none" style="color:red">Name Required</small>
               <small id="unique-qualificationname" class="d-none" style="color:red">Name Already Exist</small>
             </div>
-          <div class="form-row mt-2">
-              <textarea class="form-control description addvalidator_qualification" name="description" placeholder="Description*" rows="6"></textarea>
-              <small id="required-description" class="d-none" style="color:red">Description Required</small>
-          </div>
           <div class=" mt-2">
                 <label class="">Status</label>
               <input class="" name="status" type="checkbox" checked>
@@ -146,7 +138,6 @@ $(document).on("click", "#qualification_add", function () {
     $(".modal-title").append("qualification");
     $("#modal-form").append(tmp_body);
     $(".qualificationmodalsave").addClass("qualification_insert");
-    $(".qualificationmodalsave").addClass("disabled");
     $(".qualificationmodalsave").removeClass("d-none");
     $("#qualification_modal").modal("show");
 
@@ -155,11 +146,13 @@ $(document).on("click", "#qualification_add", function () {
 
 // add qualification validation
 
-$(document).on("keyup", ".qualificationnamevalidator", function () {
+$(document).on("blur", ".qualificationnamevalidator", function () {
   $.ajax({
       url: "{{ route('qualification_validate') }}",
       data: {
-          data: $(this).val(),
+          "data": $(this).val(),
+          "_token": "{{ csrf_token() }}"
+
       },
       dataType: "json",
       type: "post",
@@ -178,7 +171,7 @@ $(document).on("keyup", ".qualificationnamevalidator", function () {
 });
 
 
-$(document).on("keyup", ".addvalidator_qualification", function () {
+$(document).on("blur", ".addvalidator_qualification", function () {
     validator_qualification();
 });
 
@@ -220,9 +213,10 @@ $(document).on("click", ".qualification_insert", function () {
 
 
   $.ajax({
-      url: base_url() + "public/ajax/qualification-create",
+      url: "{{ route('qualification_store') }}",
       data: {
-          data: data,
+          "data": data,
+          "_token": "{{ csrf_token() }}"
       },
       dataType: "json",
       type: "post",
@@ -239,13 +233,13 @@ $(document).on("click", ".qualification_insert", function () {
        },success: function (data) {
         $("#qualification_modal").modal("hide");
         setTimeout(function() { 
-          reload_qualifications(); 
           Swal.fire(
             'qualification',
             'Created Successfully!',
             'success'
           )
         }, 1000);
+        location.reload();
       },
   });
 });
@@ -261,7 +255,9 @@ $(document).on("click", "#qualification_view", function () {
     $.ajax({
         url: "{{ route('qualification_view') }}",
         data: {
-            id: id,
+            "id": id,
+          "_token": "{{ csrf_token() }}"
+
         },
         dataType: "json",
         type: "post",
@@ -269,12 +265,14 @@ $(document).on("click", "#qualification_view", function () {
 
             var tmp_body = `
         <hr>
-        <div class="form-row">
+
+            <div class="form-row mt-2">
+              <input type="text" class="form-control qualificationnamevalidator" value="`+data['0'].type+`" readonly>
+            </div>
+       
+            <div class="form-row mt-2">
               <input type="text" class="form-control qualificationnamevalidator" value="`+data['0'].name+`" readonly>
             </div>
-          <div class="form-row mt-2">
-              <textarea class="form-control description" name="description" readonly rows="6">`+data['0'].type+`</textarea>
-          </div>
 
           </div>
         </div>`;
@@ -301,7 +299,9 @@ $(document).on("click", "#qualification_edit", function () {
     $.ajax({
       url: "{{ route('qualification_view') }}",
       data: {
-          id: id,
+          "id": id,
+          "_token": "{{ csrf_token() }}"
+
       },
       dataType: "json",
       type: "post",
@@ -309,14 +309,18 @@ $(document).on("click", "#qualification_edit", function () {
 
           var tmp_body = `
       <hr>
-      <div class="form-row">
+          <div class="form-row">
+              <select class="form-select form-control" name="type" aria-label="Default select example">
+                <option selected>Qualification Type</option>
+                <option value="2">Short Term</option>
+                <option value="1">Long Term</option>
+              </select>
+          </div>
+          <div class="form-row mt-2">
             <input type="text" name="name" class="form-control qualificationnamevalidatoredit schoupdate" id="`+id+`" value="`+data['0'].name+`" >
             <small id="unique-name" class="d-none" style="color:red">Name Already Exist</small>
             <small id="required-qualificationname" class="d-none" style="color:red">Name Required</small>
           </div>
-        <div class="form-row mt-2">
-            <textarea class="form-control description schoupdate" name="description"  rows="6">`+data['0'].description+`</textarea>
-        </div>
         </div>
       </div>`;
 
@@ -385,7 +389,8 @@ $(document).on("click", ".qualification_update", function () {
   $.ajax({
       url: "{{ route('qualification_update') }}",
       data: {
-          data: data,
+          "data": data,
+          "_token": "{{ csrf_token() }}"
       },
       dataType: "json",
       type: "post",
@@ -403,22 +408,23 @@ $(document).on("click", ".qualification_update", function () {
         $("#qualification_modal").modal("hide");
         if (data == "success") {
           setTimeout(function() { 
-            reload_qualifications(); 
             Swal.fire(
               'qualification Update',
               'Updated Successfully!',
               'success'
             )
           }, 1000);
+          location.reload();
+
         }else{
           setTimeout(function() { 
-            reload_qualifications(); 
             Swal.fire(
               'qualification',
               'Updated Failed Successfully!',
               'warning'
             )
           }, 1000);
+          location.reload();
         }
       },
   });
@@ -455,8 +461,9 @@ $(document).on("click", ".qualification-delete", function () {
     $.ajax({
         url: "{{ route('qualification_destroy') }}",
         data: {
-            id: id,
-            status: 0,
+            "id": id,
+            "status": 0,
+            "_token": "{{ csrf_token() }}"
         },
         dataType: "json",
         type: "post",
@@ -473,13 +480,13 @@ $(document).on("click", ".qualification-delete", function () {
          },success: function (data) {
           $("#qualification_modal").modal("hide");
           setTimeout(function() { 
-            reload_qualifications(); 
             Swal.fire(
               'qualification',
               'Deleted Successfully!',
               'success'
             )
           }, 1000);
+          location.reload();
         },
     });
 });

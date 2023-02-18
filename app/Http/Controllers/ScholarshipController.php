@@ -47,9 +47,6 @@ class ScholarshipController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-
-        // validation
         $validate_name = DB::table('scholarships')
                 ->where('name', '=', $request['data']['name'])
                 ->count();

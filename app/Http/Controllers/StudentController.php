@@ -5,6 +5,9 @@ use GuzzleHttp\Client;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\qualifications;
+use App\Models\scholarship;
+
 
 class StudentController extends Controller
 {
@@ -119,29 +122,31 @@ class StudentController extends Controller
         $data['benefitiary_address']                =           $student->benefitiary_address ?? '';
         $data['benefitiary_email']                  =           $student->benefitiary_email ?? '';
         $data['benefitiary_contact']                =           $student->benefitiary_contact ?? '';
-        
+        $data['disability']                         =           $student->disability ?? '';
+        $data['disability_others']                  =           $student->disability_others ?? '';
+        $data['disability_cause']                   =           $student->disability_cause ?? '';
+        $data['qualification_type']                 =           $student->qualification_type ?? '';
+        $data['qualification']                      =           $student->qualification ?? '';
+        $data['qualification_school_year']          =           $student->qualification_school_year ?? '';
+        $data['qualification_semester']             =           $student->qualification_semester ?? '';
+        $data['qualification_batch']                          =       $student->qualification_batch ?? '';
+        $data['qualification_training_day_duration']          =       $student->qualification_training_day_duration ?? '';
+        $data['qualification_training_hours_duration']        =       $student->qualification_training_hours_duration ?? '';
+        $data['scholarship']                                  =           $student->scholarship ?? '';
 
 
 
 
+        if($data['qualification_type'] == ''){
+            $qualifications=qualifications::where('status',1)->get();
+        }else{
+            $qualifications=qualifications::where('status',1)->where('qualification_type_id',$student->qualification_type)->get();
+        }
 
+        $scholarships=scholarship::where('status',1)->get();
+   
 
-
-        // dd($data);
-
-        
-
-
-       
-
-
-
-
-
-
-
-
-        return view('student/add', compact('students','data'));
+        return view('student/add', compact('students','data','qualifications','scholarships'));
     }
 
     /**
@@ -153,25 +158,25 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data['t2mis']                                  =       $request->t2mis;
-        $data['vouchers_number']                        =       $request->vouchers_number;
-        $data['training_status']                        =       $request->training_status;
-        $data['training_date_started']                  =       $request->training_date_started;
-        $data['training_date_end']                      =       $request->training_date_end;
-        $data['trainor_name']                           =       $request->trainor_name;
-        $data['name_of_assessor']                       =       $request->name_of_assessor;
-        $data['training_date_assessed']                 =       $request->training_date_assessed;
-        $data['assessment_result']                      =       $request->assessment_result;
-        $data['assessment_venue']                       =       $request->assessment_venue;
-        $data['first_name']                             =       $request->first_name;
-        $data['last_name']                              =       $request->last_name;
-        $data['middle_name']                            =       $request->middle_name;
-        $data['extension']                              =       $request->extension;
-        $data['permanent_address_region']               =       $request->permanent_address_region;
-        $data['permanent_address_province']             =       $request->permanent_address_province;
-        $data['permanent_address_city']                 =       $request->permanent_address_city;
-        $data['permanent_address_barangay']             =       $request->permanent_address_barangay;
-        $data['permanent_address_street']               =       $request->permanent_address_street;
+        $data['t2mis']                                  =       $request->t2mis ?? '';
+        $data['vouchers_number']                        =       $request->vouchers_number ?? '';
+        $data['training_status']                        =       $request->training_status ?? '';
+        $data['training_date_started']                  =       $request->training_date_started ?? '';
+        $data['training_date_end']                      =       $request->training_date_end ?? '';
+        $data['trainor_name']                           =       $request->trainor_name ?? '';
+        $data['name_of_assessor']                       =       $request->name_of_assessor ?? '';
+        $data['training_date_assessed']                 =       $request->training_date_assessed ?? '';
+        $data['assessment_result']                      =       $request->assessment_result ?? '';
+        $data['assessment_venue']                       =       $request->assessment_venue ?? '';
+        $data['first_name']                             =       $request->first_name ?? '';
+        $data['last_name']                              =       $request->last_name ?? '';
+        $data['middle_name']                            =       $request->middle_name ?? '';
+        $data['extension']                              =       $request->extension ?? '';
+        $data['permanent_address_region']               =       $request->permanent_address_region ?? '';
+        $data['permanent_address_province']             =       $request->permanent_address_province ?? '';
+        $data['permanent_address_city']                 =       $request->permanent_address_city ?? '';
+        $data['permanent_address_barangay']             =       $request->permanent_address_barangay ?? '';
+        $data['permanent_address_street']               =       $request->permanent_address_street ?? '';
         $data['contact_number']                         =       $request->contact_number ?? '';
         $data['contact_number_2']                       =       $request->contact_number_2 ?? '';
         $data['email']                                  =       $request->email ?? '';
@@ -204,15 +209,17 @@ class StudentController extends Controller
         $data['benefitiary_address']                    =       $request->benefitiary_address ?? '';
         $data['benefitiary_email']                      =       $request->benefitiary_email ?? '';
         $data['benefitiary_contact']                    =       $request->benefitiary_contact ?? '';
-
-
-
-
-
-
-
-
-
+        $data['disability']                             =       $request->disability ?? '';
+        $data['disability_others']                      =       $request->disability_others ?? '';
+        $data['disability_cause']                       =       $request->disability_cause ?? '';
+        $data['qualification_type']                     =       $request->qualification_type ?? '';
+        $data['qualification_school_year']                          =       $request->qualification_school_year ?? '';
+        $data['qualification_semester']                          =       $request->qualification_semester ?? '';
+        $data['qualification_batch']                          =       $request->qualification_batch ?? '';
+        $data['qualification_training_day_duration']                          =       $request->qualification_training_day_duration ?? '';
+        $data['qualification_training_hours_duration']                          =       $request->qualification_training_hours_duration ?? '';
+        $data['qualification']                          =       $request->qualification ?? '';
+        $data['scholarship']                          =       $request->scholarship ?? '';
 
 
 
@@ -221,8 +228,6 @@ class StudentController extends Controller
             'data'=> $data
         ];
        
-
-
         Student::where('id',$id)->update($input);
 
         return redirect()->route('admin.student.edit', ['id' => $id]);

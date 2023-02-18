@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\qualifications;
+use Auth;
+
 
 class QualificationController extends Controller
 {
@@ -31,6 +33,22 @@ class QualificationController extends Controller
 
     }
 
+    public function name_validate_edit(Request $request)
+    {
+        $data = qualifications::
+                where('name', '=', $request['data'])
+                ->where('id', '!=',$request['id'])
+                ->count();
+        return response()->json($data);
+    }
+
+    public function name_validate(Request $request)
+    {
+        $data = qualifications::where('name', '=', $request['data'])
+                ->count();
+        return response()->json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -49,18 +67,36 @@ class QualificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate_name = qualifications::where('name', '=', $request['data']['name'])
+        ->count();
+
+        if ($validate_name == 0 ) {
+        qualifications::insert(
+            [
+                'name'          => $request['data']['name'],
+                'qualification_type_id'=>$request['data']['type'],
+                'status'        => $request['data']['status'],
+                'createdBy_id'=> Auth::user()->id  ,
+                'updatedBy_id'=> Auth::user()->id 
+            ]);
+            return response()->json('success');
+        }else{
+            return response()->json('failed');
+        }
     }
 
+    
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(request $request)
     {
-        //
+        $qualifications=qualifications::where('qualification_type_id', $request->id)->get();
+
+        return($qualifications);
     }
 
     /**
@@ -81,9 +117,18 @@ class QualificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        
+        qualifications::where('id' , '=' , $request['data']['id'])
+        ->update(
+         [
+             'qualification_type_id' => $request['data']['type'],
+             'name'                 => $request['data']['name'],
+             'updated_at'           => date("Y-m-d H:i:s") ,
+             'updatedBy_id'         => Auth::user()->id,
+         ]);
+         return response()->json('success');
     }
 
     /**
@@ -92,8 +137,11 @@ class QualificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(request $request)
     {
-        //
+        qualifications::where('id', $request['id'])
+        ->update(['status' => $request['status']]);
+
+    return response()->json($request['id']);
     }
 }

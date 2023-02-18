@@ -8,6 +8,8 @@ use Auth;
 use App\Models\disability;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use App\Models\Student;
+
 
 
 class DisabilityController extends Controller
@@ -97,6 +99,17 @@ class DisabilityController extends Controller
     public function show()
     {
         $data = disability::where('status', 1)->get();
+
+    return $data;
+
+    }
+
+    public function user(request $request)
+    {
+        $students=Student::where('id',$request->student_id)->get();
+        $student=json_decode($students[0]['data']);
+
+        $data['disability']                              =           $student->disability ?? '';
 
     return $data;
 

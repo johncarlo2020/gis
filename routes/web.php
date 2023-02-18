@@ -101,6 +101,8 @@ Route::post('/ajax/qualification-reload', [qualificationController::class, 'relo
 Route::post('/ajax/qualification-view', [qualificationController::class, 'view'])->name('qualification_view');
 Route::post('/ajax/qualification-edit', [qualificationController::class, 'update'])->name('qualification_update');
 Route::post('/ajax/qualification-delete', [qualificationController::class, 'destroy'])->name('qualification_destroy');
+Route::post('/ajax/qualification-show', [qualificationController::class, 'show'])->name('qualification_show');
+
 // disability
 Route::post('/ajax/disability-reload', [DisabilityController::class, 'reload'])->name('disability_reload');
 Route::post('/ajax/disability-view', [DisabilityController::class, 'view'])->name('disability_view');
@@ -110,3 +112,7 @@ Route::post('/ajax/disability-validate_name', [DisabilityController::class, 'val
 Route::post('/ajax/disability-store', [DisabilityController::class, 'store'])->name('disability_store');
 Route::post('/ajax/disability-edit', [DisabilityController::class, 'update'])->name('disability_edit');
 Route::post('/ajax/disability-status', [DisabilityController::class, 'destroy'])->name('disability_status');
+Route::post('/ajax/disability-user', [DisabilityController::class, 'user'])->name('disability_user');
+
+
+

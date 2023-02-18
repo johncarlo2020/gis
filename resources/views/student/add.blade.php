@@ -82,6 +82,7 @@
                 <div class="right-side">
                     <form method="POST" id="resumeGenForm" name="resumeGenForm"
                         action="{{ route('admin.student.update', [$students[0]->id]) }}" enctype="multipart/form-data">
+                       <input type="hidden" id="student_id" value={{$students[0]->id}}>
 
                         @method('PUT')
                         @csrf
@@ -659,17 +660,19 @@
                                 </div>
                                 <div class="student-input mt-3 d-none" id="disabilityTeaxtarea">
                                     <label for="floatingTextarea2">Please specify:</label>
-                                    <textarea class="form-control" placeholder="Write the discription here ..." id="floatingTextarea2"
-                                        style="height: 100px"></textarea>
+                                    <textarea class="form-control" name="disability_others" placeholder="Write the discription here ..." id="disability_others"
+                                        style="height: 100px" >{{$data['disability_others']}}</textarea>
                                 </div>
                             </div>
                             <div class="row student-input">
                                 <div class="col-3">
                                     <div class="mb-3">
                                         <label for="disabledSelect" class="form-label">Cause of Disability:</label>
-                                        <select id="disabledSelect" class="form-select">
-                                            <option>Disabled select</option>
-                                            <option>Disabled select</option>
+                                        <select id="disabledSelect" name="disability_cause" class="form-select">
+                                            <option {{ $data["disability_cause"] =='Congenital/Inborn' ? 'selected' : '' }} value="Congenital/Inborn">Congenital/Inborn</option>
+                                            <option {{ $data["disability_cause"] =='Illness' ? 'selected' : '' }} value="Illness">Illness</option>
+                                            <option {{ $data["disability_cause"] =='Injury' ? 'selected' : '' }} value="Injury">Injury</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -692,13 +695,13 @@
                                     </label>
                                     <div class="mb-3  border-bottom">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                id="inlineRadio1" value="option1">
+                                            <input class="form-check-input qualification_type" type="radio" name="qualification_type"
+                                                id="inlineRadio1" value="1" {{ $data["qualification_type"] =='1' ? 'checked' : '' }}>
                                             <label class="form-check-label p-0" for="inlineRadio1">Long term</label>
                                         </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                id="inlineRadio2" value="option2">
+                                        <div class="form-check form-check-inline qualification_type">
+                                            <input class="form-check-input" type="radio" name="qualification_type" 
+                                                id="inlineRadio2" value="2" {{ $data["qualification_type"] =='2' ? 'checked' : '' }}>
                                             <label class="form-check-label p-0" for="inlineRadio2">Short term</label>
                                         </div>
                                     </div>
@@ -709,9 +712,12 @@
                                         <div class="mb-3">
                                             <label for="disabledSelect" class="form-label">Name of Course/Qualification:
                                             </label>
-                                            <select id="disabledSelect" class="form-select">
-                                                <option>Disabled select</option>
-                                                <option>Disabled select</option>
+                                            <select id="courses" name="qualification" class="form-select">
+                                            <option >Select Course</option>
+
+                                            @foreach($qualifications as $key => $qualification)
+                                                <option {{ $data["qualification"] ==$qualification->id ? 'selected' : '' }}  value="{{$qualification->id}}">{{$qualification->name}}</option>    
+                                            @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -719,18 +725,18 @@
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1" class="form-label">School Year
                                             </label>
-                                            <input type="date" class="form-control" id="exampleFormControlInput1"
+                                            <input type="text" class="form-control" name="qualification_school_year" value="{{$data['qualification_school_year']}}" id="exampleFormControlInput1"
                                                 placeholder="Contact number
                                             ">
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col {{ $data["qualification_type"] =='1' ? 'd-none' : '' }}" id="semester">
                                         <div class="mb-3">
                                             <label for="disabledSelect" class="form-label">Semester
                                             </label>
-                                            <select id="disabledSelect" class="form-select">
-                                                <option>Disabled select</option>
-                                                <option>Disabled select</option>
+                                            <select name="qualification_semester" class="form-select">
+                                                <option {{ $data["qualification_semester"] == '1st Sem' ? 'selected' : '' }} value="1st Sem">1st Sem</option>
+                                                <option {{ $data["qualification_semester"] == '2nd Sem' ? 'selected' : '' }} value="2nd Sem">2nd Sem</option>
                                             </select>
                                         </div>
                                     </div>
@@ -738,9 +744,8 @@
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1" class="form-label">Batch
                                             </label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                                placeholder="Batch number
-                                            ">
+                                            <input type="text" class="form-control" name="qualification_batch" value="{{$data['qualification_batch']}}"
+                                                placeholder="Batch number">
                                         </div>
                                     </div>
                                 </div>
@@ -749,9 +754,8 @@
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1" class="form-label">Training Day Duration
                                             </label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                                placeholder="Training Day Duration
-                                            ">
+                                            <input type="text" class="form-control" name="qualification_training_day_duration" value="{{$data['qualification_training_day_duration']}}"
+                                                placeholder="Training Day Duration">
                                         </div>
                                     </div>
                                     <div class="col-3">
@@ -759,9 +763,8 @@
                                             <label for="exampleFormControlInput1" class="form-label">Training Hours
                                                 Duration
                                             </label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                                placeholder="Training Hours Duration
-                                            ">
+                                            <input type="text" class="form-control" name="qualification_training_hours_duration" value="{{$data['qualification_training_hours_duration']}}"
+                                                placeholder="Training Hours Duration">
                                         </div>
                                     </div>
                                 </div>
@@ -771,13 +774,13 @@
                                     <label for="disabledSelect" class="form-label p-0">Scholar</label>
                                     <div class="mb-3  border-bottom">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                id="inlineRadio1" value="option1">
+                                            <input class="form-check-input " type="radio" name="course_type"
+                                                id="inlineRadio1" value="1" selected>
                                             <label class="form-check-label p-0" for="inlineRadio1">Long term</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                id="inlineRadio2" value="option2">
+                                            <input class="form-check-input " type="radio" name="course_type"
+                                                id="inlineRadio2" value="2" checked="checked">
                                             <label class="form-check-label p-0" for="inlineRadio2">Short term</label>
                                         </div>
                                     </div>
@@ -788,9 +791,10 @@
                                         <div class="mb-3">
                                             <label for="disabledSelect" class="form-label">Type of Scholarship
                                             </label>
-                                            <select id="disabledSelect" class="form-select">
-                                                <option>Disabled select</option>
-                                                <option>Disabled select</option>
+                                            <select name="scholarship" class="form-select">
+                                            @foreach($scholarships as $key => $scholarship)
+                                                <option {{ $data["scholarship"] ==$scholarship->id ? 'selected' : '' }}  value="{{$scholarship->id}}">{{$scholarship->name}}</option>    
+                                            @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -1079,7 +1083,6 @@
                 items[i].addEventListener('click', function(event) {
                     // Get the index of the clicked item
                     var index = Array.prototype.indexOf.call(items, event.target);
-                    console.log(index + ': ' + this.innerHTML);
                     formnumber = index;
                     updateform();
                     progress_forward();
@@ -1182,10 +1185,134 @@
             }
 
 
-            const sampleData = [{
-                'label': 'Overseas Filipino Workers (OFW) Dependents',
+            const sampleData = [
+            {
+                'label': 'Student',
                 'id': '1'
-            }];
+            },
+            {
+                'label': 'Out of School Youth',
+                'id': '2'
+            },
+            {
+                'label': 'Solo Parent',
+                'id': '3'
+            },
+            {
+                'label': 'Solo Parents Children',
+                'id': '1'
+            },
+            {
+                'label': 'Senior Citizen',
+                'id': '2'
+            },
+            {
+                'label': 'TVET Trainers',
+                'id': '3'
+            },{
+                'label': 'Displaced HEIs Teaching Personnel',
+                'id': '1'
+            },
+            {
+                'label': 'Persons with Disabilities',
+                'id': '2'
+            },
+            {
+                'label': 'Currently Employed Workers',
+                'id': '3'
+            },{
+                'label': 'Employees with Contractual/ Job order Status',
+                'id': '1'
+            },
+            {
+                'label': 'Urban and Rural Poor',
+                'id': '2'
+            },
+            {
+                'label': 'Informal Workers',
+                'id': '3'
+            },{
+                'label': 'Industry Workers',
+                'id': '1'
+            },
+            {
+                'label': 'Cooperatives',
+                'id': '2'
+            },
+            {
+                'label': 'Family Enterprises',
+                'id': '3'
+            },{
+                'label': 'Family Members of Microenterpreneurs',
+                'id': '1'
+            },
+            {
+                'label': 'Micro Enterpreneurs',
+                'id': '2'
+            },
+            {
+                'label': 'Farmers and fisherman',
+                'id': '3'
+            },{
+                'label': 'Family Members of Farmers and Fisherman',
+                'id': '1'
+            },
+            {
+                'label': 'Community Training and Employment Coordinator',
+                'id': '2'
+            },
+            {
+                'label': 'Overseas Filipino Workers (OFW) Dependents',
+                'id': '3'
+            },{
+                'label': 'Returning/Repatriated Overseas Filipino',
+                'id': '1'
+            },
+            {
+                'label': 'Indigenous People and Cultural Communities',
+                'id': '2'
+            },
+            {
+                'label': 'Disadvantage Woman',
+                'id': '3'
+            },{
+                'label': 'Victims of Natural Disasters and Calamities',
+                'id': '1'
+            },
+            {
+                'label': 'Victims or Survivor of Human Trafficking',
+                'id': '2'
+            },
+            {
+                'label': 'Drug Dependent Surrenderers',
+                'id': '3'
+            },{
+                'label': 'Rebel Returnees or Decommissioned Combanants',
+                'id': '1'
+            },
+            {
+                'label': 'Inmates and Detainees',
+                'id': '2'
+            },
+            {
+                'label': 'Family Members of Inmates and Detainees',
+                'id': '3'
+            },{
+                'label': 'Uniformed Personnel',
+                'id': '1'
+            },
+            {
+                'label': 'Wounded-in Action AFP and PNP-Personnel',
+                'id': '2'
+            },
+            {
+                'label': 'Family Members of AFP and PNP Killed-and Wounded in Action',
+                'id': '3'
+            }, {
+                'label': 'Tesda Alumni',
+                'id': '3'
+            },
+            ];
 
             var disabilityData = [];
 
@@ -1228,20 +1355,19 @@
                         const checkbox = document.createElement("div");
                         checkbox.className = "form-check";
                         checkbox.innerHTML =
-                            '<input class="form-check-input checkboxDisability" name="checkboxDisability" type="checkbox" value="' +
+                            '<input class="form-check-input checkboxDisability" name="disability[]" type="checkbox" value="' +
                             value.id + '" id="checkboxDisability' + value.id +
                             '"><label class="form-check-label p-0" for="checkbox' + value.id +
                             '">' + value.label + '</label>';
                         checkboxColumn.appendChild(checkbox);
                     });
 
-                    $('input[name="checkboxDisability"][type="checkbox"]').click(function() {
+                    $('input[name="disability[]"][type="checkbox"]').click(function() {
                         if ($(this).prop("checked") == true && $(this).val() == 0) {
                             $(this).removeClass('checkboxDisability');
                             $('.checkboxDisability').prop('checked', false);
                             $('#checkInput' + this.value).removeClass('d-none');
                             $('#disabilityTeaxtarea').removeClass('d-none');
-                            console.log(this.value)
                         } else if ($(this).prop("checked") == false) {
                             $('#checkInput' + this.value).addClass('d-none');
                             $('#disabilityTeaxtarea').addClass('d-none');
@@ -1255,7 +1381,7 @@
 
             var checboxContainerClassification = document.getElementById("checboxContainerClassification");
 
-            $.each(sampleData, function(index, value) {
+            $.each(sampleData, function(index, value) { 
                 const split = Math.floor(sampleData.length / 4) + 1;
 
                 var checkboxColumn;
@@ -1282,6 +1408,8 @@
             });
 
 
+
+
             function initialize() {
                 var input = document.getElementById('Assesment_venue');
                 var input1 = document.getElementById('employment_address');
@@ -1301,11 +1429,62 @@
                 var autocomplete = new google.maps.places.Autocomplete(input4);
                 var autocomplete = new google.maps.places.Autocomplete(input5);
                 var autocomplete = new google.maps.places.Autocomplete(input6);
-
-
-
-
             }
+
+            $('input:radio[name="qualification_type"]').on('change', function(){
+                var type=$(this).val();
+                if(type==1){
+                    $('#semester').addClass('d-none');
+                }else{
+
+                    $('#semester').removeClass('d-none');
+                }
+
+                $.ajax({
+                url: "{{ route('qualification_show') }}",
+                data:{
+                    "_token": "{{ csrf_token() }}",
+                    "id":$(this).val()
+                },
+                dataType: "json",
+                type: "post",
+                success: function (data) {
+
+                    
+
+                    $('#courses').empty();
+                    $.each(data, function(index, value) {
+
+
+                        var options='<option>Select Course</option>';
+                        $.each(data, function(index, value) {
+                            options += '<option value="'+value.id+'">'+value.name+'</option>';
+                        });
+                    $('#courses').html(options); 
+                    });
+                
+                },
+            });
+                
+            });
+
+            $.ajax({
+                url: "{{ route('disability_user') }}",
+                data:{
+                    "_token": "{{ csrf_token() }}",
+                    "student_id":$('#student_id').val()
+                },
+                dataType: "json",
+                type: "post",
+                success: function (data) {
+                    $.each(data['disability'], function(index, value) {
+                            var id='#checkboxDisability'+value;
+                            $('#disabilityTeaxtarea').addClass('d-none');
+                            $(id).attr( 'checked', true );
+                    });
+                
+                },
+            });
             
             $.ajax({
                 url: "https://psgc.gitlab.io/api/regions/",
