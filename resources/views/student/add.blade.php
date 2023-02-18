@@ -58,7 +58,7 @@
         <div class="">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Student List</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.student.show') }}">Student List</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Add Student</li>
                 </ol>
             </nav>
@@ -831,7 +831,7 @@
                                             ">
                                         </div>
                                     </div>
-                                    <div class="col {{ $data['qualification_type'] == '1' ? 'd-none' : '' }}"
+                                    <div class="col {{ $data['qualification_type'] == '2' ? 'd-none' : '' }}"
                                         id="semester">
                                         <div class="mb-3">
                                             <label for="disabledSelect" class="form-label">Semester
@@ -1585,7 +1585,7 @@
 
             $('input:radio[name="qualification_type"]').on('change', function() {
                 var type = $(this).val();
-                if (type == 1) {
+                if (type == 2) {
                     $('#semester').addClass('d-none');
                 } else {
 
