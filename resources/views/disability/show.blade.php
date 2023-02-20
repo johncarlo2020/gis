@@ -5,7 +5,10 @@
 <section class="main-section">
         <div class="title-head">
             <h1>Disability</h1>
-            <button class="btn add-btn trigger_btn" data-type="new" id="">Add <span><i class="fa-solid fa-circle-plus"></i></span></button>
+            <div>
+                <button class="btn add-btn trigger_btn" data-type="deleted_view" id="">Deleted</button>
+                <button class="btn add-btn trigger_btn" data-type="new" id="">Add <span><i class="fa-solid fa-circle-plus"></i></span></button>
+            </div>
         </div>
         <div class="container-fluid">
             <table class="table" id="table_id">
@@ -86,7 +89,8 @@ $.ajaxSetup({
 $(document).ready(function () {
     $("#table_id").DataTable();
 });
-function disability_reload(){
+function disability_reload(status){
+
   $('#table_id').DataTable().clear().destroy();
 
   $('#table_id').DataTable({
@@ -94,6 +98,8 @@ function disability_reload(){
       "serverSide": true,
       "ajax": {
         url: "{{ route('disability_reload') }}",
+        data: {status:status},
+        dataType: "json",
         type: 'POST',
       },
   });
@@ -103,9 +109,9 @@ function disability_reload(){
 
 $(document).on("click", ".trigger_btn", function () {
 
-    var type = $(this).data('type');
-    var name = $(this).data('name');
-    var id = $(this).data("id");
+    var id = $(this).attr('data-id')
+    var type = $(this).attr('data-type')
+    var name = $(this).attr('data-name')
 
     $("#modal-form").empty();
     $(".modal-title").empty();
@@ -118,6 +124,18 @@ $(document).on("click", ".trigger_btn", function () {
     $(".save_btn").removeClass("d-none");
     $(".save_btn").text("Save");
 
+    if (type == 'deleted_view') {
+        $(this).text('Active View');
+        $(this).attr('data-type','default_view');
+        disability_reload(0); 
+        return false;
+    }
+    if (type == 'default_view') {
+        $(this).text('Deleted');
+        $(this).attr('data-type','deleted_view');
+        disability_reload(1); 
+        return false;
+    }
     if (type == 'new') {
             var tmp_body = `
                 <div class="form-row">
@@ -210,6 +228,7 @@ $(document).on("click", ".trigger_btn", function () {
         }    
         $("#modal-form").append(tmp_body);
     }
+    
     $("#modal").modal("show");
 
 });
@@ -253,7 +272,7 @@ $(document).on("click", ".save_btn", function () {
                 },success: function (data) {
                     $("#modal").modal("hide");
                     setTimeout(function() { 
-                        disability_reload(); 
+                        disability_reload(1); 
                     Swal.fire(
                         'Disability',
                         'Created Successfully!',
@@ -292,7 +311,7 @@ $(document).on("click", ".save_btn", function () {
                 $("#modal").modal("hide");
                 if (data == "success") {
                 setTimeout(function() { 
-                    disability_reload(); 
+                    disability_reload(1); 
                     Swal.fire(
                     'Disability',
                     'Updated Successfully!',
@@ -301,7 +320,7 @@ $(document).on("click", ".save_btn", function () {
                 }, 1000);
                 }else{
                 setTimeout(function() { 
-                    disability_reload(); 
+                    disability_reload(1); 
                     Swal.fire(
                     'Disability',
                     'Updated Failed Successfully!',
@@ -333,10 +352,14 @@ $(document).on("click", ".save_btn", function () {
             });
             },success: function (data) {
             $("#modal").modal("hide");
-            if (data == 1) { var status = 'Recovered';
-            }else{ var status = "Deleted";}
+            if (data == 1) { 
+                disability_reload(0); 
+                var status = 'Recovered';
+            }else{ 
+                disability_reload(1); 
+                var status = "Deleted";
+            }
             setTimeout(function() { 
-                disability_reload(); 
                 Swal.fire(
                 'Scholarship',
                 status+' Successfully!',

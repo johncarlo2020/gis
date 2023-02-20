@@ -20,6 +20,7 @@ class DisabilityController extends Controller
     {
         $count = DB::table('disabilities')->count();
         $disabilities = DB::table('disabilities')
+        ->where('status', '=', $request['status'])
         ->offset($request['start'])
         ->limit($request['length'])
         ->get([
@@ -41,9 +42,12 @@ class DisabilityController extends Controller
 
             if ($disabilities['status'] == 1) {
                 $status = '<span data-id="' . $disabilities['id'] . '" data-name="' . $disabilities['name'] . '" class="btn btn-sm btn-danger trigger_btn" data-type="status" data-status="delete"> <i class="fa-solid fa-trash-can"></i></span>';
-             }else{
+                $edit = '<span data-id="'.$disabilities['id'].'" class="btn btn-sm btn-info trigger_btn" data-type="edit"> <i class="fa-solid fa-pen "></i></span>&nbsp;';
+            }else{
                 $status = '<span data-id="' . $disabilities['id'] . '" data-name="' . $disabilities['name'] . '" class="btn btn-sm btn-success trigger_btn" data-type="status" data-status="recover"> <i class="fa-solid fa-hammer"></i></span>';
-             }
+                $edit = '';
+                
+            }
  
                 return  [
                          $disabilities['id'],
@@ -52,7 +56,7 @@ class DisabilityController extends Controller
                          $role,
                         '<center>
                                 <span data-id="'.$disabilities['id'].'" class="btn btn-sm btn-primary trigger_btn" data-type="view"><i class="fa-solid fa-eye"></i></span>&nbsp;
-                                <span data-id="'.$disabilities['id'].'" class="btn btn-sm btn-info trigger_btn" data-type="edit"> <i class="fa-solid fa-pen "></i></span>&nbsp;' . 
+                                ' .$edit .
                                 $status . 
                         '</center>',
                 ];
@@ -72,6 +76,7 @@ class DisabilityController extends Controller
     public function index()
     {
         $disabilities = DB::table('disabilities')
+        ->where('status', '=', 1)
         ->get([
             'id',
             'name',
