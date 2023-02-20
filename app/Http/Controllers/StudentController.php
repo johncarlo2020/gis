@@ -19,7 +19,7 @@ class StudentController extends Controller
     public function index()
     {
 
-        $students=Student::get();
+        $students=Student::where('status', 1)->get();
         $data=[];
         foreach ($students as $key => $student1) {
             $student=json_decode($student1['data']);
@@ -107,7 +107,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $student=Student::create();
+        $inputs = ['status' => 0];
+        $student=Student::create($inputs);
 
         return redirect()->route('admin.student.edit', ['id' => $student->id]);
         // return view('student/add');
@@ -298,16 +299,14 @@ class StudentController extends Controller
         $data['qualification']                                      =       $request->qualification ?? '';
         $data['scholarship']                                        =       $request->scholarship ?? '';
 
-
-
-
         $input=[
-            'data'=> $data
+            'data'=> $data,
+            'status' => 1
         ];
        
         Student::where('id',$id)->update($input);
 
-        return redirect()->route('admin.student.edit', ['id' => $id]);
+        return redirect()->route('admin.student.show');
 
     }
 

@@ -719,7 +719,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="submit">
 
                             <div class="buttons button_space">
                                 <button type="button" class="back_button">Back</button>
@@ -1153,7 +1152,6 @@
                             </div>
                             <div class="buttons button_space">
                                 <button type="button" class="back_button">Back</button>
-
                                 <button type="button" class="next_button">Next Step</button>
                             </div>
                         </div>

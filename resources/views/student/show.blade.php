@@ -27,8 +27,6 @@
                             <td>{{$student['contact_number']}} </td>
                             <td>{{$student['gender']}} </td>
 
-
-
                             <td>{{ $student['qualification_name'][0]->name}}</td>
                             <td>
                                 <a href="{{ url('/Student' , [ $student['id'] ]) }}/edit" class="btn btn-primary" role="button">Edit</a>
