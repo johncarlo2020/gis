@@ -36,7 +36,7 @@ class HomeController extends Controller
     {
         $studentCount = Student::count();
         $activeStudentCount = Student::where('status',1)->count();
-        $students= Student::where('status',1)->take(5)->get();
+        $students= Student::where('status',1)->take(5)->orderBy('id','desc')->get();
         foreach ($students as $key => $student1) {
             $students[$key]=json_decode($student1['data']);
 
