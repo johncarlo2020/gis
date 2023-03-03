@@ -12,7 +12,7 @@
                         <div class="title row shadow-sm  card ">
                             <div class="info col-8">
                                 <span>Student count</span>
-                                <h1>1000</h1>
+                                <h1>{{$studentCount}}</h1>
                             </div>
                             <div class="info-icon col-4">
                                 <i class="fa-solid fa-user-graduate"></i>
@@ -23,7 +23,7 @@
                         <div class="title row shadow-sm  card ">
                             <div class="info col-8">
                                 <span>Active Student Count</span>
-                                <h1>1000</h1>
+                                <h1>{{$activeStudentCount}}</h1>
                             </div>
                             <div class="info-icon col-4">
                                 <i class="fa-solid fa-user-graduate"></i>
@@ -45,7 +45,7 @@
                         <div class="title row shadow-sm  card ">
                             <div class="info col-8">
                                 <span>Total Courses</span>
-                                <h1>1000</h1>
+                                <h1>{{$courses}}</h1>
                             </div>
                             <div class="info-icon col-4">
                                 <i class="fa-solid fa-user-graduate"></i>
@@ -71,30 +71,22 @@
                                 <table class="table ">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
                                             <th scope="col">First</th>
                                             <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Courses</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($students as $key => $student)
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <th scope="row">{{$student->first_name}}</th>
+                                            <td>{{$student->last_name}}</td>
+                                            <td>{{$student->email}}</td>
+                                            <td>{{$student->qualification_name}}</td>
                                         </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
+                                    @endforeach
+                                     
                                     </tbody>
                                 </table>
                             </div>
