@@ -15,7 +15,8 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.4",
-        "livewire/livewire": "^2.11"
+        "livewire/livewire": "^2.11",
+        "phpoffice/phpspreadsheet": "^1.27"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

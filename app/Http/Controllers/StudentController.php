@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use GuzzleHttp\Client;
 
@@ -8,18 +7,23 @@ use App\Models\Student;
 use App\Models\qualifications;
 use App\Models\scholarship;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
 
-        $students=Student::where('status', 1)->get();
+    public function index(Request $request)
+    {
+        $qualifications=qualifications::where('status',1)->get();
+
+        $course_filter=$request->qualification ?? null;
+        if($course_filter!=null){
+            $students=Student::where('status', 1)->where('data','LIKE','%"qualification":"'.$course_filter.'%')->get();
+        }else{
+            $students=Student::where('status', 1)->get();
+        }
+
         $data=[];
         foreach ($students as $key => $student1) {
             $student=json_decode($student1['data']);
@@ -81,7 +85,7 @@ class StudentController extends Controller
             $data[$student1->id]['disability_cause']                               =           $student->disability_cause ?? '';
             $data[$student1->id]['qualification_type']                             =           $student->qualification_type ?? '';
             $data[$student1->id]['qualification']                                  =           $student->qualification ?? '';
-            $data[$student1->id]['qualification_name']                             =            qualifications::where('id',$student->qualification)->get() ?? '';
+            $data[$student1->id]['qualification_name']                             =           qualifications::where('id',$student->qualification)->get() ?? '';
             $data[$student1->id]['qualification_school_year']                      =           $student->qualification_school_year ?? '';
             $data[$student1->id]['qualification_semester']                         =           $student->qualification_semester ?? '';
             $data[$student1->id]['qualification_batch']                            =           $student->qualification_batch ?? '';
@@ -93,7 +97,89 @@ class StudentController extends Controller
        
 
 
-        return view('student/show',compact('data'));
+        return view('student/show',compact('data','qualifications'));
+
+
+    }
+
+    public function export(request $request){
+        $worksheets = new Spreadsheet();
+        $worksheet = $worksheets->getActiveSheet();
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Transfer-Encoding: Binary');
+		$filename =date("Y-m-d H:i:s") . '.xls';
+		header("Content-Disposition: attachment; filename={$filename}");
+
+        if($request->qualification!=null){
+                $students=Student::where('status', 1)->where('data','LIKE','%"qualification":"'.$request->qualification.'%')->get();
+        }else{
+                $students=Student::where('status', 1)->get();
+        }
+
+        $worksheet->getRowDimension(3)->setRowHeight(30);
+        $worksheet->setCellValue('B3', 'Region');
+        $worksheet->setCellValue('C3', 'Province');
+        $worksheet->setCellValue('D3', 'Congerssional District');
+        $worksheet->setCellValue('E3', 'Municipality City');
+        $worksheet->setCellValue('F3', 'Name of Provider');
+        $worksheet->setCellValue('G3', 'Complete Address');
+        $worksheet->setCellValue('H3', 'Type of Provider');
+        $worksheet->setCellValue('I3', 'Classfication Provider');
+        $worksheet->setCellValue('J3', 'Industry Sectior of Qualification');
+        $worksheet->setCellValue('K3', 'TVET Program Registration Status');
+        $worksheet->setCellValue('L3', 'Qualification Program Title');
+        $worksheet->setCellValue('M3', 'COPR');
+        $worksheet->setCellValue('N3', 'Delivery Mode');
+        $worksheet->setCellValue('O3', 'Last Name');
+        $worksheet->setCellValue('P3', 'First Name');
+        $worksheet->setCellValue('Q3', 'Middle Name');
+        $worksheet->setCellValue('R3', 'Extension Name');
+        $worksheet->setCellValue('S3', 'Contact Number');
+        $worksheet->setCellValue('T3', 'Email Address');
+        $worksheet->setCellValue('U3', 'Street No and Street address');
+        $worksheet->setCellValue('V3', 'Barangay');
+        $worksheet->setCellValue('W3', 'Municipality City');
+        $worksheet->setCellValue('X3', 'Province ');
+        $worksheet->setCellValue('Y3', 'Sex');
+        $worksheet->setCellValue('Z3', 'Date of Birth');
+        $worksheet->setCellValue('AA3', 'Age');
+        $worksheet->setCellValue('AB3', 'Civil Status');
+        $worksheet->setCellValue('AC3', 'Highest Grade Completed');
+        $worksheet->setCellValue('AD3', 'Nationality');
+        $worksheet->setCellValue('AE3', 'Year');
+        $worksheet->setCellValue('AF3', 'Semester');
+        $worksheet->setCellValue('Ag3', 'Date Started');
+        $worksheet->setCellValue('AH3', 'Date Finished');
+        $worksheet->setCellValue('AI3', 'Type Scholarships');
+        $worksheet->setCellValue('AJ3', 'SGC');
+        $worksheet->setCellValue('AK3', 'Status');
+
+      
+
+         # GENERATE WORKSHEET DATA
+		   $bg_counter = 1;
+		   $row        = 4;
+		   foreach ($students as $key => $student) {
+            $data=json_decode($student['data']);
+                $worksheet->setCellValue('B'.$row, 'Region III - Central Luzon');
+                $worksheet->setCellValue('C'.$row, 'Zambales');
+                $worksheet->setCellValue('D'.$row, 'll');
+                $worksheet->setCellValue('E'.$row, 'San Marcelino');
+                $worksheet->setCellValue('F'.$row, 'GIS Institute of Technology Phils Inc.');
+                $worksheet->setCellValue('G'.$row, '2nd Floor SM Terraces Bldg., National Road, San Marcelino, Zambales');
+                $worksheet->setCellValue('H'.$row, 'Private');
+                $worksheet->setCellValue('I'.$row, 'TVIs');
+                $worksheet->setCellValue('J'.$row, 'Tourism (Hotel and Restaurant)');
+                $worksheet->setCellValue('K'.$row, 'NTR');
+
+
+				$row = $row + 1;
+				$bg_counter++;
+			}
+
+        $writer = new Xlsx($worksheets);
+        return ($writer->save('php://output'));
 
 
     }
@@ -211,6 +297,9 @@ class StudentController extends Controller
         $data['qualification_training_day_duration']            =           $student->qualification_training_day_duration ?? '';
         $data['qualification_training_hours_duration']          =           $student->qualification_training_hours_duration ?? '';
         $data['scholarship']                                    =           $student->scholarship ?? '';
+        $data['classification']                                     =           $student->classification ?? '';
+        //  dd($data);
+
 
 
 
@@ -298,6 +387,9 @@ class StudentController extends Controller
         $data['qualification_training_hours_duration']              =       $request->qualification_training_hours_duration ?? '';
         $data['qualification']                                      =       $request->qualification ?? '';
         $data['scholarship']                                        =       $request->scholarship ?? '';
+        $data['classification']                                         =       $request->classification ?? '';
+
+
 
         $input=[
             'data'=> $data,

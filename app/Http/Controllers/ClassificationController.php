@@ -8,6 +8,10 @@ use Auth;
 use App\Models\disability;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use App\Models\client_classification;
+use App\Models\Student;
+
+
 
 
 class ClassificationController extends Controller
@@ -70,6 +74,17 @@ class ClassificationController extends Controller
         return response()->json($data);
 
     }
+
+    public function user(request $request)
+    {
+        $students=Student::where('id',$request->student_id)->get();
+        $student=json_decode($students[0]['data']);
+
+        $data['classification']                              =           $student->classification ?? '';
+
+    return $data;
+
+    }
     public function index()
     {
         $client_classifications = DB::table('client_classifications')
@@ -100,6 +115,13 @@ class ClassificationController extends Controller
 
     return $data;
 
+    }
+
+    public function ajaxshow(request $request)
+    {
+        $classification=client_classification::where('status',1)->get();
+
+        return($classification);
     }
     /**
      * Show the form for creating a new resource.

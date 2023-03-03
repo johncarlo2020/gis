@@ -1215,6 +1215,8 @@
         async defer></script>
     <script type="text/javascript">
         $(document).ready(function() {
+
+
             google.maps.event.addDomListener(window, 'load', initialize);
 
             // Get the parent div
@@ -1336,133 +1338,9 @@
             }
 
 
-            const sampleData = [{
-                    'label': 'Student',
-                    'id': '1'
-                },
-                {
-                    'label': 'Out of School Youth',
-                    'id': '2'
-                },
-                {
-                    'label': 'Solo Parent',
-                    'id': '3'
-                },
-                {
-                    'label': 'Solo Parents Children',
-                    'id': '1'
-                },
-                {
-                    'label': 'Senior Citizen',
-                    'id': '2'
-                },
-                {
-                    'label': 'TVET Trainers',
-                    'id': '3'
-                }, {
-                    'label': 'Displaced HEIs Teaching Personnel',
-                    'id': '1'
-                },
-                {
-                    'label': 'Persons with Disabilities',
-                    'id': '2'
-                },
-                {
-                    'label': 'Currently Employed Workers',
-                    'id': '3'
-                }, {
-                    'label': 'Employees with Contractual/ Job order Status',
-                    'id': '1'
-                },
-                {
-                    'label': 'Urban and Rural Poor',
-                    'id': '2'
-                },
-                {
-                    'label': 'Informal Workers',
-                    'id': '3'
-                }, {
-                    'label': 'Industry Workers',
-                    'id': '1'
-                },
-                {
-                    'label': 'Cooperatives',
-                    'id': '2'
-                },
-                {
-                    'label': 'Family Enterprises',
-                    'id': '3'
-                }, {
-                    'label': 'Family Members of Microenterpreneurs',
-                    'id': '1'
-                },
-                {
-                    'label': 'Micro Enterpreneurs',
-                    'id': '2'
-                },
-                {
-                    'label': 'Farmers and fisherman',
-                    'id': '3'
-                }, {
-                    'label': 'Family Members of Farmers and Fisherman',
-                    'id': '1'
-                },
-                {
-                    'label': 'Community Training and Employment Coordinator',
-                    'id': '2'
-                },
-                {
-                    'label': 'Overseas Filipino Workers (OFW) Dependents',
-                    'id': '3'
-                }, {
-                    'label': 'Returning/Repatriated Overseas Filipino',
-                    'id': '1'
-                },
-                {
-                    'label': 'Indigenous People and Cultural Communities',
-                    'id': '2'
-                },
-                {
-                    'label': 'Disadvantage Woman',
-                    'id': '3'
-                }, {
-                    'label': 'Victims of Natural Disasters and Calamities',
-                    'id': '1'
-                },
-                {
-                    'label': 'Victims or Survivor of Human Trafficking',
-                    'id': '2'
-                },
-                {
-                    'label': 'Drug Dependent Surrenderers',
-                    'id': '3'
-                }, {
-                    'label': 'Rebel Returnees or Decommissioned Combanants',
-                    'id': '1'
-                },
-                {
-                    'label': 'Inmates and Detainees',
-                    'id': '2'
-                },
-                {
-                    'label': 'Family Members of Inmates and Detainees',
-                    'id': '3'
-                }, {
-                    'label': 'Uniformed Personnel',
-                    'id': '1'
-                },
-                {
-                    'label': 'Wounded-in Action AFP and PNP-Personnel',
-                    'id': '2'
-                },
-                {
-                    'label': 'Family Members of AFP and PNP Killed-and Wounded in Action',
-                    'id': '3'
-                }, {
-                    'label': 'Tesda Alumni',
-                    'id': '3'
-                },
-            ];
+         
+
+            var classificationData=[];
 
             var disabilityData = [];
 
@@ -1489,7 +1367,6 @@
                     var checboxContainerDisability = document.getElementById(
                         "checboxContainerDisability");
 
-
                     $.each(disabilityData, function(index, value) {
                         const split = Math.floor(disabilityData.length / 4) + 1;
 
@@ -1512,6 +1389,104 @@
                         checkboxColumn.appendChild(checkbox);
                     });
 
+                      $.ajax({
+                            url: "{{ route('disability_user') }}",
+                            data: {
+                                "_token": "{{ csrf_token() }}",
+                                "student_id": $('#student_id').val()
+                            },
+                            dataType: "json",
+                            type: "post",
+                            success: function(data) {
+                                $.each(data['disability'], function(index, value) {
+                                    var id = '#checkboxDisability' + value;
+                                    $('#disabilityTeaxtarea').addClass('d-none');
+                                    $(id).attr('checked', true);
+                                });
+
+                            },
+                        });
+
+                    $('input[name="disability[]"][type="checkbox"]').click(function() {
+                        if ($(this).prop("checked") == true && $(this).val() == 0) {
+                            $(this).removeClass('checkboxDisability');
+                            $('.checkboxDisability').prop('checked', false);
+                            $('#checkInput' + this.value).removeClass('d-none');
+                            $('#disabilityTeaxtarea').removeClass('d-none');
+                        } else if ($(this).prop("checked") == false) {
+                            $('#checkInput' + this.value).addClass('d-none');
+                            $('#disabilityTeaxtarea').addClass('d-none');
+
+                        }
+                    });
+                },
+            });
+
+            var checboxContainerClassification = document.getElementById("checboxContainerClassification");
+
+              $.ajax({
+                url: "{{ route('classification_ajax_show') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                },
+                dataType: "json",
+                type: "post",
+                success: function(data) {
+                    console.log(data);
+                    $.each(data, function(i, item) {
+                        classificationData.push({
+                            label: data[i].name,
+                            id: data[i].id
+                        });
+                    });
+
+                    classificationData.push({
+                        label: 'others',
+                        id: '0'
+                    });
+                    var checboxContainerDisability = document.getElementById(
+                        "checboxContainerDisability");
+                        $.each(classificationData, function(index, value) {
+                        const split = Math.floor(classificationData.length / 4) + 1;
+                        var checkboxColumn;
+                        if (index % split === 0) {
+                            checkboxColumn = document.createElement("div");
+                            checkboxColumn.className = "col-3";
+                            checboxContainerClassification.appendChild(checkboxColumn);
+                        } else {
+                            checkboxColumn = checboxContainerClassification.lastChild;
+                        }
+                        const checkbox = document.createElement("div");
+                        checkbox.className = "form-check";
+                         checkbox.innerHTML =
+                            '<input class="form-check-input checkboxClassification" name="classification[]" type="checkbox" value="' +
+                            value.id + '" id="checkboxClassification' + value.id +
+                            '"><label class="form-check-label p-0" for="checkbox' + value.id +
+                            '">' + value.label + '</label>';
+                        checkboxColumn.appendChild(checkbox);
+                    });
+
+                    
+                $.ajax({
+                url: "{{ route('classification_user') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "student_id": $('#student_id').val()
+                },
+                dataType: "json",
+                type: "post",
+                success: function(data) {
+                    $.each(data['classification'], function(index, value) {
+                        console.log(value);
+                        var id = '#checkboxClassification' + value;
+                        $('#classificationTeaxtarea').addClass('d-none');
+                        $(id).attr('checked', true);
+                    });
+
+                },
+            });
+
+
                     $('input[name="disability[]"][type="checkbox"]').click(function() {
                         if ($(this).prop("checked") == true && $(this).val() == 0) {
                             $(this).removeClass('checkboxDisability');
@@ -1529,30 +1504,7 @@
                 },
             });
 
-            var checboxContainerClassification = document.getElementById("checboxContainerClassification");
-
-            $.each(sampleData, function(index, value) {
-                const split = Math.floor(sampleData.length / 4) + 1;
-
-                var checkboxColumn;
-                if (index % split === 0) {
-                    checkboxColumn = document.createElement("div");
-                    checkboxColumn.className = "col-3";
-                    checboxContainerClassification.appendChild(checkboxColumn);
-                } else {
-                    checkboxColumn = checboxContainerClassification.lastChild;
-                }
-
-                const checkbox = document.createElement("div");
-                checkbox.className = "form-check";
-                checkbox.innerHTML = '<input class="form-check-input" type="checkbox" value="' + value.id +
-                    '" id="checkbox' + value.id + '"><label class="form-check-label p-0" for="checkbox' +
-                    value.id + '">' + value.label +
-                    '</label> <input type="text" class="form-control d-none mt-2" id="checkInput' + value
-                    .id + '"placeholder="' + value.label + '">';
-                checkboxColumn.appendChild(checkbox);
-            });
-
+        
             window.addEventListener("load", function() {
                 document.querySelector(".loader").style.display = "none";
             });
@@ -1619,23 +1571,9 @@
 
             });
 
-            $.ajax({
-                url: "{{ route('disability_user') }}",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "student_id": $('#student_id').val()
-                },
-                dataType: "json",
-                type: "post",
-                success: function(data) {
-                    $.each(data['disability'], function(index, value) {
-                        var id = '#checkboxDisability' + value;
-                        $('#disabilityTeaxtarea').addClass('d-none');
-                        $(id).attr('checked', true);
-                    });
+          
 
-                },
-            });
+        
 
             $.ajax({
                 url: "https://psgc.gitlab.io/api/regions/",

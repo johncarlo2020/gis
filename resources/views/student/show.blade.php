@@ -11,16 +11,18 @@
              <h6>Filter results</h6>
          </div>
          <div class="form-container card p-3 ">
-             <form>
+             <form method="get" action="{{ route('admin.student.show') }}">
                  <div class="row student-input">
                      <div class="col">
                          <div class="mb-3">
                              <label for="exampleInputEmail1" class="form-label">Course</label>
-                             <select class="form-select" aria-label="Default select example">
+                             <select name="qualification" class="form-select" aria-label="Default select example">
                                  <option selected>Open this select menu</option>
-                                 <option value="1">One</option>
-                                 <option value="2">Two</option>
-                                 <option value="3">Three</option>
+                                 @foreach($qualifications as $key => $qualification)
+                                 <option value="{{$qualification->id}}">{{$qualification->name}}</option>
+
+                                    
+                                 @endforeach
                              </select>
                          </div>
                      </div>
@@ -112,6 +114,7 @@
              $buttonExport.addClass('btn btn-sm btn-success rounded-pill px-3');
              $buttonFilter.attr('id', 'btn_filter');
              $buttonExport.attr('id', 'btn_export');
+             //$buttonExport.attr('href','{{ route('admin.student.export') }}');
 
              //append icons and button
              $('#table_id_filter').append($buttonFilter, $buttonExport);
@@ -125,6 +128,25 @@
              $buttonFilter.click(function() {
                  $(filter).toggle();
              });
+
+             $.urlParam = function(name){
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                if (results==null) {
+                return null;
+                }
+                return decodeURI(results[1]) || 0;
+            }
+
+             $('#btn_export').click(function(){
+
+                var filter = $.urlParam('qualification') ?? null;
+
+                window.location='{{ route('admin.student.export') }}'+'?qualification='+filter;
+
+                
+
+                console.log(filter);
+             })
 
 
 

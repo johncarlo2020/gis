@@ -46,6 +46,8 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('Student/show', [StudentController::class, 'index'])->name('admin.student.show');
         Route::get('Student/add', [StudentController::class, 'create'])->name('admin.student.add');
         Route::get('Student/{id}/edit', [StudentController::class, 'edit'])->name('admin.student.edit');
+        Route::get('Student/export', [StudentController::class, 'export'])->name('admin.student.export');
+
         Route::PUT('Student/update/{id}', [StudentController::class, 'update'])->name('admin.student.update');
 
 
@@ -103,6 +105,7 @@ Route::post('/ajax/qualification-edit', [qualificationController::class, 'update
 Route::post('/ajax/qualification-delete', [qualificationController::class, 'destroy'])->name('qualification_destroy');
 Route::post('/ajax/qualification-show', [qualificationController::class, 'show'])->name('qualification_show');
 
+
 // disability
 Route::post('/ajax/disability-reload', [DisabilityController::class, 'reload'])->name('disability_reload');
 Route::post('/ajax/disability-view', [DisabilityController::class, 'view'])->name('disability_view');
@@ -120,6 +123,10 @@ Route::post('/ajax/classification-store', [ClassificationController::class, 'sto
 Route::post('/ajax/classification-edit', [ClassificationController::class, 'update'])->name('classification_edit');
 Route::post('/ajax/classification-status', [ClassificationController::class, 'destroy'])->name('classification_status');
 Route::post('/ajax/disability-user', [DisabilityController::class, 'user'])->name('disability_user');
+Route::post('/ajax/classsification-user', [ClassificationController::class, 'user'])->name('classification_user');
+
+Route::post('/ajax/classification-show/student', [ClassificationController::class, 'ajaxshow'])->name('classification_ajax_show');
+
 
 
 
