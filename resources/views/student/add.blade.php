@@ -1214,8 +1214,14 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHSbhwRN70xEw6oR-HDn8_mcMJtK0xvHI&libraries=places&callback=initMap"
         async defer></script>
     <script type="text/javascript">
-        $(document).ready(function() {
+    
+        window.addEventListener("load", function() {
+                document.querySelector(".loader").style.display = "none";
+            });
+          
 
+        $(document).ready(function() {
+            
 
             google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -1505,9 +1511,6 @@
             });
 
         
-            window.addEventListener("load", function() {
-                document.querySelector(".loader").style.display = "none";
-            });
 
 
 

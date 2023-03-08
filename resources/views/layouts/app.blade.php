@@ -270,7 +270,6 @@
             </div>
         </footer>
     </div>
-    @yield('scripts')
 
     <style>
         .image {
@@ -324,6 +323,7 @@
 
         });
     </script>
+    @yield('scripts')
 
 
 
