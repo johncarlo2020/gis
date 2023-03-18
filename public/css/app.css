@@ -10865,3 +10865,7 @@ textarea.form-control-lg {
 .dashboard-section .col:nth-child(4) .title::after {
   background-color: #D4FF2B !important;
 }
+
+.main-container-steper input[type=radio] {
+  margin-top: 6px;
+}
