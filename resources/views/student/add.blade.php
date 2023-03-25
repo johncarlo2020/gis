@@ -182,6 +182,36 @@
                                             placeholder="Assessment Venue">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Learners refference
+                                            number
+                                        </label>
+                                        <input type="text" class="form-control" name="learners_reference_number"
+                                            placeholder="Learners refference number">
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="border p-2 rounded">
+                                        <div class="border-bottom mb-2">
+                                            <label for="exampleFormControlInput1" class="form-label m-0 p-0 ">Type of
+                                                student
+                                            </label>
+                                        </div>
+                                        <div class="mb-3 ">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input qualification_type" type="radio"
+                                                    name="qualification_type" id="inlineRadio1" value="1">
+                                                <label class="form-check-label p-0" for="inlineRadio1">Old student</label>
+                                            </div>
+                                            <div class="form-check form-check-inline qualification_type">
+                                                <input class="form-check-input" type="radio" name="qualification_type"
+                                                    id="inlineRadio2" value="2">
+                                                <label class="form-check-label p-0" for="inlineRadio2">New student</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="buttons">
@@ -517,6 +547,13 @@
                                             value="{{ $data['date_of_birth'] }}" require>
                                     </div>
                                 </div>
+                                <div class="col-3">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Age*
+                                        </label>
+                                        <input type="text" class="form-control" name="Age" placeholder="Age">
+                                    </div>
+                                </div>
                             </div>
                             <div class="buttons button_space">
                                 <button type="button" class="back_button">Back</button>
@@ -788,7 +825,6 @@
                                             <label class="form-check-label p-0" for="inlineRadio2">Short term</label>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="row student-input">
                                     <div class="col-5">
@@ -892,7 +928,8 @@
                                                 @foreach ($scholarships as $key => $scholarship)
                                                     <option
                                                         {{ $data['scholarship'] == $scholarship->id ? 'selected' : '' }}
-                                                        value="{{ $scholarship->id }}">{{ $scholarship->name }}</option>
+                                                        value="{{ $scholarship->id }}">{{ $scholarship->name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -1199,11 +1236,10 @@
 
     <script src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations-v1.0.0.js"></script>
     <script type="text/javascript">
-    
         window.addEventListener("load", function() {
-                document.querySelector(".loader").style.display = "none";
-            });
-          
+            document.querySelector(".loader").style.display = "none";
+        });
+
 
         $(document).ready(function() {
             var autocomplete;
@@ -1333,7 +1369,6 @@
             }
 
 
-         
 
             var classificationData=[];
             var disabilityData = [];
@@ -1383,23 +1418,23 @@
                         checkboxColumn.appendChild(checkbox);
                     });
 
-                      $.ajax({
-                            url: "{{ route('disability_user') }}",
-                            data: {
-                                "_token": "{{ csrf_token() }}",
-                                "student_id": $('#student_id').val()
-                            },
-                            dataType: "json",
-                            type: "post",
-                            success: function(data) {
-                                $.each(data['disability'], function(index, value) {
-                                    var id = '#checkboxDisability' + value;
-                                    $('#disabilityTeaxtarea').addClass('d-none');
-                                    $(id).attr('checked', true);
-                                });
+                    $.ajax({
+                        url: "{{ route('disability_user') }}",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "student_id": $('#student_id').val()
+                        },
+                        dataType: "json",
+                        type: "post",
+                        success: function(data) {
+                            $.each(data['disability'], function(index, value) {
+                                var id = '#checkboxDisability' + value;
+                                $('#disabilityTeaxtarea').addClass('d-none');
+                                $(id).attr('checked', true);
+                            });
 
-                            },
-                        });
+                        },
+                    });
 
                     $('input[name="disability[]"][type="checkbox"]').click(function() {
                         if ($(this).prop("checked") == true && $(this).val() == 0) {
@@ -1418,7 +1453,7 @@
 
             var checboxContainerClassification = document.getElementById("checboxContainerClassification");
 
-              $.ajax({
+            $.ajax({
                 url: "{{ route('classification_ajax_show') }}",
                 data: {
                     "_token": "{{ csrf_token() }}",
@@ -1440,7 +1475,7 @@
                     });
                     var checboxContainerDisability = document.getElementById(
                         "checboxContainerDisability");
-                        $.each(classificationData, function(index, value) {
+                    $.each(classificationData, function(index, value) {
                         const split = Math.floor(classificationData.length / 4) + 1;
                         var checkboxColumn;
                         if (index % split === 0) {
@@ -1452,7 +1487,7 @@
                         }
                         const checkbox = document.createElement("div");
                         checkbox.className = "form-check";
-                         checkbox.innerHTML =
+                        checkbox.innerHTML =
                             '<input class="form-check-input checkboxClassification" name="classification[]" type="checkbox" value="' +
                             value.id + '" id="checkboxClassification' + value.id +
                             '"><label class="form-check-label p-0" for="checkbox' + value.id +
@@ -1460,25 +1495,25 @@
                         checkboxColumn.appendChild(checkbox);
                     });
 
-                    
-                $.ajax({
-                url: "{{ route('classification_user') }}",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "student_id": $('#student_id').val()
-                },
-                dataType: "json",
-                type: "post",
-                success: function(data) {
-                    $.each(data['classification'], function(index, value) {
-                        console.log(value);
-                        var id = '#checkboxClassification' + value;
-                        $('#classificationTeaxtarea').addClass('d-none');
-                        $(id).attr('checked', true);
-                    });
 
-                },
-            });
+                    $.ajax({
+                        url: "{{ route('classification_user') }}",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "student_id": $('#student_id').val()
+                        },
+                        dataType: "json",
+                        type: "post",
+                        success: function(data) {
+                            $.each(data['classification'], function(index, value) {
+                                console.log(value);
+                                var id = '#checkboxClassification' + value;
+                                $('#classificationTeaxtarea').addClass('d-none');
+                                $(id).attr('checked', true);
+                            });
+
+                        },
+                    });
 
 
                     $('input[name="disability[]"][type="checkbox"]').click(function() {
@@ -1537,9 +1572,9 @@
 
             });
 
-          
 
-        
+
+
 
             $.ajax({
                 url: "https://psgc.gitlab.io/api/regions/",
