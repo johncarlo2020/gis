@@ -98,7 +98,7 @@
                                         </label>
                                         <input type="text" class="form-control" name="t2mis"
                                             id="exampleFormControlInput1" value="{{ $data['t2mis'] }}"
-                                            placeholder="Unique Learner Identifier*">
+                                            placeholder="Unique Learner Identifier*" require>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -106,7 +106,7 @@
                                         <label for="exampleFormControlInput1" class="form-label">Vouchers Number</label>
                                         <input type="text" class="form-control" name="vouchers_number"
                                             id="exampleFormControlInput1" value="{{ $data['vouchers_number'] }}"
-                                            placeholder="Vouchers Number">
+                                            placeholder="Vouchers Number" require>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -114,7 +114,7 @@
                                         <label for="exampleFormControlInput1" class="form-label">Training Status</label>
                                         <input type="text" class="form-control" name="training_status"
                                             id="exampleFormControlInput1" value="{{ $data['training_status'] }}"
-                                            placeholder="Training Status">
+                                            placeholder="Training Status" require>
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@
                                         </label>
                                         <input type="text" class="form-control" name="trainor_name"
                                             id="exampleFormControlInput1" value="{{ $data['trainor_name'] }}"
-                                            placeholder="Trainor Name">
+                                            placeholder="Trainor Name" require>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -133,7 +133,7 @@
                                         <label for="exampleFormControlInput1" class="form-label">Date Started of
                                             training</label>
                                         <input type="date" class="form-control" name="training_date_started"
-                                            id="exampleFormControlInput1" value="{{ $data['training_date_started'] }}">
+                                            id="exampleFormControlInput1" value="{{ $data['training_date_started'] }}" require>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -141,7 +141,7 @@
                                         <label for="exampleFormControlInput1" class="form-label">Date end of
                                             training</label>
                                         <input type="date" class="form-control" name="training_date_end"
-                                            id="exampleFormControlInput1" value="{{ $data['training_date_end'] }}">
+                                            id="exampleFormControlInput1" value="{{ $data['training_date_end'] }}" >
                                     </div>
                                 </div>
                             </div>
@@ -152,15 +152,14 @@
                                         </label>
                                         <input type="text" class="form-control" name="name_of_assessor"
                                             id="exampleFormControlInput1" value="{{ $data['name_of_assessor'] }}"
-                                            placeholder="Assesor Name">
+                                            placeholder="Assesor Name" require>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">Date Assessed
-                                            training</label>
+                                        <label for="exampleFormControlInput1" class="form-label">Assessement date</label>
                                         <input type="date" class="form-control" name="training_date_assessed"
-                                            id="exampleFormControlInput1" value="{{ $data['training_date_assessed'] }}">
+                                            id="exampleFormControlInput1" value="{{ $data['training_date_assessed'] }}" require>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -179,14 +178,14 @@
                                         <label for="exampleFormControlInput1" class="form-label">Assessment Venue
                                         </label>
                                         <input type="text" class="form-control" name="assessment_venue"
-                                            id="Assesment_venue" value="{{ $data['assessment_venue'] }}"
+                                            id="assesment_venue" value="{{ $data['assessment_venue'] }}"
                                             placeholder="Assessment Venue">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="buttons">
-                                <button type="button" class="next_button">Next Step</button>
+                                <button type="button" data-id="1" class="next_button">Next Step</button>
 
                             </div>
                         </div>
@@ -203,7 +202,7 @@
                                         </label>
                                         <input type="text" name="first_name" class="form-control"
                                             id="exampleFormControlInput1" value="{{ $data['first_name'] }}"
-                                            placeholder="First name">
+                                            placeholder="First name" require>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -212,7 +211,7 @@
                                         </label>
                                         <input type="text" name="last_name" class="form-control"
                                             id="exampleFormControlInput1" value="{{ $data['last_name'] }}"
-                                            placeholder="Last Name ">
+                                            placeholder="Last Name " require>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -221,7 +220,7 @@
                                         </label>
                                         <input type="text" name="middle_name" class="form-control"
                                             id="exampleFormControlInput1" value="{{ $data['middle_name'] }}"
-                                            placeholder="Middle name ">
+                                            placeholder="Middle name " require>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -294,7 +293,7 @@
                                         </label>
                                         <input type="text" name="contact_number" class="form-control"
                                             id="exampleFormControlInput1" value="{{ $data['contact_number'] }}"
-                                            placeholder="Contact number">
+                                            placeholder="Contact number" require>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -314,7 +313,7 @@
                                         </label>
                                         <input type="email" class="form-control" name="email"
                                             id="exampleFormControlInput1" value="{{ $data['email'] }}"
-                                            placeholder="email@example.com">
+                                            placeholder="email@example.com" require>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -339,7 +338,7 @@
                                 <div class="col-2">
                                     <div class="mb-3">
                                         <label for="disabledSelect" class="form-label">Gender *</label>
-                                        <select name="gender" class="form-select" value="{{ $data['gender'] }}">
+                                        <select name="gender" class="form-select" value="{{ $data['gender'] }}" require>
                                             <option {{ $data['gender'] == 'Male' ? 'selected' : '' }} value="Male">Male
                                             </option>
                                             <option {{ $data['gender'] == 'Female' ? 'selected' : '' }} value="Female">
@@ -351,7 +350,7 @@
                                     <div class="mb-3">
                                         <label for="disabledSelect" class="form-label">Civil Status </label>
                                         <select name="civil_status" class="form-select"
-                                            value="{{ $data['civil_status'] }}">
+                                            value="{{ $data['civil_status'] }}" require>
                                             <option {{ $data['civil_status'] == 'Single' ? 'selected' : '' }}
                                                 value="Single">Single</option>
                                             <option {{ $data['civil_status'] == 'Married' ? 'selected' : '' }}
@@ -370,7 +369,7 @@
                                     <div class="mb-3">
                                         <label for="disabledSelect" class="form-label">Educational Attainment Before the
                                             Training (Trainee)</label>
-                                        <select name="educational_attainment" class="form-select">
+                                        <select name="educational_attainment" class="form-select" require>
                                             <option
                                                 {{ $data['educational_attainment'] == 'No Grade Completed' ? 'selected' : '' }}
                                                 value="No Grade Completed">No Grade Completed</option>
@@ -416,7 +415,7 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Religion
                                         </label>
-                                        <select name="religion" class="form-select">
+                                        <select name="religion" class="form-select" require>
                                             <option {{ $data['religion'] == 'None' ? 'selected' : '' }} value="None">
                                                 None
                                             </option>
@@ -445,16 +444,6 @@
                             <div class="text">
                                 <h6>Complete Address</h6>
                             </div>
-                            <div class="row student-input">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        </label>
-                                        <input type="text" name="complete_address" class="form-control"
-                                            id="complete_address" value="{{ $data['complete_address'] }}"
-                                            placeholder="Complete Address">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="text">
                                 <h6>Other relevant information</h6>
                             </div>
@@ -465,8 +454,7 @@
                                         </label>
                                         <input type="text" name="nationality" class="form-control"
                                             id="exampleFormControlInput1" value="{{ $data['nationality'] }}"
-                                            placeholder="Nationality
-                                        ">
+                                            placeholder="Nationality " require>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -474,7 +462,7 @@
                                         <label for="disabledSelect" class="form-label">Employment Status (before the
                                             training)
                                             * </label>
-                                        <select name="employment_status" class="form-select">
+                                        <select name="employment_status" class="form-select" require>
                                             <option {{ $data['employment_status'] == 'Employed' ? 'selected' : '' }}
                                                 value="Employed">Employed</option>
                                             <option {{ $data['employment_status'] == 'Unemployed' ? 'selected' : '' }}
@@ -489,7 +477,7 @@
                                         <label for="exampleFormControlInput1" class="form-label">Date of Employment
                                         </label>
                                         <input type="date" class="form-control" name="date_of_employment"
-                                            value="{{ $data['date_of_employment'] }}">
+                                            value="{{ $data['date_of_employment'] }}" >
 
                                     </div>
                                 </div>
@@ -526,7 +514,7 @@
                                         <label for="exampleFormControlInput1" class="form-label">Date of Birth
                                         </label>
                                         <input type="date" class="form-control" name="date_of_birth"
-                                            value="{{ $data['date_of_birth'] }}">
+                                            value="{{ $data['date_of_birth'] }}" require>
                                     </div>
                                 </div>
                             </div>
@@ -808,7 +796,7 @@
                                             <label for="disabledSelect" class="form-label">Name of Course/Qualification:
                                             </label>
                                             <select id="courses" name="qualification" class="form-select">
-                                                <option>Select Course</option>
+                                                <option disabled>Select Course</option>
 
                                                 @foreach ($qualifications as $key => $qualification)
                                                     <option
@@ -1210,9 +1198,6 @@
     @parent
 
     <script src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations-v1.0.0.js"></script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHSbhwRN70xEw6oR-HDn8_mcMJtK0xvHI&libraries=places&callback=initMap"
-        async defer></script>
     <script type="text/javascript">
     
         window.addEventListener("load", function() {
@@ -1221,9 +1206,15 @@
           
 
         $(document).ready(function() {
+            var autocomplete;
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById(assesment_venue)),{
+                types:['geocode'],
+            });
+            google.maps.event.addListener( autocomplete,'place_changed', function (){
+                var near_place =autocomplete.getPlace();
+            });
             
 
-            google.maps.event.addDomListener(window, 'load', initialize);
 
             // Get the parent div
             var $parentDiv = $(".sidebar");
@@ -1338,16 +1329,13 @@
                         }
                     }
                 });
-
                 return validate;
-
             }
 
 
          
 
             var classificationData=[];
-
             var disabilityData = [];
 
             $.ajax({
@@ -1510,31 +1498,6 @@
                 },
             });
 
-        
-
-
-
-
-            function initialize() {
-                var input = document.getElementById('Assesment_venue');
-                var input1 = document.getElementById('employment_address');
-                var input2 = document.getElementById('training_venue');
-                var input3 = document.getElementById('examination_venue');
-                var input4 = document.getElementById('complete_address');
-                var input5 = document.getElementById('parent_address');
-                var input6 = document.getElementById('benefitiary_address');
-
-
-
-
-                var autocomplete = new google.maps.places.Autocomplete(input);
-                var autocomplete = new google.maps.places.Autocomplete(input1);
-                var autocomplete = new google.maps.places.Autocomplete(input2);
-                var autocomplete = new google.maps.places.Autocomplete(input3);
-                var autocomplete = new google.maps.places.Autocomplete(input4);
-                var autocomplete = new google.maps.places.Autocomplete(input5);
-                var autocomplete = new google.maps.places.Autocomplete(input6);
-            }
 
             $('input:radio[name="qualification_type"]').on('change', function() {
                 var type = $(this).val();
@@ -1561,7 +1524,7 @@
                         $.each(data, function(index, value) {
 
 
-                            var options = '<option>Select Course</option>';
+                            var options = '<option disabled>Select Course</option>';
                             $.each(data, function(index, value) {
                                 options += '<option value="' + value.id + '">' +
                                     value.name + '</option>';
