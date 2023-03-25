@@ -21,16 +21,19 @@ class DisabilityController extends Controller
      */
     public function reload(Request $request)
     {
-        $count = DB::table('disabilities')->count();
+        $count = DB::table('disabilities')
+            ->where('status', '=', 1)
+            ->count();
         $disabilities = DB::table('disabilities')
-        ->offset($request['start'])
-        ->limit($request['length'])
-        ->get([
-            'id',
-            'name',
-            'description',
-            'status',
-    ]);
+            ->where('status', '=', 1)
+            ->offset($request['start'])
+            ->limit($request['length'])
+            ->get([
+                'id',
+                'name',
+                'description',
+                'status',
+            ]);
 
         $disabilities = json_decode($disabilities, true);
 
@@ -75,6 +78,7 @@ class DisabilityController extends Controller
     public function index()
     {
         $disabilities = DB::table('disabilities')
+        ->where('status', '=', 1)
         ->get([
             'id',
             'name',
@@ -109,7 +113,7 @@ class DisabilityController extends Controller
         $students=Student::where('id',$request->student_id)->get();
         $student=json_decode($students[0]['data']);
 
-        $data['disability']                              =           $student->disability ?? '';
+        $data['disability'] = $student->disability ?? '';
 
     return $data;
 
@@ -220,11 +224,13 @@ class DisabilityController extends Controller
         
         if ($request['type'] == 'validate_new') {
             $data = DB::table('disabilities')
+            ->where('status', '=', 1)
             ->where('name', '=', $request['data'])
             ->count();
         }
         if ($request['type'] == 'validate_edit') {
             $data = DB::table('disabilities')
+            ->where('status', '=', 1)
             ->where('name', '=', $request['data'])
             ->where('id', '!=', $request['data_id'])
             ->count();

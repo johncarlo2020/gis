@@ -23,8 +23,11 @@ class ClassificationController extends Controller
      */
     public function reload(Request $request)
     {
-        $count = DB::table('client_classifications')->count();
+        $count = DB::table('client_classifications')
+        ->where('status', '=', 1)
+        ->count();
         $client_classifications = DB::table('client_classifications')
+        ->where('status', '=', 1)
         ->offset($request['start'])
         ->limit($request['length'])
         ->get([
@@ -80,7 +83,7 @@ class ClassificationController extends Controller
         $students=Student::where('id',$request->student_id)->get();
         $student=json_decode($students[0]['data']);
 
-        $data['classification']                              =           $student->classification ?? '';
+        $data['classification']  = $student->classification ?? '';
 
     return $data;
 
@@ -88,6 +91,7 @@ class ClassificationController extends Controller
     public function index()
     {
         $client_classifications = DB::table('client_classifications')
+        ->where('status', '=', 1)
         ->get([
             'id',
             'name',
@@ -100,6 +104,7 @@ class ClassificationController extends Controller
     {
         $data = DB::table('client_classifications')
                 ->where('id', '=', $request['id'])
+                ->where('status', '=', 1)
                 ->get([
                     'id',
                     'name',
@@ -144,6 +149,7 @@ class ClassificationController extends Controller
 
         $data = DB::table('client_classifications')
             ->where('name', '=', $request['data'])
+            ->where('status', '=', 1)
             ->count();
 
         if ($data == 0 ) {
@@ -187,6 +193,7 @@ class ClassificationController extends Controller
     {
         DB::table('client_classifications')
             ->where('id' , '=' , $request['data']['id'])
+            ->where('status', '=', 1)
             ->update(
              [
                  'name'                 => $request['data']['name'],
@@ -229,11 +236,13 @@ class ClassificationController extends Controller
         
         if ($request['type'] == 'validate_new') {
             $data = DB::table('client_classifications')
+            ->where('status', '=', 1)
             ->where('name', '=', $request['data'])
             ->count();
         }
         if ($request['type'] == 'validate_edit') {
             $data = DB::table('client_classifications')
+            ->where('status', '=', 1)
             ->where('name', '=', $request['data'])
             ->where('id', '!=', $request['data_id'])
             ->count();

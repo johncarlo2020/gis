@@ -19,6 +19,7 @@ class ScholarshipController extends Controller
     public function index()
     {
         $scholarships = DB::table('scholarships')
+        ->where('status', '=', 1)
                 ->get([
                     'id',
                     'name',
@@ -48,6 +49,7 @@ class ScholarshipController extends Controller
     public function store(Request $request)
     {
         $validate_name = DB::table('scholarships')
+                ->where('status', '=', 1)
                 ->where('name', '=', $request['data']['name'])
                 ->count();
 
@@ -77,6 +79,7 @@ class ScholarshipController extends Controller
     public function view(Request $request)
     {
         $data = DB::table('scholarships')
+        ->where('status', '=', 1)
                 ->where('id', '=', $request['id'])
                 ->get([
                     'id',
@@ -141,6 +144,7 @@ class ScholarshipController extends Controller
     public function name_validate_edit(Request $request)
     {
         $data = DB::table('scholarships')
+                ->where('status', '=', 1)
                 ->where('name', '=', $request['data'])
                 ->where('id', '!=',$request['id'])
                 ->count();
@@ -150,6 +154,7 @@ class ScholarshipController extends Controller
     public function name_validate(Request $request)
     {
         $data = DB::table('scholarships')
+                ->where('status', '=', 1)
                 ->where('name', '=', $request['data'])
                 ->count();
 
@@ -158,17 +163,19 @@ class ScholarshipController extends Controller
     public function reload(Request $request)
     {
 
-        $count = DB::table('scholarships')->count();
+        $count = DB::table('scholarships')
+        ->where('status', '=', 1)
+            ->count();
         $scholarships = DB::table('scholarships')
-        ->offset($request['start'])
-        ->limit($request['length'])
-        ->get([
-            
-            'id',
-            'name',
-            'description',
-            'status',
-    ]);
+            ->where('status', '=', 1)
+            ->offset($request['start'])
+            ->limit($request['length'])
+            ->get([
+                'id',
+                'name',
+                'description',
+                'status',
+            ]);
 
         $scholarships = json_decode($scholarships, true);
 
