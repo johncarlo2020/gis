@@ -301,8 +301,6 @@
         $(document).ready(function() {
 
             var myData = '{{ $myData }}';
-            console.log(myData);
-
             $("#navDropItem").hide();
             var open = false;
             $("#navDropDown").click(function() {

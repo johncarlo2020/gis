@@ -232,6 +232,7 @@ class StudentController extends Controller
     public function edit($id)
     {
         $students=Student::where('id',$id)->get();
+        $data['student_type']                                          =           $students[0]['type'] ?? '';
         $student=json_decode($students[0]['data']);
 
         $data['t2mis']                                          =           $student->t2mis ?? '';
@@ -297,8 +298,12 @@ class StudentController extends Controller
         $data['qualification_training_day_duration']            =           $student->qualification_training_day_duration ?? '';
         $data['qualification_training_hours_duration']          =           $student->qualification_training_hours_duration ?? '';
         $data['scholarship']                                    =           $student->scholarship ?? '';
-        $data['classification']                                     =           $student->classification ?? '';
-        //  dd($data);
+        $data['classification']                                 =           $student->classification ?? '';
+        $data['date_of_birth']                                 =           $student->date_of_birth ?? '';
+        $data['age']                                 =           $student->age ?? '';
+
+
+        // dd($data);
 
 
 
@@ -387,13 +392,18 @@ class StudentController extends Controller
         $data['qualification_training_hours_duration']              =       $request->qualification_training_hours_duration ?? '';
         $data['qualification']                                      =       $request->qualification ?? '';
         $data['scholarship']                                        =       $request->scholarship ?? '';
-        $data['classification']                                         =       $request->classification ?? '';
+        $data['classification']                                     =       $request->classification ?? '';
+        $data['date_of_birth']                                     =       $request->date_of_birth ?? '';
+        $data['age']                                     =       $request->age ?? '';
+
+
 
 
 
         $input=[
             'data'=> $data,
-            'status' => 1
+            'status' => 1,
+            'type' => $request->student_type
         ];
        
         Student::where('id',$id)->update($input);

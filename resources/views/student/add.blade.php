@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="loader">
-        <div class="spinner"></div>
-    </div>
+    
     <style>
         .main-container-steper {
             max-width: 100% !important;
@@ -200,13 +198,13 @@
                                         </div>
                                         <div class="mb-3 ">
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input qualification_type" type="radio"
-                                                    name="qualification_type" id="inlineRadio1" value="1">
+                                                <input class="form-check-input student_type" type="radio"
+                                                    name="student_type" id="inlineRadio1" value="old" {{ $data['student_type'] == 'old' ? 'checked' : '' }}>
                                                 <label class="form-check-label p-0" for="inlineRadio1">Old student</label>
                                             </div>
-                                            <div class="form-check form-check-inline qualification_type">
-                                                <input class="form-check-input" type="radio" name="qualification_type"
-                                                    id="inlineRadio2" value="2">
+                                            <div class="form-check form-check-inline student_type">
+                                                <input class="form-check-input" type="radio" name="student_type"
+                                                    id="inlineRadio2" value="new" {{ $data['student_type'] == 'new' ? 'checked' : '' }} >
                                                 <label class="form-check-label p-0" for="inlineRadio2">New student</label>
                                             </div>
                                         </div>
@@ -215,7 +213,7 @@
                             </div>
 
                             <div class="buttons">
-                                <button type="button" data-id="1" class="next_button">Next Step</button>
+                                <button type="button" class="next_button">Next Step</button>
 
                             </div>
                         </div>
@@ -543,7 +541,7 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Date of Birth
                                         </label>
-                                        <input type="date" class="form-control" name="date_of_birth"
+                                        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth"
                                             value="{{ $data['date_of_birth'] }}" require>
                                     </div>
                                 </div>
@@ -551,7 +549,7 @@
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Age*
                                         </label>
-                                        <input type="text" class="form-control" name="Age" placeholder="Age">
+                                        <input type="text" class="form-control" id="age" name="age" placeholder="age" value="{{ $data['age'] }}" >
                                     </div>
                                 </div>
                             </div>
@@ -750,34 +748,33 @@
                                 <button type="button" class="next_button">Next Step</button>
                             </div>
                         </div>
+
                         <div class="main ">
                             <div class="text">
-                                <h6> Learner/Trainee/Student (Clients) Classification:
-                                </h6>
+                                <h6> Learner/Trainee/Student (Clients) Classification:</h6>
                             </div>
-                            <div class="row student-input border rounded py-3 px-2 mb-4"
-                                id="checboxContainerClassification">
+                            <div class="row student-input border rounded py-3 px-2 mb-4" id="checboxContainerClassification">
                             </div>
-
+                            
                             <div class="buttons button_space">
-                                <button class="back_button">Back</button>
-                                <button class="next_button">Next Step</button>
+                                <button type="button" class="back_button">Back</button>
+                                <button type="button" class="next_button">Next Step</button>
                             </div>
                         </div>
+
                         <div class="main ">
                             <div class="text">
-                                <h6>Student Disability:
-                                </h6>
+                                <h6>Student Disability:</h6>
                             </div>
-                            <div class="disability-form border rounded py-3 px-2 mb-4">
-                                <div class="row student-input " id="checboxContainerDisability">
-                                </div>
-                                <div class="student-input mt-3 d-none" id="disabilityTeaxtarea">
-                                    <label for="floatingTextarea2">Please specify:</label>
-                                    <textarea class="form-control" name="disability_others" placeholder="Write the discription here ..."
-                                        id="disability_others" style="height: 100px">{{ $data['disability_others'] }}</textarea>
-                                </div>
+                            <div class="row student-input " id="checboxContainerDisability">
                             </div>
+
+                            <div class="student-input mt-3 d-none" id="disabilityTeaxtarea">
+                                <label for="floatingTextarea2">Please specify:</label>
+                                <textarea class="form-control" name="disability_others" placeholder="Write the discription here ..."
+                                    id="disability_others" style="height: 100px">{{ $data['disability_others'] }}</textarea>
+                            </div>
+
                             <div class="row student-input">
                                 <div class="col-3">
                                     <div class="mb-3">
@@ -795,12 +792,14 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="buttons button_space">
-                                <button class="back_button">Back</button>
-                                <button class="next_button">Next Step</button>
+                                <button type="button" class="back_button">Back</button>
+                                <button type="button" class="next_button">Next Step</button>
                             </div>
                         </div>
+
+                        
                         <div class="main">
 
                             <div class="text">
@@ -975,7 +974,10 @@
                                     </button>
                                 </li>
                             </ul>
+                            <button type="button" class="other-training-btn btn btn-success  add-tile"><i
+                                class="fa-solid fa-plus"></i></button>
                             <div class="tab-content mt-3" id="myTabContent">
+                                
                                 <div class="tab-pane fade show active" id="home" role="tabpanel"
                                     aria-labelledby="home-tab">
                                     <div class="other-training border rounded py-3 px-2 pr-5 mb-4">
@@ -1037,12 +1039,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="btn btn-success rounded-circle add-tile"><i
-                                                class="fa-solid fa-plus"></i></button>
                                     </div>
+                                    
                                 </div>
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                    <div class="other-training border rounded py-3 px-2 pr-5 mb-4">
+                                    <div class=" border rounded py-3 px-2 pr-5 mb-4">
                                         <div class="row student-input">
                                             <div class="col-4">
                                                 <div class="">
@@ -1107,7 +1108,7 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                                    <div class="other-training border rounded py-3 px-2 pr-5 mb-4">
+                                    <div class=" border rounded py-3 px-2 pr-5 mb-4">
                                         <div class="row student-input">
                                             <div class="col-3">
                                                 <div class="">
@@ -1206,7 +1207,8 @@
                             </div>
                             <div class="buttons button_space">
                                 <button class="back_button">Back</button>
-                                <button class="submit_button">Submit</button>
+                                <input type="submit">
+
                             </div>
                         </div>
                         <div class="main complete-loader">
@@ -1236,22 +1238,55 @@
 
     <script src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations-v1.0.0.js"></script>
     <script type="text/javascript">
-        window.addEventListener("load", function() {
-            document.querySelector(".loader").style.display = "none";
-        });
+       
 
 
         $(document).ready(function() {
-            var autocomplete;
-            autocomplete = new google.maps.places.Autocomplete((document.getElementById(assesment_venue)),{
-                types:['geocode'],
-            });
-            google.maps.event.addListener( autocomplete,'place_changed', function (){
-                var near_place =autocomplete.getPlace();
-            });
-            
 
+             window.addEventListener("load", function() {
+            document.querySelector(".loader").style.display = "none";
+        });
 
+            $('.other-training-btn').click(function() {
+                console.log('asdad');
+                // Duplicate the original div
+                var $originalDiv = $('.other-training:first');
+                var $duplicatedDiv = $originalDiv.clone();
+
+                // Remove all input values from the duplicated div
+                $duplicatedDiv.find('input').val('');
+
+                // Append the duplicated div to the page
+                $originalDiv.after($duplicatedDiv);
+            });
+
+            $("#date_of_birth").change(function() {
+            var inputDate = new Date($(this).val());
+            var today = new Date();
+            var minDate = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
+            var maxDate = new Date(today.getFullYear() - 10, today.getMonth(), today.getDate());
+
+            if (inputDate < minDate || inputDate > maxDate) {
+                swal.fire({
+                title: "Error!",
+                text: "Please enter a valid date of birth between " + minDate.toLocaleDateString() + " and " + maxDate.toLocaleDateString() + ".",
+                icon: "error",
+                button: "OK",
+                }).then(function() {
+                var inputField = $("#date_of_birth");
+                inputField.val("");
+                });
+                
+            } else {
+                var birthday = new Date($(this).val());
+                var ageDifMs = Date.now() - birthday.getTime();
+                var ageDate = new Date(ageDifMs);
+                var age = Math.abs(ageDate.getUTCFullYear() - 1970);
+
+                $('#age').val(age);
+            }
+            });
+          
             // Get the parent div
             var $parentDiv = $(".sidebar");
 
@@ -1345,9 +1380,7 @@
             }
 
             function progress_backward() {
-                var form_num = formnumber + 1;
                 step_list[form_num].classList.remove('active');
-                num.innerHTML = form_num;
             }
 
 
@@ -1461,7 +1494,6 @@
                 dataType: "json",
                 type: "post",
                 success: function(data) {
-                    console.log(data);
                     $.each(data, function(i, item) {
                         classificationData.push({
                             label: data[i].name,
@@ -1491,7 +1523,7 @@
                             '<input class="form-check-input checkboxClassification" name="classification[]" type="checkbox" value="' +
                             value.id + '" id="checkboxClassification' + value.id +
                             '"><label class="form-check-label p-0" for="checkbox' + value.id +
-                            '">' + value.label + '</label>';
+                            ' ">' + value.label + '</label>';
                         checkboxColumn.appendChild(checkbox);
                     });
 
@@ -1506,7 +1538,6 @@
                         type: "post",
                         success: function(data) {
                             $.each(data['classification'], function(index, value) {
-                                console.log(value);
                                 var id = '#checkboxClassification' + value;
                                 $('#classificationTeaxtarea').addClass('d-none');
                                 $(id).attr('checked', true);
@@ -1528,8 +1559,6 @@
 
                         }
                     });
-
-
                 },
             });
 
